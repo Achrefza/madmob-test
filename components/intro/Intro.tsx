@@ -5,26 +5,17 @@ import { lockScroll, unlockScroll } from "@/hooks/useScrollLock";
 
 export default function Intro({ onFinish }: { onFinish: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoReady, setVideoReady] = useState(false);
-const [minTimePassed, setMinTimePassed] = useState(false);
-
-const ready = videoReady && minTimePassed;
-
+  const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
     lockScroll();
+
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, 1000); // LOADING stays 1 second minimum
+
+    return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-  lockScroll();
-
-  const timer = setTimeout(() => {
-    setMinTimePassed(true);
-  }, 1000); // minimum loading time
-
-  return () => clearTimeout(timer);
-}, []);
-
 
   const handleEnd = () => {
     unlockScroll();
@@ -32,37 +23,28 @@ const ready = videoReady && minTimePassed;
   };
 
   return (
-  <div className="fixed inset-0 z-[999] bg-black overflow-hidden">
+    <div className="fixed inset-0 z-[999] bg-black overflow-hidden">
 
-    {/* LOADING TEXT */}
-    {!ready && (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-white tracking-[0.6em] text-sm animate-pulse">
-          LOADING
+      {/* VIDEO ALWAYS VISIBLE (important for iOS autoplay) */}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/intro/intro.mp4"
+        autoPlay
+        muted
+        playsInline
+        preload="auto"
+        onEnded={handleEnd}
+      />
+
+      {/* LOADING OVERLAY */}
+      {showLoader && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black">
+          <div className="text-white tracking-[0.6em] text-sm animate-pulse">
+            LOADING
+          </div>
         </div>
-      </div>
-    )}
-
-    {/* VIDEO */}
-    <video
-  ref={videoRef}
-  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-    ready ? "opacity-100" : "opacity-0"
-  }`}
-  src="/intro/intro.mp4"
-  autoPlay
-  muted
-  playsInline
-  preload="auto"
-  onLoadedData={() => {
-    setVideoReady(true);
-
-    // Force autoplay attempt (important for iOS Safari)
-    videoRef.current?.play().catch(() => {});
-  }}
-  onEnded={handleEnd}
-/>
-  </div>
-);
-
+      )}
+    </div>
+  );
 }
