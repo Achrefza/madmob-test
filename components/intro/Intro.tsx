@@ -45,18 +45,23 @@ const ready = videoReady && minTimePassed;
 
     {/* VIDEO */}
     <video
-      ref={videoRef}
-      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-        ready ? "opacity-100" : "opacity-0"
-      }`}
-      src="/intro/intro.mp4"
-      autoPlay
-      muted
-      playsInline
-      preload="auto"
-      onLoadedData={() => setVideoReady(true)}
-      onEnded={handleEnd}
-    />
+  ref={videoRef}
+  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+    ready ? "opacity-100" : "opacity-0"
+  }`}
+  src="/intro/intro.mp4"
+  autoPlay
+  muted
+  playsInline
+  preload="auto"
+  onLoadedData={() => {
+    setVideoReady(true);
+
+    // Force autoplay attempt (important for iOS Safari)
+    videoRef.current?.play().catch(() => {});
+  }}
+  onEnded={handleEnd}
+/>
   </div>
 );
 
