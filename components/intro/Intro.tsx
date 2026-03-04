@@ -29,7 +29,7 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"
-        src="/intro/intro.mp4"
+        src="/intro/Intro.mp4"
         autoPlay
         muted
         playsInline
