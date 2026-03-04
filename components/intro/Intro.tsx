@@ -1,46 +1,57 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { lockScroll, unlockScroll } from "@/hooks/useScrollLock";
 
 export default function Intro({ onFinish }: { onFinish: () => void }) {
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
     lockScroll();
-  }, []);
 
-  useEffect(() => {
-    if (!imageLoaded) return;
+    const video = videoRef.current;
 
-    // Show loader minimum 1 second
+    if (video) {
+      video.muted = true;
+      video.playsInline = true;
+
+      // attempt autoplay (works on most devices)
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    }
+
+    // loader stays at least 1 second
     const loaderTimer = setTimeout(() => {
       setShowLoader(false);
     }, 1000);
 
-    // Total intro duration
-    const endTimer = setTimeout(() => {
-      unlockScroll();
-      onFinish();
-    }, 4700);
+    return () => clearTimeout(loaderTimer);
+  }, []);
 
-    return () => {
-      clearTimeout(loaderTimer);
-      clearTimeout(endTimer);
-    };
-  }, [imageLoaded]);
+  const handleEnd = () => {
+    unlockScroll();
+    onFinish();
+  };
 
   return (
     <div className="fixed inset-0 z-[999] bg-black overflow-hidden">
 
-      <img
-        src="/intro/intro.webp"
-        alt="Intro animation"
+      {/* VIDEO */}
+      <video
+        ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"
-        onLoad={() => setImageLoaded(true)}
+        src="/intro/intro.mp4"
+        muted
+        playsInline
+        autoPlay
+        preload="auto"
+        onEnded={handleEnd}
       />
 
+      {/* LOADING TEXT */}
       {showLoader && (
         <div className="absolute inset-0 flex items-center justify-center bg-black">
           <div className="text-white tracking-[0.6em] text-sm animate-pulse">
@@ -48,6 +59,7 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
           </div>
         </div>
       )}
+
     </div>
   );
 }
