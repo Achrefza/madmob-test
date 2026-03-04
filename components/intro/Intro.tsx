@@ -23,7 +23,7 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
     const endTimer = setTimeout(() => {
       unlockScroll();
       onFinish();
-    }, 5000);
+    }, 4800);
 
     return () => {
       clearTimeout(loaderTimer);
