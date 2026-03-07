@@ -2,15 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Intro from "@/components/intro/Intro";
+import HeroSection from "@/components/sections/HeroSection";
+import CollectiveSection from "@/components/sections/CollectiveSection";
+import WorkAreasSection from "@/components/sections/WorkAreasSection";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import ContactSection from "@/components/sections/ContactSection";
 
 export default function Page() {
   const [introFinished, setIntroFinished] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  // Detect normal first mount
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Detect refresh / back-forward cache restore
   useEffect(() => {
@@ -28,22 +27,20 @@ export default function Page() {
     };
   }, []);
 
-  if (!mounted) return null;
-
   return (
-    <main className="bg-black text-white min-h-screen">
-      {!introFinished && (
-        <Intro onFinish={() => setIntroFinished(true)} />
-      )}
+    <main className="min-h-screen bg-[#000000] text-white">
+      {!introFinished && <Intro onFinish={() => setIntroFinished(true)} />}
 
       <div
         className={`transition-opacity duration-1000 ${
-          introFinished ? "opacity-100" : "opacity-0 pointer-events-none"
+          introFinished ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <section className="h-screen flex items-center justify-center">
-          <h1 className="text-6xl">Homepage</h1>
-        </section>
+        <HeroSection />
+        <CollectiveSection />
+        <WorkAreasSection />
+        <ProjectsSection />
+        <ContactSection />
       </div>
     </main>
   );
