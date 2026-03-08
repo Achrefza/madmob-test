@@ -1,3 +1,7 @@
+"use client";
+
+import { useCallback } from "react";
+
 const navigationItems = [
   {
     title: "Work Areas",
@@ -38,6 +42,56 @@ const navigationItems = [
 ];
 
 export default function CollectiveSection() {
+  const applySectionHighlight = useCallback((target: HTMLElement) => {
+    const cinematicHighlightClass =
+      "bg-[radial-gradient(circle_at_center,rgba(255,42,42,0.08),transparent_70%)] shadow-[inset_0_0_48px_rgba(255,42,42,0.14)]";
+
+    target.classList.add("transition-[background,box-shadow]", "duration-1000", "ease-out");
+    target.classList.add(...cinematicHighlightClass.split(" "));
+
+    window.setTimeout(() => {
+      target.classList.remove(...cinematicHighlightClass.split(" "));
+    }, 1000);
+  }, []);
+
+  const registerNavigationFeedback = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      event.preventDefault();
+
+      const targetId = href.replace("#", "");
+      const target = document.getElementById(targetId);
+
+      if (!target) {
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const isReached = entries.some((entry) => entry.isIntersecting);
+
+          if (!isReached) {
+            return;
+          }
+
+          observer.disconnect();
+          applySectionHighlight(target);
+        },
+        { threshold: 0.45 },
+      );
+
+      observer.observe(target);
+
+      window.setTimeout(() => {
+        window.location.hash = targetId;
+      }, 170);
+
+      window.setTimeout(() => {
+        observer.disconnect();
+      }, 2200);
+    },
+    [applySectionHighlight],
+  );
+
   return (
     <section className="border-t border-white/10 px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-4xl text-center">
@@ -56,7 +110,8 @@ export default function CollectiveSection() {
             <a
               key={item.title}
               href={item.href}
-              className="group flex items-center justify-center gap-3 rounded-lg border border-white/10 bg-zinc-950/60 px-5 py-4 text-left transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#ff2a2a]/60"
+              onClick={(event) => registerNavigationFeedback(event, item.href)}
+              className="group flex items-center justify-center gap-3 rounded-lg border border-white/10 bg-zinc-950/60 px-5 py-4 text-left shadow-[0_0_0_rgba(255,42,42,0)] transition-all duration-400 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:border-[#ff2a2a]/70 hover:shadow-[0_0_20px_rgba(255,42,42,0.15)] active:scale-95 active:duration-200"
             >
               <span className="flex h-8 w-8 items-center justify-center rounded-md border border-[#ff2a2a]/30 bg-black text-[#ff2a2a] transition-colors duration-300 group-hover:border-[#ff2a2a]/60">
                 {item.icon}
