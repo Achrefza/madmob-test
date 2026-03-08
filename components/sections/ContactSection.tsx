@@ -2,7 +2,7 @@ const socials = ["Instagram", "YouTube", "Spotify", "TikTok"];
 
 export default function ContactSection() {
   return (
-    <section className="border-t border-white/10 px-6 py-20 sm:py-24">
+    <section id="contact" className="border-t border-white/10 px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-4xl text-center">
         <p className="text-xs tracking-[0.35em] text-[#ff2a2a] uppercase">Contact</p>
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Let’s Build Something Bold</h2>

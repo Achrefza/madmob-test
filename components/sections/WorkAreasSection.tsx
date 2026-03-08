@@ -28,7 +28,7 @@ const areas = [
 
 export default function WorkAreasSection() {
   return (
-    <section className="border-t border-white/10 px-6 py-20 sm:py-28">
+    <section id="work-areas" className="border-t border-white/10 px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 sm:mb-14">
           <p className="text-xs tracking-[0.35em] text-[#ff2a2a] uppercase">Areas of Work</p>
