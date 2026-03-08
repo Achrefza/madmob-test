@@ -10,7 +10,6 @@ export default function HeroSection() {
           MADMOB
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-zinc-300 sm:text-base md:text-lg">
-A Tunisian-founded, globally connected music collective, label, and cultural movement. Since 2015, we’ve united artists, producers, DJs, and curators to push hip-hop culture beyond boundaries: from beats and events to visuals and art direction.
         </p>
       </div>
 
