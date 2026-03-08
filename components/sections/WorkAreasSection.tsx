@@ -31,19 +31,19 @@ export default function WorkAreasSection() {
     <section className="border-t border-white/10 px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 sm:mb-14">
-          <p className="text-xs tracking-[0.35em] text-[#ff2a2a] uppercase">Areas of Work</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Craft Disciplines</h2>
+          <p className="text-xs uppercase tracking-[0.35em] text-[#ff2a2a]">Areas of Work</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">Craft Disciplines</h2>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
           {areas.map((area) => (
             <article
               key={area.title}
-              className="group border border-white/15 bg-zinc-950/60 p-5 transition duration-300 hover:-translate-y-1 hover:border-[#ff2a2a]/70 hover:bg-zinc-900"
+              className="group rounded-lg border border-white/10 bg-zinc-950/60 p-5 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#ff2a2a]/60"
             >
-              <div className="mb-5 h-44 w-full bg-gradient-to-br from-zinc-800 to-zinc-950 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-70 bg-[linear-gradient(135deg,rgba(255,42,42,0.35),rgba(0,0,0,0)_45%)]" />
-                <div className="absolute inset-0 flex items-end p-4 text-[11px] tracking-[0.25em] text-zinc-300 uppercase">
+              <div className="relative mb-5 h-44 w-full overflow-hidden rounded-md bg-gradient-to-br from-zinc-800 to-zinc-950">
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,42,42,0.35),rgba(0,0,0,0)_45%)] opacity-70" />
+                <div className="absolute inset-0 flex items-end p-4 text-[11px] uppercase tracking-[0.25em] text-zinc-300">
                   Placeholder Image
                 </div>
               </div>
