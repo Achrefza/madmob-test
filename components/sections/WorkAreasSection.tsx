@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 const areas = [
   {
     title: "DJing",
@@ -26,7 +30,47 @@ const areas = [
   },
 ];
 
+function useCardReveal(cardCount: number) {
+  const [visibleCards, setVisibleCards] = useState(() => Array.from({ length: cardCount }, () => false));
+  const cardRefs = useRef<Array<HTMLElement | null>>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const index = Number(entry.target.getAttribute("data-card-index"));
+          if (Number.isNaN(index)) return;
+
+          setVisibleCards((prev) => {
+            if (prev[index]) return prev;
+            const next = [...prev];
+            next[index] = true;
+            return next;
+          });
+
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    cardRefs.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return { cardRefs, visibleCards };
+}
+
 export default function WorkAreasSection() {
+  const { cardRefs, visibleCards } = useCardReveal(areas.length);
+
   return (
     <section className="border-t border-white/10 px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl">
@@ -36,10 +80,17 @@ export default function WorkAreasSection() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {areas.map((area) => (
+          {areas.map((area, index) => (
             <article
               key={area.title}
-              className="group border border-white/15 bg-zinc-950/60 p-5 transition duration-300 hover:-translate-y-1 hover:border-[#ff2a2a]/70 hover:bg-zinc-900"
+              ref={(node) => {
+                cardRefs.current[index] = node;
+              }}
+              data-card-index={index}
+              style={{ transitionDelay: `${index * 80}ms` }}
+              className={`group border border-white/15 bg-zinc-950/60 p-5 transition-all duration-700 ease-out hover:-translate-y-1 hover:border-[#ff2a2a]/70 hover:bg-zinc-900 ${
+                visibleCards[index] ? "translate-y-0 opacity-100 blur-0" : "translate-y-10 opacity-0 blur-[8px]"
+              }`}
             >
               <div className="mb-5 h-44 w-full bg-gradient-to-br from-zinc-800 to-zinc-950 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-70 bg-[linear-gradient(135deg,rgba(255,42,42,0.35),rgba(0,0,0,0)_45%)]" />
