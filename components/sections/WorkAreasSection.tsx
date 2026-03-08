@@ -1,18 +1,28 @@
 const areas = [
   {
-    title: "DJ",
+    title: "DJing",
     description:
       "Curated sets and sonic direction that transform venues, films, and digital spaces into immersive atmospheres.",
   },
   {
-    title: "Editing",
+    title: "Music Videos & Visuals",
     description:
       "Cinematic editing and visual rhythm built for music videos, campaign films, and cultural storytelling.",
   },
   {
-    title: "Rap",
+    title: "Event organanization",
     description:
-      "Lyrical performance and writing with a sharp identity, blending vulnerability, power, and contemporary flow.",
+      "We design and deliver explosive music festivals,residencies, and unforgettable live performances, crafting immersive experiences that unite artists and audiences.",
+  },
+  {
+    title: "Art Direction & Creative Direction",
+    description:
+      "Our creative team shapes the visual narrative of our collective, from branding to event aesthetics.",
+  },
+  {
+    title: "Music Production",
+    description:
+      "We craft original tracks, blending diverse influences from hip-hop, electronic, and alternative music.",
   },
 ];
 

@@ -1,10 +1,10 @@
 const projects = [
-  "Night Pulse Session",
-  "Red Frame Visual",
-  "Street Anthem Vol.1",
-  "Noir City Live Set",
-  "Afterlight Edit",
-  "Collective Teaser",
+  "Madfest",
+  "..",
+  "...",
+  "....",
+  ".....",
+  ".......",
 ];
 
 export default function ProjectsSection() {
@@ -13,7 +13,7 @@ export default function ProjectsSection() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 sm:mb-14">
           <p className="text-xs tracking-[0.35em] text-[#ff2a2a] uppercase">Projects</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Selected Work</h2>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">The Mob’s Newest</h2>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

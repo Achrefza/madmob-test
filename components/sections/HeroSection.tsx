@@ -5,12 +5,12 @@ export default function HeroSection() {
 
       <div className="relative z-10 max-w-5xl text-center">
         <div className="mx-auto mb-6 h-[2px] w-20 bg-[#ff2a2a]" />
-        <p className="mb-5 text-xs tracking-[0.45em] text-zinc-400 uppercase">Artistic Collective</p>
+        <p className="mb-5 text-xs tracking-[0.45em] text-zinc-400 uppercase">Collective</p>
         <h1 className="text-4xl font-semibold leading-[0.95] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
-          NOIR SIGNAL
+          MADMOB
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-zinc-300 sm:text-base md:text-lg">
-          A cinematic collective crafting immersive sound, visual storytelling, and lyrical expression for modern culture.
+A Tunisian-founded, globally connected music collective, label, and cultural movement. Since 2015, we’ve united artists, producers, DJs, and curators to push hip-hop culture beyond boundaries: from beats and events to visuals and art direction.
         </p>
       </div>
 
