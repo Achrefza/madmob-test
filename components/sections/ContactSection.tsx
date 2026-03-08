@@ -14,7 +14,7 @@ export default function ContactSection() {
           href="#"
           className="mt-8 inline-flex items-center justify-center border border-[#ff2a2a] px-8 py-3 text-sm tracking-[0.2em] text-white uppercase transition hover:bg-[#ff2a2a]"
         >
-          Contact@Collective.com
+          contact@madmob.tn
         </a>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-5 text-sm text-zinc-400">
