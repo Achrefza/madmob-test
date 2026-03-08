@@ -1,27 +1,36 @@
 const projects = [
   {
-    title: "Madfest",
-    description: "A landmark festival bringing together underground artists and global hip-hop culture.",
+    title: "Annual Festival: MADFEST",
+    description:
+      "From 2020 to 2022, MADFEST ran as a two-day festival with 1,000–1,200 attendees and lineups of up to 12 rappers per edition.",
   },
   {
-    title: "Paris Showcase",
-    description: "A live showcase connecting Tunisian talent with the Paris hip-hop scene.",
+    title: "Royal Rumble",
+    description: "Held on 15 Feb 2020, this high-energy battle-style music event spotlighted underground talent.",
   },
   {
-    title: "Street Sessions",
-    description: "Raw live performances filmed in urban spaces across Tunisia.",
+    title: "ALTERNATIVE (DJ Set)",
+    description: "In 2024, MADMOB hosted an intimate DJ set session at TBRL Studio.",
   },
   {
-    title: "Mob Visual Series",
-    description: "A collection of cinematic music visuals directed by the collective.",
+    title: "Club Residency — Zebra Club",
+    description: "A weekly Sunday residency with ALA, one of Tunisia’s leading rap voices.",
   },
   {
-    title: "Mob Cypher",
-    description: "A series of freestyle cyphers highlighting emerging voices.",
+    title: "Club DJ Events — Club Gingembre",
+    description: "Regular DJ takeovers that helped push and amplify the underground hip-hop scene.",
   },
   {
-    title: "Global Collaborations",
-    description: "Cross-border collaborations connecting artists across continents.",
+    title: "Club Nights — Cocoon & Lotus Club",
+    description: "Curated DJ nights featuring both international and local artists.",
+  },
+  {
+    title: "MADTALK Podcast",
+    description: "Running since 2023, MADTALK explores underground music, industry shifts, and artist stories.",
+  },
+  {
+    title: "Gimic Radio Residency",
+    description: "From 2022 to 2023, MADMOB held a radio residency in Brussels, Belgium.",
   },
 ];
 
