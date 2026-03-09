@@ -7,14 +7,17 @@ const projects = [
     title: "Annual Festival: MADFEST",
     description:
       "From 2020 to 2022, MADFEST ran as a two-day festival with 1,000–1,200 attendees and lineups of up to 12 rappers per edition.",
+    image: "/images/backgrounds/madfest.webp",
   },
   {
     title: "Royal Rumble",
     description: "Held on 15 Feb 2020, this high-energy battle-style music event spotlighted underground talent.",
+    image: "/images/backgrounds/royalrumble.webp",
   },
   {
     title: "ALTERNATIVE (DJ Set)",
     description: "In 2024, MADMOB hosted an intimate DJ set session at TBRL Studio.",
+    image: "/images/backgrounds/alternative.webp",
   },
   {
     title: "Club Residency — Zebra Club",
@@ -32,6 +35,7 @@ const projects = [
   {
     title: "MADTALK Podcast",
     description: "Running since 2023, MADTALK explores underground music, industry shifts, and artist stories.",
+    image: "/images/backgrounds/madtalk.webp",
   },
   {
     title: "Gimic Radio Residency",
@@ -102,7 +106,7 @@ export default function ProjectsSection() {
             >
               <div
                 className={`absolute inset-0 scale-100 transform transition-all duration-500 ease-out group-hover:scale-105 ${
-                  project.image ? "bg-cover bg-center" : "bg-[linear-gradient(145deg,#191919,#050505)]"
+                  project.image ? "bg-cover bg-center bg-no-repeat" : "bg-[linear-gradient(145deg,#191919,#050505)]"
                 }`}
                 style={{ backgroundImage: project.image ? `url(${project.image})` : undefined }}
               />
