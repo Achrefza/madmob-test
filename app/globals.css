@@ -43,7 +43,11 @@ textarea,
   cursor: text;
 }
 
+
 ::selection {
   background: #ff2a2a;
   color: white;
+}
+.font-madmob {
+  font-family: var(--font-madmob), sans-serif;
 }
