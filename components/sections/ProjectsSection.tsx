@@ -71,7 +71,6 @@ export default function ProjectsSection() {
               data-project-index={index}
               className="group relative h-52 overflow-hidden border border-white/10 bg-zinc-900"
             >
-              <div className="absolute inset-0 scale-100 transform bg-[linear-gradient(145deg,#191919,#050505)] transition-all duration-500 ease-out group-hover:scale-105" />
               <div
                 className={`absolute inset-0 scale-100 transform transition-all duration-500 ease-out group-hover:scale-105 ${
                   project.image ? "bg-cover bg-center" : "bg-[linear-gradient(145deg,#191919,#050505)]"
