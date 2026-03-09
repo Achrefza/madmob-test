@@ -1,6 +1,7 @@
 const areas = [
   {
     title: "DJing",
+    image: "/images/backgrounds/djing.webp",
     description:
       "Curated sets and sonic direction that transform venues, films, and digital spaces into immersive atmospheres.",
   },
@@ -41,11 +42,18 @@ export default function WorkAreasSection() {
               key={area.title}
               className="group border border-white/15 bg-zinc-950/60 p-5 transition duration-300 hover:-translate-y-1 hover:border-[#ff2a2a]/70 hover:bg-zinc-900"
             >
-              <div className="mb-5 h-44 w-full bg-gradient-to-br from-zinc-800 to-zinc-950 relative overflow-hidden">
+              <div
+                className={`mb-5 h-44 w-full relative overflow-hidden bg-cover bg-center ${
+                  area.image ? "" : "bg-gradient-to-br from-zinc-800 to-zinc-950"
+                }`}
+                style={area.image ? { backgroundImage: `url(${area.image})` } : undefined}
+              >
                 <div className="absolute inset-0 opacity-70 bg-[linear-gradient(135deg,rgba(255,42,42,0.35),rgba(0,0,0,0)_45%)]" />
-                <div className="absolute inset-0 flex items-end p-4 text-[11px] tracking-[0.25em] text-zinc-300 uppercase">
-                  Placeholder Image
-                </div>
+                {!area.image && (
+                  <div className="absolute inset-0 flex items-end p-4 text-[11px] tracking-[0.25em] text-zinc-300 uppercase">
+                    Placeholder Image
+                  </div>
+                )}
               </div>
               <h3 className="text-2xl font-medium text-white">{area.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-zinc-300">{area.description}</p>
