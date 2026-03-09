@@ -88,8 +88,14 @@ export default function CollectiveSection() {
   );
 
   return (
-    <section className="border-t border-white/10 px-6 py-20 sm:py-28">
-      <div className="mx-auto max-w-4xl text-center">
+    <section className="relative overflow-hidden border-t border-white/10 px-6 py-20 sm:py-28">
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-[0.18] pointer-events-none"
+        style={{ backgroundImage: 'url("/images/backgrounds/collective.webp")' }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none" />
+
+      <div className="relative z-10 mx-auto max-w-4xl text-center">
         <p className="mb-4 text-xs tracking-[0.35em] text-[#ff2a2a] uppercase">MADMOB</p>
         <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
           Amplifying Voices, Shaping Culture
