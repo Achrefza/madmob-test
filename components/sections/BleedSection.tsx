@@ -7,7 +7,6 @@ const slides = [
   "/images/backgrounds/bleed1.webp",
   "/images/backgrounds/bleed2.webp",
   "/images/backgrounds/bleed3.webp",
-  "/images/backgrounds/bleed4.webp",
   "/images/backgrounds/bleed5.webp",
 ];
 
@@ -54,7 +53,7 @@ export default function BleedSection() {
             href="#contact"
             className="mt-10 inline-flex items-center justify-center border border-blue-500/70 px-8 py-3 text-sm uppercase tracking-[0.2em] text-white transition duration-300 hover:border-blue-400 hover:bg-blue-500/10 hover:shadow-[0_0_28px_rgba(37,99,235,0.35)]"
           >
-            Continue
+            Bleed website
           </a>
         </div>
 
