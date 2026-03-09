@@ -3,17 +3,23 @@
 import Image from "next/image";
 import { useState } from "react";
 
-const images = ["/images/bleed/1.webp", "/images/bleed/2.webp", "/images/bleed/3.webp"];
+const slides = [
+  "/images/backgrounds/bleed1.webp",
+  "/images/backgrounds/bleed2.webp",
+  "/images/backgrounds/bleed3.webp",
+  "/images/backgrounds/bleed4.webp",
+  "/images/backgrounds/bleed5.webp",
+];
 
 export default function BleedSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
   return (
@@ -44,15 +50,15 @@ export default function BleedSection() {
         </div>
 
         <div className="relative overflow-hidden rounded-lg h-[420px] border border-white/10">
-          <div
-            className="flex h-full transition-transform duration-700 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {images.map((image) => (
-              <div key={image} className="relative h-full w-full flex-shrink-0 overflow-hidden">
-                <Image src={image} alt="Bleed cinematic slide" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
-              </div>
-            ))}
+          <div className="relative h-full transition-all duration-500 ease-out">
+            <Image
+              key={slides[currentSlide]}
+              src={slides[currentSlide]}
+              alt="Bleed cinematic slide"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="h-full w-full object-cover"
+            />
           </div>
 
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.35))]" />
