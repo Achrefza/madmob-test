@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 
 const madmobFont = localFont({
-  src: "../public/fonts/madmob.otf",
+  src: "../fonts/madmob.otf",
   variable: "--font-madmob",
   display: "swap",
 });
