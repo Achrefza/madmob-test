@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --accent-red: #ff0000;
 }
 
 @theme inline {
@@ -45,7 +46,7 @@ textarea,
 
 
 ::selection {
-  background: #ff2a2a;
+  background: var(--accent-red);
   color: white;
 }
 .font-madmob {

@@ -96,7 +96,7 @@ export default function ProjectsSection() {
 
       <div className="relative z-10 mx-auto max-w-6xl">
         <div className="mb-10 sm:mb-14">
-          <p className="text-xs tracking-[0.35em] text-[#ff2a2a] uppercase">Milestones</p>
+          <p className="text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">Milestones</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">The Mob’s Journey</h2>
         </div>
 
@@ -119,7 +119,7 @@ export default function ProjectsSection() {
                 <div className="absolute inset-0 bg-[linear-gradient(145deg,#191919,#050505)]" />
               )}
               <div className="absolute inset-0 bg-[linear-gradient(145deg,#191919,#050505)] opacity-70" />
-              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,#ff2a2a,transparent_45%)] transition-all duration-500 ease-out group-hover:opacity-60" />
+              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,var(--accent-red),transparent_45%)] transition-all duration-500 ease-out group-hover:opacity-60" />
               <div className="absolute inset-0 flex items-end p-4">
                 <div className="translate-y-2 transition-all duration-500 ease-out group-hover:translate-y-0">
                   <h3 className="text-lg text-white">{project.title}</h3>

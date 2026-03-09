@@ -49,7 +49,7 @@ export default function CollectiveSection() {
 
   const applySectionHighlight = useCallback((target: HTMLElement) => {
     const cinematicHighlightClass =
-      "bg-[radial-gradient(circle_at_center,rgba(255,42,42,0.08),transparent_70%)] shadow-[inset_0_0_48px_rgba(255,42,42,0.14)]";
+      "bg-[radial-gradient(circle_at_center,rgba(255,0,0,0.08),transparent_70%)] shadow-[inset_0_0_48px_rgba(255,0,0,0.14)]";
 
     target.classList.add("transition-[background,box-shadow]", "duration-1000", "ease-out");
     target.classList.add(...cinematicHighlightClass.split(" "));
@@ -96,7 +96,7 @@ export default function CollectiveSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-4xl text-center">
-        <p className="mb-4 text-xs tracking-[0.35em] text-[#ff2a2a] uppercase">MADMOB</p>
+        <p className="mb-4 text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">MADMOB</p>
         <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
           Amplifying Voices, Shaping Culture
         </h2>
@@ -112,11 +112,11 @@ export default function CollectiveSection() {
               key={item.title}
               href={item.href}
               onClick={(event) => handleNavigationClick(event, item.sectionId)}
-              className={`group flex items-center justify-center gap-3 rounded-lg border border-white/10 bg-zinc-950/60 px-5 py-4 text-left shadow-[0_0_0_rgba(255,42,42,0)] transition-all duration-400 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:border-[#ff2a2a]/70 hover:shadow-[0_0_20px_rgba(255,42,42,0.15)] active:scale-95 active:duration-150 ${
+              className={`group flex items-center justify-center gap-3 rounded-lg border border-white/10 bg-zinc-950/60 px-5 py-4 text-left shadow-[0_0_0_rgba(255,0,0,0)] transition-all duration-400 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:border-[var(--accent-red)]/70 hover:shadow-[0_0_20px_rgba(255,0,0,0.15)] active:scale-95 active:duration-150 ${
                 activeNavigation === item.sectionId ? "scale-95 duration-150" : ""
               }`}
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-md border border-[#ff2a2a]/30 bg-black text-[#ff2a2a] transition-colors duration-300 group-hover:border-[#ff2a2a]/60">
+              <span className="flex h-8 w-8 items-center justify-center rounded-md border border-[var(--accent-red)]/30 bg-black text-[var(--accent-red)] transition-colors duration-300 group-hover:border-[var(--accent-red)]/60">
                 {item.icon}
               </span>
               <span className="text-sm tracking-[0.08em] text-zinc-100 uppercase">{item.title}</span>

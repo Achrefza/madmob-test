@@ -3,10 +3,10 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
       
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,42,42,0.16)_0,_rgba(255,42,42,0)_50%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,0,0,0.16)_0,_rgba(255,0,0,0)_50%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl text-center">
-        <div className="mx-auto mb-6 h-[2px] w-20 bg-[#ff2a2a]" />
+        <div className="mx-auto mb-6 h-[2px] w-20 bg-[var(--accent-red)]" />
         <p className="mb-5 text-xs tracking-[0.45em] text-zinc-400 uppercase">Collective</p>
         <h1 className="font-madmob text-8xl">
           MADMOB
@@ -17,7 +17,7 @@ export default function HeroSection() {
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-400">
         <span className="text-[10px] tracking-[0.35em] uppercase">Scroll</span>
-        <span className="h-8 w-[1px] bg-[#ff2a2a]/80" />
+        <span className="h-8 w-[1px] bg-[var(--accent-red)]/80" />
       </div>
     </section>
   );
