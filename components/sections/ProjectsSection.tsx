@@ -89,7 +89,7 @@ export default function ProjectsSection() {
   return (
     <section id="projects" className="relative overflow-hidden border-t border-white/10 px-6 py-20 sm:py-28">
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-35"
         style={{ backgroundImage: "url('/images/backgrounds/backjourney.webp')" }}
       />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.85),rgba(0,0,0,0.95))]" />
