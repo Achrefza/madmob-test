@@ -41,8 +41,8 @@ export default function Page() {
         <HeroSection />
         <CollectiveSection />
         <WorkAreasSection />
-        <CollaborationsSection />
         <ProjectsSection />
+        <CollaborationsSection />
         <BleedSection />
         <ContactSection />
       </div>

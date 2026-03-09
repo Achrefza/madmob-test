@@ -30,6 +30,32 @@ const navigationItems = [
     ),
   },
   {
+    title: "Collaborations",
+    href: "#collaborations",
+    sectionId: "collaborations",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
+        <path
+          d="M7 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm10 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM7 13c2.3 0 6 1.1 6 3.4V19H1v-2.6C1 14.1 4.7 13 7 13zm10 0c2.3 0 6 1.1 6 3.4V19h-8v-2.6c0-1.1-.4-2-1.1-2.8.9-.4 2-.6 3.1-.6z"
+          fill="currentColor"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Bleed",
+    href: "#bleed",
+    sectionId: "bleed",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
+        <path
+          d="M12 3c2.4 3.6 6 6.7 6 10.7A6 6 0 0 1 6 13.7C6 9.7 9.6 6.6 12 3zm0 8.5c-1.5 1.8-2.5 3.1-2.5 4.2a2.5 2.5 0 1 0 5 0c0-1.1-1-2.4-2.5-4.2z"
+          fill="currentColor"
+        />
+      </svg>
+    ),
+  },
+  {
     title: "Contact",
     href: "#contact",
     sectionId: "contact",
