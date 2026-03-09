@@ -7,6 +7,7 @@ export default function HeroSection() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,42,42,0.16)_0,_rgba(255,42,42,0)_50%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('/images/textures/grain.png')] bg-repeat opacity-[0.05] mix-blend-overlay pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl text-center">
         <div className="mx-auto mb-6 h-[2px] w-20 bg-[#ff2a2a]" />
