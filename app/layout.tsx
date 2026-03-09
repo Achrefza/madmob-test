@@ -19,7 +19,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
     <html lang="en" className={madmobFont.variable}>
       <body>{children}</body>
     </html>
