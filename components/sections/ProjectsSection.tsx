@@ -106,7 +106,7 @@ export default function ProjectsSection() {
             >
               {project.image ? (
                 <div
-                  className="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-100 transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-100 translate-y-0 transition-transform duration-700 ease-out group-hover:scale-105 group-hover:translate-y-[-6px]"
                   style={{ backgroundImage: `url(${project.image})` }}
                 />
               ) : (
