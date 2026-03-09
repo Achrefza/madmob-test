@@ -1,5 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import localFont from "next/font/local";
+
+const madmobFont = localFont({
+  src: "../public/fonts/madmob.otf",
+  variable: "--font-madmob",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Collective",
@@ -13,6 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+    <html lang="en" className={madmobFont.variable}>
       <body>{children}</body>
     </html>
   );
