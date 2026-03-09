@@ -13,26 +13,7 @@ const artists = [
     description: "A bold underground voice collaborating with the collective on forward-thinking sessions.",
     image: "/images/backgrounds/ktyb.webp",
   },
-  {
-    name: "STOU",
-    description: "Part of MADMOB collaborative projects, blending raw presence with modern rap aesthetics.",
-    image: "/images/backgrounds/stou.webp",
-  },
-  {
-    name: "MIZO-H",
-    description: "Frequent creative partner contributing performance energy and distinct artistic identity.",
-    image: "/images/backgrounds/mizo-h.webp",
-  },
-  {
-    name: "DVARK BOY",
-    description: "A recurring collaborator helping shape MADMOB events through expressive underground style.",
-    image: "/images/backgrounds/dvarkboy.webp",
-  },
-  {
-    name: "DOPEMAN",
-    description: "Collaborated with MADMOB across live moments and community-driven creative activations.",
-    image: "/images/backgrounds/dopeman.webp",
-  },
+  
 ];
 
 export default function CollaborationsSection() {
