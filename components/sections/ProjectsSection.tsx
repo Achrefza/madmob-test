@@ -45,7 +45,36 @@ export default function ProjectsSection() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-export default function ProjectsSection() {
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          const indexValue = entry.target.getAttribute("data-project-index");
+          if (indexValue === null) {
+            return;
+          }
+
+          const index = Number(indexValue);
+          setRevealedCards((previous) => {
+            if (previous[index]) {
+              return previous;
+            }
+
+            const next = [...previous];
+            next[index] = true;
+            return next;
+          });
+
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.2 },
+    );
+
+    cardRefs.current.forEach((card) => {
+      if (card) {
         observer.observe(card);
       }
     });
