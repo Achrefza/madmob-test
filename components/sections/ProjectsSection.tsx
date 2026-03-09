@@ -45,7 +45,7 @@ export default function ProjectsSection() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-@@ -77,46 +78,52 @@ export default function ProjectsSection() {
+export default function ProjectsSection() {
         observer.observe(card);
       }
     });
