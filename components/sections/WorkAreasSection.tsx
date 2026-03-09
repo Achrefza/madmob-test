@@ -48,7 +48,7 @@ export default function WorkAreasSection() {
                 }`}
                 style={area.image ? { backgroundImage: `url(${area.image})` } : undefined}
               >
-                <div className="absolute inset-0 opacity-70 bg-[linear-gradient(135deg,rgba(255,0,0,0.35),rgba(0,0,0,0)_45%)]" />
+                <div className="absolute inset-0 opacity-70 bg-[linear-gradient(135deg,rgba(205,28,24,0.35),rgba(0,0,0,0)_45%)]" />
                 {!area.image && (
                   <div className="absolute inset-0 flex items-end p-4 text-[11px] tracking-[0.25em] text-zinc-300 uppercase">
                     Placeholder Image

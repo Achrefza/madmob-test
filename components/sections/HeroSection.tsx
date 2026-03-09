@@ -3,7 +3,7 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
       
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,0,0,0.16)_0,_rgba(255,0,0,0)_50%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(205,28,24,0.16)_0,_rgba(205,28,24,0)_50%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl text-center">
         <div className="mx-auto mb-6 h-[2px] w-20 bg-[var(--accent-red)]" />

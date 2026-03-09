@@ -34,7 +34,7 @@ export default function BleedSection() {
       id="bleed"
       className="relative overflow-hidden border-t border-white/10 bg-black px-6 py-20 sm:py-28 min-h-[80vh]"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,0,0,0.15),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(205,28,24,0.15),transparent_60%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.4),rgba(0,0,0,0.92))]" />
 
       <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 gap-16 items-center lg:grid-cols-2">
@@ -51,7 +51,7 @@ export default function BleedSection() {
 
           <a
             href="#contact"
-            className="mt-10 inline-flex items-center justify-center border border-[var(--accent-red)]/70 px-8 py-3 text-sm uppercase tracking-[0.2em] text-white transition duration-300 hover:border-[var(--accent-red)] hover:bg-[var(--accent-red)]/10 hover:shadow-[0_0_28px_rgba(255,0,0,0.35)]"
+            className="mt-10 inline-flex items-center justify-center border border-[var(--accent-red)]/70 px-8 py-3 text-sm uppercase tracking-[0.2em] text-white transition duration-300 hover:border-[var(--accent-red)] hover:bg-[var(--accent-red)]/10 hover:shadow-[0_0_28px_rgba(205,28,24,0.35)]"
           >
             Bleed website
           </a>
@@ -59,7 +59,7 @@ export default function BleedSection() {
 
         <div>
           <div className="relative overflow-hidden rounded-lg h-[420px] border border-white/10">
-            <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,0,0,0.22),transparent_60%)]" />
+            <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_70%_30%,rgba(205,28,24,0.22),transparent_60%)]" />
 
             {slides.map((slide, index) => {
               const isActive = index === currentSlide;
