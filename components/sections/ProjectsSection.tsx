@@ -19,6 +19,7 @@ const projects = [
   {
     title: "Club Residency — Zebra Club",
     description: "A weekly Sunday residency with ALA, one of Tunisia’s leading rap voices.",
+    image: "/images/backgrounds/zebra.webp",
   },
   {
     title: "Club DJ Events — Club Gingembre",
@@ -44,36 +45,7 @@ export default function ProjectsSection() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          const cardIndex = Number((entry.target as HTMLElement).dataset.projectIndex);
-
-          if (Number.isNaN(cardIndex)) {
-            return;
-          }
-
-          setRevealedCards((currentState) => {
-            if (currentState[cardIndex]) {
-              return currentState;
-            }
-
-            const nextState = [...currentState];
-            nextState[cardIndex] = true;
-            return nextState;
-          });
-
-          observer.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    cardRefs.current.forEach((card) => {
-      if (card) {
+@@ -77,46 +78,52 @@ export default function ProjectsSection() {
         observer.observe(card);
       }
     });
@@ -100,6 +72,13 @@ export default function ProjectsSection() {
               className="group relative h-52 overflow-hidden border border-white/10 bg-zinc-900"
             >
               <div className="absolute inset-0 scale-100 transform bg-[linear-gradient(145deg,#191919,#050505)] transition-all duration-500 ease-out group-hover:scale-105" />
+              <div
+                className={`absolute inset-0 scale-100 transform transition-all duration-500 ease-out group-hover:scale-105 ${
+                  project.image ? "bg-cover bg-center" : "bg-[linear-gradient(145deg,#191919,#050505)]"
+                }`}
+                style={{ backgroundImage: project.image ? `url(${project.image})` : undefined }}
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(145deg,#191919,#050505)] opacity-70" />
               <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,#ff2a2a,transparent_45%)] transition-all duration-500 ease-out group-hover:opacity-60" />
               <div className="absolute inset-0 flex items-end p-4">
                 <div className="translate-y-2 transition-all duration-500 ease-out group-hover:translate-y-0">
