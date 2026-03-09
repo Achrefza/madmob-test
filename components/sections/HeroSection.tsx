@@ -1,6 +1,11 @@
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-[0.12] pointer-events-none"
+        style={{ backgroundImage: 'url("/images/backgrounds/hero.webp")' }}
+      />
+      <div className="absolute inset-0 bg-black/80 pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,42,42,0.16)_0,_rgba(255,42,42,0)_50%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl text-center">
