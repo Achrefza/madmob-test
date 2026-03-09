@@ -7,6 +7,7 @@ import CollectiveSection from "@/components/sections/CollectiveSection";
 import WorkAreasSection from "@/components/sections/WorkAreasSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ContactSection from "@/components/sections/ContactSection";
+import BleedSection from "@/components/sections/BleedSection";
 
 export default function Page() {
   const [introFinished, setIntroFinished] = useState(false);
@@ -40,6 +41,7 @@ export default function Page() {
         <CollectiveSection />
         <WorkAreasSection />
         <ProjectsSection />
+        <BleedSection />
         <ContactSection />
       </div>
     </main>
