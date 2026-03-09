@@ -104,12 +104,14 @@ export default function ProjectsSection() {
               data-project-index={index}
               className="group relative h-52 overflow-hidden border border-white/10 bg-zinc-900"
             >
-              <div
-                className={`absolute inset-0 scale-100 transform transition-all duration-500 ease-out group-hover:scale-105 ${
-                  project.image ? "bg-cover bg-center bg-no-repeat" : "bg-[linear-gradient(145deg,#191919,#050505)]"
-                }`}
-                style={{ backgroundImage: project.image ? `url(${project.image})` : undefined }}
-              />
+              {project.image ? (
+                <div
+                  className="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-100 transition-transform duration-700 ease-out group-hover:scale-105"
+                  style={{ backgroundImage: `url(${project.image})` }}
+                />
+              ) : (
+                <div className="absolute inset-0 bg-[linear-gradient(145deg,#191919,#050505)]" />
+              )}
               <div className="absolute inset-0 bg-[linear-gradient(145deg,#191919,#050505)] opacity-70" />
               <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,#ff2a2a,transparent_45%)] transition-all duration-500 ease-out group-hover:opacity-60" />
               <div className="absolute inset-0 flex items-end p-4">
