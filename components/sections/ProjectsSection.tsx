@@ -87,8 +87,14 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section id="projects" className="border-t border-white/10 px-6 py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section id="projects" className="relative overflow-hidden border-t border-white/10 px-6 py-20 sm:py-28">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-25"
+        style={{ backgroundImage: "url('/images/backgrounds/backjourney.webp')" }}
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.85),rgba(0,0,0,0.95))]" />
+
+      <div className="relative z-10 mx-auto max-w-6xl">
         <div className="mb-10 sm:mb-14">
           <p className="text-xs tracking-[0.35em] text-[#ff2a2a] uppercase">Milestones</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">The Mob’s Journey</h2>
