@@ -24,16 +24,27 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+html,
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  cursor: text;
+}
+
 ::selection {
   background: #ff2a2a;
   color: white;
-}
-
-h1, h2, h3, h4, h5, h6,
-button,
-a,
-span,
-.card,
-.no-select {
-  user-select: none;
 }
