@@ -5,6 +5,7 @@ import Intro from "@/components/intro/Intro";
 import HeroSection from "@/components/sections/HeroSection";
 import CollectiveSection from "@/components/sections/CollectiveSection";
 import WorkAreasSection from "@/components/sections/WorkAreasSection";
+import CollaborationsSection from "@/components/sections/CollaborationsSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import BleedSection from "@/components/sections/BleedSection";
@@ -40,6 +41,7 @@ export default function Page() {
         <HeroSection />
         <CollectiveSection />
         <WorkAreasSection />
+        <CollaborationsSection />
         <ProjectsSection />
         <BleedSection />
         <ContactSection />
