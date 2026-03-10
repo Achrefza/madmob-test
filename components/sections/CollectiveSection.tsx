@@ -122,7 +122,7 @@ export default function CollectiveSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-4xl text-center">
-        <p className="mb-4 text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">MADMOB</p>
+        <p className="font-madmob mb-4 text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">MADMOB</p>
         <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
           Amplifying Voices, Shaping Culture
         </h2>
