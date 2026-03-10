@@ -18,7 +18,7 @@ export default function HeroSection() {
 
       <div className="relative z-20 max-w-5xl text-center">
         <div className="mx-auto mb-6 h-[2px] w-20 bg-[var(--accent-red)]" />
-        <h1 className="font-madmob text-8xl">
+        <h1 className="mx-auto max-w-[90vw] text-center font-madmob text-[clamp(3rem,10vw,8rem)] text-white">
           MADMOB
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-zinc-300 sm:text-base md:text-lg">
