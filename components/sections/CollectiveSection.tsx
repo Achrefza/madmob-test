@@ -131,7 +131,7 @@ export default function CollectiveSection() {
 
       <div className="relative z-10 mx-auto max-w-4xl text-center">
         <p className="font-madmob mb-4 text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">MADMOB</p>
-        <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
+        <h2 className="font-madmob text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
           Amplifying Voices, Shaping Culture
         </h2>
         <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-zinc-300 sm:text-lg">
