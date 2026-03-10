@@ -63,8 +63,8 @@ export default function CollaborationsSection() {
     <section id="collaborations" className="border-t border-white/10 px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 sm:mb-14">
-          <p className="text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">Collaborations</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <p className="font-madmob text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">Collaborations</p>
+          <h2 className="font-madmob mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Artists Who Collaborated With The Mob
           </h2>
         </div>
