@@ -18,7 +18,6 @@ export default function HeroSection() {
 
       <div className="relative z-20 max-w-5xl text-center">
         <div className="mx-auto mb-6 h-[2px] w-20 bg-[var(--accent-red)]" />
-        <p className="mb-5 text-xs tracking-[0.45em] text-zinc-400 uppercase">Collective</p>
         <h1 className="font-madmob text-8xl">
           MADMOB
         </h1>
