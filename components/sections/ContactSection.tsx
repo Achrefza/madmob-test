@@ -5,7 +5,7 @@ export default function ContactSection() {
     <section id="contact" className="border-t border-white/10 px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-4xl text-center">
         <p className="text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">Contact</p>
-        <h2 className="font-madmob mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Stay Mad</h2>
+        <h2 className="font-madmob mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">S t a y M a d</h2>
         <p className="mx-auto mt-5 max-w-2xl text-zinc-300">
           For bookings, collaborations, and creative direction inquiries, reach out and we’ll respond with availability and next steps.
         </p>
