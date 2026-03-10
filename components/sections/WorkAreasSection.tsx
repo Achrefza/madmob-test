@@ -55,7 +55,7 @@ export default function WorkAreasSection() {
                   </div>
                 )}
               </div>
-              <h3 className="text-2xl font-medium text-white">{area.title}</h3>
+              <h3 className="font-madmob text-2xl font-medium text-white">{area.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-zinc-300">{area.description}</p>
             </article>
           ))}
