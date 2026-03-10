@@ -1,17 +1,6 @@
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-      >
-        <source src="/video/hero.mp4" type="video/mp4" />
-      </video>
-
       <div className="absolute inset-0 z-10 bg-black/60 pointer-events-none" />
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none" />
       <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_top,_rgba(205,28,24,0.16)_0,_rgba(205,28,24,0)_50%)] pointer-events-none" />

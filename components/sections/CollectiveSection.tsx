@@ -88,13 +88,20 @@ export default function CollectiveSection() {
 
   return (
     <section className="relative overflow-hidden border-t border-white/10 px-6 py-20 sm:py-28">
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-[0.18] pointer-events-none"
-        style={{ backgroundImage: 'url("/images/backgrounds/collective.webp")' }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none" />
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        className="absolute inset-0 z-0 h-full w-full object-cover object-center"
+      >
+        <source src="/video/hero.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 z-10 bg-black/60 pointer-events-none" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/30 via-black/60 to-black pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-4xl text-center">
+      <div className="relative z-20 mx-auto max-w-4xl text-center">
         <p className="font-madmob mb-4 text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">MADMOB</p>
         <h2 className="font-madmob text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
           C u l t u r e
