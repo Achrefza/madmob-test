@@ -33,7 +33,7 @@ export default function WorkAreasSection() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 sm:mb-14">
           <p className="font-madmob text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">Areas of Work</p>
-          <h2 className="font-madmob mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Craft Disciplines</h2>
+          <h2 className="font-madmob mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Disciplines</h2>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
