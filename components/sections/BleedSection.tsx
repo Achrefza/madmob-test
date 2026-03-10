@@ -46,8 +46,8 @@ export default function BleedSection() {
       <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 gap-16 items-center lg:grid-cols-2">
         <div>
           <p className="font-madmob text-xs uppercase tracking-[0.35em] text-[var(--bleed-accent)]">Interlude</p>
-          <h2 className="font-madmob mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white">
-            Brand &amp; Merch: BLEED
+          <h2 className="font-madmob mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-red">
+             BLEED
           </h2>
           <p className="mt-6 text-zinc-300 leading-relaxed max-w-xl">
             Our in-house brand, BLEED, was created by our designer and has taken the scene by storm. Selling out
