@@ -1,11 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { lockScroll, unlockScroll } from "@/hooks/useScrollLock";
 
 export default function Intro({ onFinish }: { onFinish: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showLoader, setShowLoader] = useState(true);
+  const hasFinishedRef = useRef(false);
+
+  const finishIntro = useCallback(() => {
+    if (hasFinishedRef.current) {
+      return;
+    }
+
+    hasFinishedRef.current = true;
+    unlockScroll();
+    onFinish();
+  }, [onFinish]);
 
   useEffect(() => {
     lockScroll();
@@ -19,7 +30,9 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
       // attempt autoplay (works on most devices)
       const playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise.catch(() => {});
+        playPromise.catch(() => {
+          finishIntro();
+        });
       }
     }
 
@@ -28,13 +41,17 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
       setShowLoader(false);
     }, 1000);
 
-    return () => clearTimeout(loaderTimer);
-  }, []);
+    // safety net in case the browser never fires onEnded
+    const fallbackTimer = setTimeout(() => {
+      finishIntro();
+    }, 7000);
 
-  const handleEnd = () => {
-    unlockScroll();
-    onFinish();
-  };
+    return () => {
+      clearTimeout(loaderTimer);
+      clearTimeout(fallbackTimer);
+      unlockScroll();
+    };
+  }, [finishIntro]);
 
   return (
     <div className="fixed inset-0 z-[999] bg-black overflow-hidden">
@@ -48,7 +65,8 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
         playsInline
         autoPlay
         preload="auto"
-        onEnded={handleEnd}
+        onEnded={finishIntro}
+        onError={finishIntro}
       />
 
       {/* LOADING TEXT */}
