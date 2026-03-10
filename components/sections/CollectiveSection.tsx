@@ -7,68 +7,33 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 const navigationItems = [
   {
     title: "Work Areas",
+    label: "W O R K   A R E A S",
     href: "#work-areas",
     sectionId: "work-areas",
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-        <path
-          d="M14 4v11.5a3.5 3.5 0 1 1-1-2.45V6.3l7-1.8v9a3.5 3.5 0 1 1-1-2.45V3z"
-          fill="currentColor"
-        />
-      </svg>
-    ),
   },
   {
     title: "Projects",
+    label: "P R O J E C T S",
     href: "#projects",
     sectionId: "projects",
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-        <path
-          d="M12 3.8l2.2 4.4 4.9.7-3.5 3.4.8 4.9L12 15l-4.4 2.2.8-4.9-3.5-3.4 4.9-.7z"
-          fill="currentColor"
-        />
-      </svg>
-    ),
   },
   {
     title: "Collaborations",
+    label: "C O L L A B O R A T I O N S",
     href: "#collaborations",
     sectionId: "collaborations",
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-        <path
-          d="M7 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm10 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM7 13c2.3 0 6 1.1 6 3.4V19H1v-2.6C1 14.1 4.7 13 7 13zm10 0c2.3 0 6 1.1 6 3.4V19h-8v-2.6c0-1.1-.4-2-1.1-2.8.9-.4 2-.6 3.1-.6z"
-          fill="currentColor"
-        />
-      </svg>
-    ),
   },
   {
     title: "Bleed",
+    label: "B L E E D",
     href: "#bleed",
     sectionId: "bleed",
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-        <path
-          d="M12 3c2.4 3.6 6 6.7 6 10.7A6 6 0 0 1 6 13.7C6 9.7 9.6 6.6 12 3zm0 8.5c-1.5 1.8-2.5 3.1-2.5 4.2a2.5 2.5 0 1 0 5 0c0-1.1-1-2.4-2.5-4.2z"
-          fill="currentColor"
-        />
-      </svg>
-    ),
   },
   {
     title: "Contact",
+    label: "C O N T A C T",
     href: "#contact",
     sectionId: "contact",
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-        <path
-          d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm8 6.2L5.2 8h13.6z"
-          fill="currentColor"
-        />
-      </svg>
-    ),
   },
 ];
 
@@ -159,18 +124,9 @@ export default function CollectiveSection() {
                 }`}
               >
                 <span
-                  className={`flex h-8 w-8 items-center justify-center rounded-md border bg-black transition-colors duration-300 group-hover:border-[var(--accent-red)]/60 ${
-                    isActive
-                      ? "border-[var(--accent-red)] text-[var(--accent-red)]"
-                      : "border-[var(--accent-red)]/30 text-zinc-300"
-                  }`}
+                  className={`font-madmob text-sm tracking-[0.08em] uppercase ${isActive ? "text-[var(--accent-red)]" : "text-zinc-100"}`}
                 >
-                  {item.icon}
-                </span>
-                <span
-                  className={`text-sm tracking-[0.08em] uppercase ${isActive ? "text-[var(--accent-red)]" : "text-zinc-100"}`}
-                >
-                  {item.title}
+                  {item.label}
                 </span>
               </a>
             );
