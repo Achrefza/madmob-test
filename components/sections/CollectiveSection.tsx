@@ -1,6 +1,8 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+
+import { useActiveSection } from "@/hooks/useActiveSection";
 
 const navigationItems = [
   {
@@ -72,6 +74,11 @@ const navigationItems = [
 
 export default function CollectiveSection() {
   const [activeNavigation, setActiveNavigation] = useState<string | null>(null);
+  const sectionIds = useMemo(() => navigationItems.map((item) => item.sectionId), []);
+  const { activeSection, setActiveSection } = useActiveSection({
+    sectionIds,
+    threshold: 0.5,
+  });
 
   const applySectionHighlight = useCallback((target: HTMLElement) => {
     const cinematicHighlightClass =
@@ -104,13 +111,14 @@ export default function CollectiveSection() {
       event.preventDefault();
 
       setActiveNavigation(sectionId);
+      setActiveSection(sectionId);
 
       window.setTimeout(() => {
         handleNavigate(sectionId);
         setActiveNavigation((currentActive) => (currentActive === sectionId ? null : currentActive));
       }, 150);
     },
-    [handleNavigate],
+    [handleNavigate, setActiveSection],
   );
 
   return (
@@ -133,21 +141,40 @@ export default function CollectiveSection() {
         </p>
 
         <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {navigationItems.map((item) => (
-            <a
-              key={item.title}
-              href={item.href}
-              onClick={(event) => handleNavigationClick(event, item.sectionId)}
-              className={`group flex items-center justify-center gap-3 rounded-lg border border-white/10 bg-zinc-950/60 px-5 py-4 text-left shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-400 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:border-[var(--accent-red)]/70 hover:shadow-[0_0_20px_rgba(205,28,24,0.15)] active:scale-95 active:duration-150 ${
-                activeNavigation === item.sectionId ? "scale-95 duration-150" : ""
-              }`}
-            >
-              <span className="flex h-8 w-8 items-center justify-center rounded-md border border-[var(--accent-red)]/30 bg-black text-[var(--accent-red)] transition-colors duration-300 group-hover:border-[var(--accent-red)]/60">
-                {item.icon}
-              </span>
-              <span className="text-sm tracking-[0.08em] text-zinc-100 uppercase">{item.title}</span>
-            </a>
-          ))}
+          {navigationItems.map((item) => {
+            const isActive = activeSection === item.sectionId;
+
+            return (
+              <a
+                key={item.title}
+                href={item.href}
+                onClick={(event) => handleNavigationClick(event, item.sectionId)}
+                aria-current={isActive ? "true" : undefined}
+                className={`group flex items-center justify-center gap-3 rounded-lg border border-white/10 bg-zinc-950/60 px-5 py-4 text-left shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-400 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:border-[var(--accent-red)]/70 hover:shadow-[0_0_20px_rgba(205,28,24,0.15)] active:scale-95 active:duration-150 ${
+                  activeNavigation === item.sectionId ? "scale-95 duration-150" : ""
+                } ${
+                  isActive
+                    ? "border-[var(--accent-red)]/80 bg-[radial-gradient(circle_at_center,rgba(205,28,24,0.12),rgba(24,24,27,0.75))] shadow-[0_0_24px_rgba(205,28,24,0.22)]"
+                    : ""
+                }`}
+              >
+                <span
+                  className={`flex h-8 w-8 items-center justify-center rounded-md border bg-black transition-colors duration-300 group-hover:border-[var(--accent-red)]/60 ${
+                    isActive
+                      ? "border-[var(--accent-red)] text-[var(--accent-red)]"
+                      : "border-[var(--accent-red)]/30 text-zinc-300"
+                  }`}
+                >
+                  {item.icon}
+                </span>
+                <span
+                  className={`text-sm tracking-[0.08em] uppercase ${isActive ? "text-[var(--accent-red)]" : "text-zinc-100"}`}
+                >
+                  {item.title}
+                </span>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
