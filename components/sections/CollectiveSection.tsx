@@ -87,7 +87,7 @@ export default function CollectiveSection() {
   );
 
   return (
-    <section className="relative overflow-hidden border-t border-white/10 px-6 py-20 sm:py-28">
+    <section id="collective" className="relative overflow-hidden border-t border-white/10 px-6 py-20 sm:py-28">
       <video
         autoPlay
         muted

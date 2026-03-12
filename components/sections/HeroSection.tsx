@@ -1,3 +1,15 @@
+"use client";
+
+const handleExploreCollective = () => {
+  const collectiveSection = document.getElementById("collective");
+
+  if (!collectiveSection) {
+    return;
+  }
+
+  collectiveSection.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
@@ -14,10 +26,33 @@ export default function HeroSection() {
         </p>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2 text-zinc-400">
-        <span className="text-[10px] tracking-[0.35em] uppercase">Scroll</span>
-        <span className="h-8 w-[1px] bg-[var(--accent-red)]/80" />
+      <div className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2">
+        <button
+          type="button"
+          onClick={handleExploreCollective}
+          className="group inline-flex items-center justify-center gap-2 rounded-md border border-white/70 bg-transparent px-5 py-2.5 text-xs tracking-[0.2em] text-white uppercase transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-white hover:bg-white/5 hover:shadow-[0_0_18px_rgba(255,255,255,0.22)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/70"
+          style={{ animation: "heroExploreFloat 3s ease-in-out infinite" }}
+          aria-label="Explore collective"
+        >
+          <span>EXPLORE COLLECTIVE</span>
+          <span aria-hidden="true" className="text-sm leading-none transition-transform duration-300 group-hover:translate-y-0.5">
+            ↓
+          </span>
+        </button>
       </div>
+
+      <style jsx>{`
+        @keyframes heroExploreFloat {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+
+          50% {
+            transform: translateY(-3px);
+          }
+        }
+      `}</style>
     </section>
   );
 }
