@@ -4,28 +4,23 @@ import { useEffect, useState } from "react";
 
 const videoClips = [
   {
-    src: "https://www.youtube.com/embed/NC7Gx6R0Reo",
-    image: "https://img.youtube.com/vi/NC7Gx6R0Reo/maxresdefault.jpg",
+    id: "NC7Gx6R0Reo",
     title: "A.L.A - Ya Ghali (Official Music Video)",
   },
   {
-    src: "https://www.youtube.com/embed/Rug85eDybfs",
-    image: "https://img.youtube.com/vi/Rug85eDybfs/maxresdefault.jpg",
+    id: "Rug85eDybfs",
     title: "XIIVI - LESSGO (Official Music Video)",
   },
   {
-    src: "https://www.youtube.com/embed/fRqk3TDk_c0",
-    image: "https://img.youtube.com/vi/fRqk3TDk_c0/maxresdefault.jpg",
+    id: "fRqk3TDk_c0",
     title: "KTYB X Madmob - ANANAYA (Official Music Video)",
   },
   {
-    src: "https://www.youtube.com/embed/IXPu3Z_u98U",
-    image: "https://img.youtube.com/vi/IXPu3Z_u98U/maxresdefault.jpg",
+    id: "IXPu3Z_u98U",
     title: "Dabl De x Fahed — عكس الموج",
   },
   {
-    src: "https://www.youtube.com/embed/3FpdR-LKfDY",
-    image: "https://img.youtube.com/vi/3FpdR-LKfDY/maxresdefault.jpg",
+    id: "3FpdR-LKfDY",
     title: "KTYB X EMP1RE — BAYAN",
   },
 ];
@@ -35,8 +30,8 @@ export default function VideoClipsSection() {
   const [videoTitle, setVideoTitle] = useState<string>("Video clip");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openVideoModal = (source: string, title: string) => {
-    setVideoSrc(`${source}?autoplay=1&modestbranding=1&rel=0`);
+  const openVideoModal = (videoId: string, title: string) => {
+    setVideoSrc(`https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`);
     setVideoTitle(title);
     setIsModalOpen(true);
   };
@@ -77,13 +72,13 @@ export default function VideoClipsSection() {
         <div className="mt-10 grid grid-cols-1 gap-6 sm:gap-7 md:grid-cols-2 lg:grid-cols-3">
           {videoClips.map((video) => (
             <article
-              key={video.src}
+              key={video.id}
               className="group relative cursor-pointer overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-br from-zinc-900/95 via-black to-zinc-900/70 transition-all duration-500 hover:scale-[1.02] hover:border-white/30 hover:shadow-[0_0_40px_rgba(59,130,246,0.2)]"
-              onClick={() => openVideoModal(video.src, video.title)}
+              onClick={() => openVideoModal(video.id, video.title)}
               onKeyDown={(event) => {
                 if (event.key === "Enter" || event.key === " ") {
                   event.preventDefault();
-                  openVideoModal(video.src, video.title);
+                  openVideoModal(video.id, video.title);
                 }
               }}
               role="button"
@@ -92,14 +87,21 @@ export default function VideoClipsSection() {
               <div className="relative aspect-video overflow-hidden">
                 <div
                   className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${video.image})` }}
+                  style={{ backgroundImage: `url(https://img.youtube.com/vi/${video.id}/maxresdefault.jpg)` }}
                 />
 
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent transition-opacity duration-500 group-hover:from-black/70" />
 
                 <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-70 transition-all duration-500 group-hover:opacity-90">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/35 bg-black/45 backdrop-blur-sm transition-transform duration-500 group-hover:scale-110">
-                    <span className="ml-1 text-xl text-white/90">▶</span>
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/30 bg-black/55 backdrop-blur-sm transition-transform duration-500 group-hover:scale-110">
+                    <svg
+                      aria-hidden="true"
+                      className="ml-1 h-5 w-5 text-white"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.85l8.49-5.18a1 1 0 0 0 0-1.7L9.54 5.97A1 1 0 0 0 8 6.82Z" />
+                    </svg>
                   </div>
                 </div>
 
