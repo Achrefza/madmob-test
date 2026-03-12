@@ -7,7 +7,6 @@ const coverSlides = [
   "/images/backgrounds/cover2.webp",
   "/images/backgrounds/cover3.webp",
   "/images/backgrounds/cover4.webp",
-  "/images/backgrounds/cover5.webp",
 ];
 
 export default function MusicCoversSection() {
