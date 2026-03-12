@@ -10,6 +10,7 @@ import ProjectsSection from "@/components/sections/ProjectsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import BleedSection from "@/components/sections/BleedSection";
 import MusicCoversSection from "@/components/sections/MusicCoversSection";
+import VideoClipsSection from "@/components/sections/VideoClipsSection";
 
 export default function Page() {
   const [introFinished, setIntroFinished] = useState(false);
@@ -44,6 +45,7 @@ export default function Page() {
         <WorkAreasSection />
         <ProjectsSection />
         <MusicCoversSection />
+        <VideoClipsSection />
         <CollaborationsSection />
         <BleedSection />
         <ContactSection />
