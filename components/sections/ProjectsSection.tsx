@@ -25,7 +25,7 @@ const projects = [
   {
     title: "ALTERNATIVE (DJ Set)",
     description: "In 2024, MADMOB hosted an intimate DJ set session at TBRL Studio.",
-    image: "/images/backgrounds/alternative.webp",
+    image: "https://img.youtube.com/vi/OHimhB1eKGI/maxresdefault.jpg",
     video: "https://www.youtube.com/embed/OHimhB1eKGI",
   },
   {
@@ -36,6 +36,7 @@ const projects = [
   {
     title: "Gimic Radio Residency",
     description: "From 2022 to 2023, MADMOB held a radio residency in Brussels, Belgium.",
+    image: "https://img.youtube.com/vi/ki4ezofcR00/maxresdefault.jpg",
     video: "https://www.youtube.com/embed/ki4ezofcR00",
   },
 ];
