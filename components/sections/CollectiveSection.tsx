@@ -93,7 +93,7 @@ export default function CollectiveSection() {
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         className="absolute inset-0 z-0 h-full w-full object-cover object-center"
       >
         <source src="/video/hero.mp4" type="video/mp4" />
