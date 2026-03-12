@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const coverSlides = [
@@ -57,11 +56,9 @@ export default function MusicCoversSection() {
                     isActive ? "translate-x-0 opacity-100" : "translate-x-6 opacity-0"
                   }`}
                 >
-                  <Image
+                  <img
                     src={slide}
                     alt={`Music cover slide ${index + 1}`}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className={`h-full w-full object-cover transition-transform duration-[5000ms] ease-out ${
                       isActive ? "scale-105" : "scale-100"
                     }`}
