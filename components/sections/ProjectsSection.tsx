@@ -8,16 +8,25 @@ const projects = [
     description:
       "From 2020 to 2022, MADFEST ran as a two-day festival with 1,000–1,200 attendees and lineups of up to 12 rappers per edition.",
     image: "/images/backgrounds/madfest.webp",
+    video: "https://www.youtube.com/embed/UFpmdPuqVOA",
+  },
+  {
+    title: "MADFEST 2K21 SET",
+    description: "Live MADFEST 2K21 set performance.",
+    image: "/images/backgrounds/madfest.webp",
+    video: "https://www.youtube.com/embed/J8Udp3QVqm0",
   },
   {
     title: "Royal Rumble",
     description: "Held on 15 Feb 2020, this high-energy battle-style music event spotlighted underground talent.",
     image: "/images/backgrounds/royalrumble.webp",
+    video: "https://www.youtube.com/embed/vFel4jMDOrw",
   },
   {
     title: "ALTERNATIVE (DJ Set)",
     description: "In 2024, MADMOB hosted an intimate DJ set session at TBRL Studio.",
     image: "/images/backgrounds/alternative.webp",
+    video: "https://www.youtube.com/embed/OHimhB1eKGI",
   },
   {
     title: "Club Residency — Zebra Club",
@@ -27,16 +36,26 @@ const projects = [
   {
     title: "Gimic Radio Residency",
     description: "From 2022 to 2023, MADMOB held a radio residency in Brussels, Belgium.",
+    video: "https://www.youtube.com/embed/ki4ezofcR00",
   },
 ];
 
 export default function ProjectsSection() {
   const [revealedCards, setRevealedCards] = useState<boolean[]>(() => projects.map(() => false));
-  const [isMadfestModalOpen, setIsMadfestModalOpen] = useState(false);
+  const [videoSrc, setVideoSrc] = useState<string | null>(null);
+  const [videoTitle, setVideoTitle] = useState<string>("Project video");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
 
-  const closeMadfestModal = () => {
-    setIsMadfestModalOpen(false);
+  const openVideoModal = (source: string, title: string) => {
+    setVideoSrc(`${source}?autoplay=1&modestbranding=1&rel=0`);
+    setVideoTitle(title);
+    setIsModalOpen(true);
+  };
+
+  const closeVideoModal = () => {
+    setIsModalOpen(false);
+    setVideoSrc(null);
   };
 
   useEffect(() => {
@@ -79,13 +98,13 @@ export default function ProjectsSection() {
   }, []);
 
   useEffect(() => {
-    if (!isMadfestModalOpen) {
+    if (!isModalOpen) {
       return;
     }
 
     const handleEscapeKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closeMadfestModal();
+        closeVideoModal();
       }
     };
 
@@ -94,7 +113,7 @@ export default function ProjectsSection() {
     return () => {
       window.removeEventListener("keydown", handleEscapeKey);
     };
-  }, [isMadfestModalOpen]);
+  }, [isModalOpen]);
 
   return (
     <section id="projects" className="relative overflow-hidden border-t border-white/10 px-6 py-20 sm:py-28">
@@ -119,25 +138,25 @@ export default function ProjectsSection() {
               }}
               data-project-index={index}
               className={`group relative h-52 overflow-hidden border border-white/10 bg-zinc-900 ${
-                index === 0 ? "cursor-pointer" : ""
+                project.video ? "cursor-pointer" : ""
               }`}
               onClick={() => {
-                if (index === 0) {
-                  setIsMadfestModalOpen(true);
+                if (project.video) {
+                  openVideoModal(project.video, project.title);
                 }
               }}
               onKeyDown={(event) => {
-                if (index !== 0) {
+                if (!project.video) {
                   return;
                 }
 
                 if (event.key === "Enter" || event.key === " ") {
                   event.preventDefault();
-                  setIsMadfestModalOpen(true);
+                  openVideoModal(project.video, project.title);
                 }
               }}
-              role={index === 0 ? "button" : undefined}
-              tabIndex={index === 0 ? 0 : undefined}
+              role={project.video ? "button" : undefined}
+              tabIndex={project.video ? 0 : undefined}
             >
               {project.image ? (
                 <div
@@ -166,20 +185,20 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {isMadfestModalOpen ? (
+      {isModalOpen ? (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
           style={{ animation: "madfestModalFadeIn 220ms ease-out" }}
-          onClick={closeMadfestModal}
+          onClick={closeVideoModal}
           aria-modal="true"
           role="dialog"
         >
           <div className="relative w-full max-w-[1100px]" onClick={(event) => event.stopPropagation()}>
             <button
               type="button"
-              onClick={closeMadfestModal}
+              onClick={closeVideoModal}
               className="absolute -top-14 right-0 flex h-11 w-11 items-center justify-center rounded-full bg-zinc-900/90 text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:bg-zinc-700"
-              aria-label="Close MADFEST video"
+              aria-label="Close project video"
             >
               <span className="text-xl leading-none">×</span>
             </button>
@@ -187,8 +206,8 @@ export default function ProjectsSection() {
             <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-2xl shadow-black/50">
               <iframe
                 className="h-full w-full"
-                src="https://www.youtube.com/embed/UFpmdPuqVOA?autoplay=1&modestbranding=1&rel=0"
-                title="Annual Festival: MADFEST"
+                src={videoSrc ?? undefined}
+                title={videoTitle}
                 allow="autoplay; encrypted-media; picture-in-picture"
                 allowFullScreen
               />
