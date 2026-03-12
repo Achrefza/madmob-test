@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 
 const coverSlides = [
-  "/backgrounds/cover1.webp",
-  "/backgrounds/cover2.webp",
-  "/backgrounds/cover3.webp",
-  "/backgrounds/cover4.webp",
-  "/backgrounds/cover5.webp",
+  "/images/backgrounds/cover1.webp",
+  "/images/backgrounds/cover2.webp",
+  "/images/backgrounds/cover3.webp",
+  "/images/backgrounds/cover4.webp",
+  "/images/backgrounds/cover5.webp",
 ];
 
 export default function MusicCoversSection() {
