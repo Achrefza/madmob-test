@@ -1,14 +1,14 @@
 const videoClips = [
   {
-    src: "https://www.youtube.com/embed/nY3EpKcWnSY",
+    src: "https://www.youtube.com/embed/nY3EpKcWnSY?modestbranding=1&rel=0&showinfo=0&controls=1",
     title: "Kwengface x Giggs - Water (Official Music Video)",
   },
   {
-    src: "https://www.youtube.com/embed/Rug85eDybfs",
+    src: "https://www.youtube.com/embed/Rug85eDybfs?modestbranding=1&rel=0&showinfo=0&controls=1",
     title: "XIIVI - LESSGO (Official Music Video)",
   },
   {
-    src: "https://www.youtube.com/embed/fRqk3TDk_c0",
+    src: "https://www.youtube.com/embed/fRqk3TDk_c0?modestbranding=1&rel=0&showinfo=0&controls=1",
     title: "KTYB X Madmob - ANANAYA (Official Music Video)",
   },
 ];
