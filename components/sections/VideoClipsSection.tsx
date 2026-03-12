@@ -1,7 +1,7 @@
 const videoClips = [
   {
-    src: "https://www.youtube.com/embed/nY3EpKcWnSY",
-    title: "Kwengface x Giggs - Water (Official Music Video)",
+    src: "https://www.youtube.com/embed/NC7Gx6R0Reo",
+    title="A.L.A - Ya Ghali (Official Music Video)"
   },
   {
     src: "https://www.youtube.com/embed/Rug85eDybfs",
@@ -21,7 +21,7 @@ export default function VideoClipsSection() {
 
       <div className="relative z-10 mx-auto max-w-6xl">
         <h2 className="font-madmob mt-4 text-3xl font-semibold tracking-tight text-blue sm:text-4xl md:text-5xl">
-          V i d e o  C l i p s
+          V i d e o    C l i p s
         </h2>
 
         <div className="mt-10 grid grid-cols-1 gap-6 sm:gap-7 md:grid-cols-2 lg:grid-cols-3">
