@@ -38,7 +38,11 @@ export default function MusicCoversSection() {
           <h2 className="font-madmob mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-blue">
             Music Covers
           </h2>
-          <p className="mt-6 max-w-xl leading-relaxed text-zinc-300">&nbsp;</p>
+          <p className="mt-6 max-w-xl text-zinc-300 leading-relaxed">
+            Our designer <strong>YBA</strong> turns music into visual statements. Every cover is built to reflect the
+            sound, the mood, and the culture behind the track. Raw creativity, bold aesthetics, and street energy
+            shape each piece of artwork.
+          </p>
         </div>
 
         <div>
