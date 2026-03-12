@@ -26,30 +26,36 @@ export default function HeroSection() {
         </p>
       </div>
 
-      <div className="absolute bottom-24 left-1/2 z-20 -translate-x-1/2">
+      <div className="absolute bottom-16 left-1/2 z-20 -translate-x-1/2 sm:bottom-20">
         <button
           type="button"
           onClick={handleExploreCollective}
-          className="group inline-flex items-center justify-center gap-2 rounded-md border border-white/70 bg-transparent px-5 py-2.5 text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-white hover:bg-white/5 hover:shadow-[0_0_18px_rgba(255,255,255,0.22)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/70"
-          style={{ animation: "heroExploreFloat 3s ease-in-out infinite" }}
+          className="group inline-flex min-w-[13rem] flex-col items-center justify-center rounded-md border border-white/70 bg-transparent px-6 py-3 text-white transition-all duration-300 ease-out hover:scale-105 hover:border-white hover:bg-white/5 hover:text-white hover:shadow-[0_0_24px_rgba(255,255,255,0.28)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/70"
+          style={{ animation: "heroExploreFloatGlow 2.5s ease-in-out infinite" }}
           aria-label="Explore collective"
         >
-          <span className="font-madmob text-base tracking-[0.08em]">Explore</span>
-          <span aria-hidden="true" className="text-sm leading-none transition-transform duration-300 group-hover:translate-y-0.5">
-            ↓
+          <span className="text-center font-madmob text-xs tracking-[0.18em] sm:tracking-[0.25em]">
+            PRESS / SCROLL
+          </span>
+          <span className="text-center font-madmob text-xs tracking-[0.18em] sm:tracking-[0.25em]">
+            TO EXPLORE
           </span>
         </button>
       </div>
 
       <style jsx>{`
-        @keyframes heroExploreFloat {
+        @keyframes heroExploreFloatGlow {
           0%,
           100% {
             transform: translateY(0);
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 0 rgba(255, 255, 255, 0);
           }
 
           50% {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 18px rgba(255, 255, 255, 0.16);
           }
         }
       `}</style>
