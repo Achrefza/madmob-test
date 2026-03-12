@@ -106,7 +106,7 @@ export default function CollectiveSection() {
         <h2 className="font-madmob text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
           C u l t u r e
         </h2>
-        <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-zinc-300 sm:text-lg">
+        <p className="font-madmob mx-auto mt-8 max-w-3xl text-base leading-relaxed text-zinc-300 sm:text-lg">
           more than a collective—it’s a platform for artistic expression and cultural impact. We champion diversity,
           authenticity, and connection, bridging underground talent with global audiences through live shows,
           immersive experiences, and community-driven projects.
