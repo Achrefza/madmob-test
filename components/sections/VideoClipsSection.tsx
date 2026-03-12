@@ -1,7 +1,7 @@
 const videoClips = [
   {
     src: "https://www.youtube.com/embed/NC7Gx6R0Reo",
-    title="A.L.A - Ya Ghali (Official Music Video)"
+    title: "A.L.A - Ya Ghali (Official Music Video)"
   },
   {
     src: "https://www.youtube.com/embed/Rug85eDybfs",
