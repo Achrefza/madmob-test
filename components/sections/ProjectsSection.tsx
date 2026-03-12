@@ -25,19 +25,6 @@ const projects = [
     image: "/images/backgrounds/zebra.webp",
   },
   {
-    title: "Club DJ Events — Club Gingembre",
-    description: "Regular DJ takeovers that helped push and amplify the underground hip-hop scene.",
-  },
-  {
-    title: "Club Nights — Cocoon & Lotus Club",
-    description: "Curated DJ nights featuring both international and local artists.",
-  },
-  {
-    title: "MADTALK Podcast",
-    description: "Running since 2023, MADTALK explores underground music, industry shifts, and artist stories.",
-    image: "/images/backgrounds/madtalk.webp",
-  },
-  {
     title: "Gimic Radio Residency",
     description: "From 2022 to 2023, MADMOB held a radio residency in Brussels, Belgium.",
   },
