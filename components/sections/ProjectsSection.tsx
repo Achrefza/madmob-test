@@ -83,8 +83,8 @@ export default function ProjectsSection() {
 
       <div className="relative z-10 mx-auto max-w-6xl">
         <div className="mb-10 sm:mb-14">
-          <p className="font-madmob text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">T h e   J o u r n e y</p>
-          <h2 className="font-madmob mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">D j i n g   "&"   f e s t s </h2>
+          <p className="font-madmob text-xs tracking-[0.25em] text-[var(--accent-red)] uppercase">T h e   J o u r n e y</p>
+          <h2 className="font-madmob mt-3 text-3xl font-semibold tracking-[0.25em] text-white sm:text-4xl">D j i n g   "&"   f e s t s </h2>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
