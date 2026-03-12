@@ -32,7 +32,12 @@ const projects = [
 
 export default function ProjectsSection() {
   const [revealedCards, setRevealedCards] = useState<boolean[]>(() => projects.map(() => false));
+  const [isMadfestModalOpen, setIsMadfestModalOpen] = useState(false);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
+
+  const closeMadfestModal = () => {
+    setIsMadfestModalOpen(false);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -73,6 +78,24 @@ export default function ProjectsSection() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!isMadfestModalOpen) {
+      return;
+    }
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeMadfestModal();
+      }
+    };
+
+    window.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isMadfestModalOpen]);
+
   return (
     <section id="projects" className="relative overflow-hidden border-t border-white/10 px-6 py-20 sm:py-28">
       <div
@@ -95,7 +118,26 @@ export default function ProjectsSection() {
                 cardRefs.current[index] = element;
               }}
               data-project-index={index}
-              className="group relative h-52 overflow-hidden border border-white/10 bg-zinc-900"
+              className={`group relative h-52 overflow-hidden border border-white/10 bg-zinc-900 ${
+                index === 0 ? "cursor-pointer" : ""
+              }`}
+              onClick={() => {
+                if (index === 0) {
+                  setIsMadfestModalOpen(true);
+                }
+              }}
+              onKeyDown={(event) => {
+                if (index !== 0) {
+                  return;
+                }
+
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setIsMadfestModalOpen(true);
+                }
+              }}
+              role={index === 0 ? "button" : undefined}
+              tabIndex={index === 0 ? 0 : undefined}
             >
               {project.image ? (
                 <div
@@ -123,6 +165,37 @@ export default function ProjectsSection() {
           ))}
         </div>
       </div>
+
+      {isMadfestModalOpen ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          style={{ animation: "madfestModalFadeIn 220ms ease-out" }}
+          onClick={closeMadfestModal}
+          aria-modal="true"
+          role="dialog"
+        >
+          <div className="relative w-full max-w-[1100px]" onClick={(event) => event.stopPropagation()}>
+            <button
+              type="button"
+              onClick={closeMadfestModal}
+              className="absolute -top-14 right-0 flex h-11 w-11 items-center justify-center rounded-full bg-zinc-900/90 text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:bg-zinc-700"
+              aria-label="Close MADFEST video"
+            >
+              <span className="text-xl leading-none">×</span>
+            </button>
+
+            <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-2xl shadow-black/50">
+              <iframe
+                className="h-full w-full"
+                src="https://www.youtube.com/embed/UFpmdPuqVOA?autoplay=1&modestbranding=1&rel=0"
+                title="Annual Festival: MADFEST"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }
