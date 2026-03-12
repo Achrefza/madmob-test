@@ -20,7 +20,7 @@ export default function VideoClipsSection() {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.88))]" />
 
       <div className="relative z-10 mx-auto max-w-6xl">
-        <h2 className="font-madmob mt-4 text-3xl font-semibold tracking-tight text-blue sm:text-4xl md:text-5xl">
+        <h2 className="font-madmob mt-4 text-3xl font-semibold tracking-[0.25em] text-blue sm:text-4xl md:text-5xl">
           V i d e o      C l i p s
         </h2>
 
