@@ -52,3 +52,13 @@ textarea,
 .font-madmob {
   font-family: var(--font-madmob), sans-serif;
 }
+
+@keyframes madfestModalFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
