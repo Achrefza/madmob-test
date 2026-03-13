@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { lockScroll, unlockScroll } from "@/hooks/useScrollLock";
+import { lockScroll, unlockScrol } from "@/hooks/useScrollLock";
 
 export default function Intro({ onFinish }: { onFinish: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
