@@ -10,8 +10,13 @@ const madmobFont = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Collective",
+  title: "Madmob",
   description: "Artistic Collective Website",
+  icons: {
+    icon: "/images/backgrounds/madmob.png",
+    shortcut: "/images/backgrounds/madmob.png",
+    apple: "/images/backgrounds/madmob.png",
+  },
 };
 
 export default function RootLayout({
@@ -21,7 +26,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={madmobFont.variable}>
-      <body>{children}<MadBotWidget /></body>
+      <body>
+        <img
+          src="/images/backgrounds/madmob.png"
+          alt="Madmob logo"
+          className="fixed top-5 right-6 z-50 w-14 h-auto opacity-90 pointer-events-none select-none"
+        />
+        {children}
+        <MadBotWidget />
+      </body>
     </html>
   );
 }
