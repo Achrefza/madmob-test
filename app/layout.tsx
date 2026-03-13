@@ -30,7 +30,7 @@ export default function RootLayout({
         <img
           src="/images/backgrounds/madmob.png"
           alt="Madmob logo"
-          className="fixed top-5 right-6 z-50 w-14 h-auto opacity-90 pointer-events-none select-none"
+          className="fixed top-5 left-6 z-50 w-14 h-auto opacity-90 pointer-events-none select-none"
         />
         {children}
         <MadBotWidget />
