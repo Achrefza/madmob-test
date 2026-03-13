@@ -46,6 +46,7 @@ const getBotReply = (message: string) => {
 export default function MadBotWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [hasMadBotButtonEntered, setHasMadBotButtonEntered] = useState(false);
   const [isIntroBubbleVisible, setIsIntroBubbleVisible] = useState(false);
   const [isIntroBubbleLeaving, setIsIntroBubbleLeaving] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -128,6 +129,16 @@ export default function MadBotWidget() {
 
     messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
   }, [messages, isMinimized, isOpen]);
+
+  useEffect(() => {
+    const animationFrameId = window.requestAnimationFrame(() => {
+      setHasMadBotButtonEntered(true);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
 
   useEffect(() => {
     if (hasIntroRunRef.current) return;
@@ -331,8 +342,12 @@ export default function MadBotWidget() {
       <button
         type="button"
         onClick={openWidget}
-        className={`pointer-events-auto font-madmob rounded-full border border-white/20 bg-black px-5 py-3 text-sm tracking-wide text-white shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-300 hover:shadow-[0_0_18px_rgba(205,28,24,0.55)] ${
-          isOpen ? "scale-90 opacity-0" : "scale-100 opacity-100"
+        className={`pointer-events-auto font-madmob rounded-full border border-white/20 bg-black px-5 py-3 text-sm tracking-wide text-white shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-[500ms] ease-out hover:shadow-[0_0_18px_rgba(205,28,24,0.55)] ${
+          isOpen
+            ? "scale-90 opacity-0"
+            : hasMadBotButtonEntered
+              ? "translate-y-0 scale-100 opacity-100"
+              : "translate-y-5 scale-95 opacity-0"
         }`}
       >
         MAD_BOT
