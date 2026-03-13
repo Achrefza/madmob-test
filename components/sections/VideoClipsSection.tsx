@@ -11,6 +11,10 @@ const videoClips = [
     src: "https://www.youtube.com/embed/fRqk3TDk_c0",
     title: "KTYB X Madmob - ANANAYA (Official Music Video)",
   },
+  {
+    src: "https://www.youtube.com/embed/qSVuAtUBL98",
+    title: "KTYB - 11",
+  },
 ];
 
 export default function VideoClipsSection() {
