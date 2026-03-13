@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useRef, useState, useEffect } from "react";
+import { FormEvent, useMemo, useRef, useState, useEffect, useCallback } from "react";
 
 type Sender = "user" | "bot";
 
@@ -8,6 +8,7 @@ type ChatMessage = {
   id: number;
   sender: Sender;
   text: string;
+  isTyping?: boolean;
 };
 
 const BOT_RESPONSES = {
@@ -58,6 +59,11 @@ export default function MadBotWidget() {
 
   const nextId = useRef(2);
   const messageContainerRef = useRef<HTMLDivElement | null>(null);
+  const hasIntroRunRef = useRef(false);
+  const introDelayTimerRef = useRef<number | null>(null);
+  const introHideTimerRef = useRef<number | null>(null);
+  const introRemoveTimerRef = useRef<number | null>(null);
+  const typingIntervalIdsRef = useRef<number[]>([]);
 
   const panelVisibilityClasses = useMemo(() => {
     if (!isOpen) {
@@ -66,6 +72,54 @@ export default function MadBotWidget() {
 
     return "translate-y-0 scale-100 opacity-100";
   }, [isOpen]);
+
+  const clearIntroTimers = useCallback(() => {
+    if (introDelayTimerRef.current) {
+      window.clearTimeout(introDelayTimerRef.current);
+      introDelayTimerRef.current = null;
+    }
+
+    if (introHideTimerRef.current) {
+      window.clearTimeout(introHideTimerRef.current);
+      introHideTimerRef.current = null;
+    }
+
+    if (introRemoveTimerRef.current) {
+      window.clearTimeout(introRemoveTimerRef.current);
+      introRemoveTimerRef.current = null;
+    }
+  }, []);
+
+  const typeMessage = (text: string, messageId: number) => {
+    let charIndex = 0;
+
+    const typingInterval = window.setInterval(() => {
+      charIndex += 1;
+      const nextText = text.slice(0, charIndex);
+      const finishedTyping = charIndex >= text.length;
+
+      setMessages((prev) =>
+        prev.map((message) =>
+          message.id === messageId
+            ? {
+                ...message,
+                text: nextText,
+                isTyping: !finishedTyping,
+              }
+            : message,
+        ),
+      );
+
+      if (finishedTyping) {
+        window.clearInterval(typingInterval);
+        typingIntervalIdsRef.current = typingIntervalIdsRef.current.filter(
+          (intervalId) => intervalId !== typingInterval,
+        );
+      }
+    }, 28);
+
+    typingIntervalIdsRef.current.push(typingInterval);
+  };
 
   useEffect(() => {
     if (!messageContainerRef.current) {
@@ -76,34 +130,85 @@ export default function MadBotWidget() {
   }, [messages, isMinimized, isOpen]);
 
   useEffect(() => {
-    const showTimer = window.setTimeout(() => {
-      setIsIntroBubbleVisible(true);
-    }, 2000);
+    const heroSection = document.querySelector("main section");
+
+    if (!heroSection) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const heroEntry = entries[0];
+
+        if (!heroEntry) {
+          return;
+        }
+
+        if (heroEntry.isIntersecting && heroEntry.intersectionRatio > 0.5) {
+          if (!hasIntroRunRef.current && !introDelayTimerRef.current) {
+            introDelayTimerRef.current = window.setTimeout(() => {
+              hasIntroRunRef.current = true;
+              setIsIntroBubbleVisible(true);
+              setIsIntroBubbleLeaving(false);
+              introDelayTimerRef.current = null;
+            }, 1000);
+          }
+
+          return;
+        }
+
+        if (!hasIntroRunRef.current && introDelayTimerRef.current) {
+          window.clearTimeout(introDelayTimerRef.current);
+          introDelayTimerRef.current = null;
+        }
+      },
+      {
+        threshold: [0.5],
+      },
+    );
+
+    observer.observe(heroSection);
 
     return () => {
-      window.clearTimeout(showTimer);
+      observer.disconnect();
+      clearIntroTimers();
     };
-  }, []);
+  }, [clearIntroTimers]);
 
   useEffect(() => {
     if (!isIntroBubbleVisible) {
       return;
     }
 
-    const hideTimer = window.setTimeout(() => {
+    introHideTimerRef.current = window.setTimeout(() => {
       setIsIntroBubbleLeaving(true);
-    }, 6500);
+    }, 6000);
 
-    const removeTimer = window.setTimeout(() => {
+    introRemoveTimerRef.current = window.setTimeout(() => {
       setIsIntroBubbleVisible(false);
       setIsIntroBubbleLeaving(false);
-    }, 7200);
+    }, 6600);
 
     return () => {
-      window.clearTimeout(hideTimer);
-      window.clearTimeout(removeTimer);
+      if (introHideTimerRef.current) {
+        window.clearTimeout(introHideTimerRef.current);
+        introHideTimerRef.current = null;
+      }
+
+      if (introRemoveTimerRef.current) {
+        window.clearTimeout(introRemoveTimerRef.current);
+        introRemoveTimerRef.current = null;
+      }
     };
   }, [isIntroBubbleVisible]);
+
+  useEffect(() => {
+    return () => {
+      typingIntervalIdsRef.current.forEach((intervalId) => window.clearInterval(intervalId));
+      typingIntervalIdsRef.current = [];
+      clearIntroTimers();
+    };
+  }, [clearIntroTimers]);
 
   const handleSend = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -121,14 +226,18 @@ export default function MadBotWidget() {
     };
     nextId.current += 1;
 
+    const botReplyText = getBotReply(trimmedInput);
+    const botMessageId = nextId.current;
     const botMessage: ChatMessage = {
-      id: nextId.current,
+      id: botMessageId,
       sender: "bot",
-      text: getBotReply(trimmedInput),
+      text: "",
+      isTyping: true,
     };
     nextId.current += 1;
 
     setMessages((prev) => [...prev, userMessage, botMessage]);
+    typeMessage(botReplyText, botMessageId);
     setInputValue("");
   };
 
@@ -137,6 +246,7 @@ export default function MadBotWidget() {
     setIsMinimized(false);
     setIsIntroBubbleVisible(false);
     setIsIntroBubbleLeaving(false);
+    clearIntroTimers();
   };
 
   const closeWidget = () => {
@@ -197,6 +307,13 @@ export default function MadBotWidget() {
                       }`}
                     >
                       {message.text}
+                      {message.isTyping ? (
+                        <span className="ml-1 inline-flex gap-0.5 align-middle">
+                          <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white/90 [animation-delay:0ms]" />
+                          <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white/90 [animation-delay:150ms]" />
+                          <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white/90 [animation-delay:300ms]" />
+                        </span>
+                      ) : null}
                     </p>
                   </div>
                 );
@@ -230,8 +347,8 @@ export default function MadBotWidget() {
           onClick={openWidget}
           className={`relative max-w-[240px] rounded-2xl border border-white/20 bg-black/85 px-4 py-3 text-center font-madmob text-sm text-white shadow-[0_0_20px_rgba(205,28,24,0.25)] backdrop-blur-sm transition hover:border-white/40 ${
             isIntroBubbleLeaving
-              ? "animate-[madbotMistOut_0.7s_ease-out_forwards]"
-              : "animate-[madbotMistIn_0.7s_ease-out_forwards]"
+              ? "animate-[madbotMistOut_0.6s_ease-out_forwards]"
+              : "animate-[madbotMistIn_0.6s_ease-out_forwards]"
           }`}
           aria-label="Open MadBot chat"
         >
