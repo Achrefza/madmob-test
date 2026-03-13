@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 const projects = [
   {
@@ -43,20 +44,18 @@ const projects = [
 
 export default function ProjectsSection() {
   const [revealedCards, setRevealedCards] = useState<boolean[]>(() => projects.map(() => false));
-  const [videoSrc, setVideoSrc] = useState<string | null>(null);
-  const [videoTitle, setVideoTitle] = useState<string>("Project video");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
 
   const openVideoModal = (source: string, title: string) => {
-    setVideoSrc(`${source}?autoplay=1&modestbranding=1&rel=0`);
-    setVideoTitle(title);
-    setIsModalOpen(true);
+    setActiveVideo({
+      src: `${source}?autoplay=1&modestbranding=1&rel=0`,
+      title,
+    });
   };
 
   const closeVideoModal = () => {
-    setIsModalOpen(false);
-    setVideoSrc(null);
+    setActiveVideo(null);
   };
 
   useEffect(() => {
@@ -99,7 +98,7 @@ export default function ProjectsSection() {
   }, []);
 
   useEffect(() => {
-    if (!isModalOpen) {
+    if (!activeVideo) {
       return;
     }
 
@@ -114,10 +113,44 @@ export default function ProjectsSection() {
     return () => {
       window.removeEventListener("keydown", handleEscapeKey);
     };
-  }, [isModalOpen]);
+  }, [activeVideo]);
+
+  const videoModal =
+    activeVideo && typeof document !== "undefined"
+      ? createPortal(
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+            style={{ animation: "madfestModalFadeIn 220ms ease-out" }}
+            onClick={closeVideoModal}
+            aria-modal="true"
+            role="dialog"
+          >
+            <div className="relative w-[90vw] max-w-4xl aspect-video" onClick={(event) => event.stopPropagation()}>
+              <button
+                type="button"
+                onClick={closeVideoModal}
+                className="absolute -top-12 right-0 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900/90 text-xl text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:bg-zinc-700"
+                aria-label="Close project video"
+              >
+                ×
+              </button>
+
+              <iframe
+                className="h-full w-full rounded-lg"
+                src={activeVideo.src}
+                title={activeVideo.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>,
+          document.body,
+        )
+      : null;
 
   return (
-    <section id="projects" className="relative overflow-hidden border-t border-white/10 px-6 py-20 sm:py-28">
+    <>
+      <section id="projects" className="relative overflow-hidden border-t border-white/10 px-6 py-20 sm:py-28">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-55"
         style={{ backgroundImage: "url('/images/backgrounds/backjourney.webp')" }}
@@ -185,37 +218,8 @@ export default function ProjectsSection() {
           ))}
         </div>
       </div>
-
-      {isModalOpen ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-          style={{ animation: "madfestModalFadeIn 220ms ease-out" }}
-          onClick={closeVideoModal}
-          aria-modal="true"
-          role="dialog"
-        >
-          <div className="relative w-full max-w-[1100px]" onClick={(event) => event.stopPropagation()}>
-            <button
-              type="button"
-              onClick={closeVideoModal}
-              className="absolute -top-14 right-0 flex h-11 w-11 items-center justify-center rounded-full bg-zinc-900/90 text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:bg-zinc-700"
-              aria-label="Close project video"
-            >
-              <span className="text-xl leading-none">×</span>
-            </button>
-
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-2xl shadow-black/50">
-              <iframe
-                className="h-full w-full"
-                src={videoSrc ?? undefined}
-                title={videoTitle}
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </div>
-      ) : null}
-    </section>
+      </section>
+      {videoModal}
+    </>
   );
 }
