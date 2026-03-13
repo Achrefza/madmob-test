@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { CSSProperties, useEffect, useState } from "react";
-
 const slides = [
   "/images/backgrounds/bleed1.webp",
   "/images/backgrounds/bleed2.webp",
