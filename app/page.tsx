@@ -48,10 +48,7 @@ export default function Page() {
       {!introFinished ? (
         <Intro onFinish={() => setIntroFinished(true)} />
       ) : (
-        <div
-          className="opacity-0 translate-y-[30px]"
-          style={heroEnterAnimationStyle}
-        >
+        <div className="opacity-0" style={heroEnterAnimationStyle}>
           <HeroSection />
           <CollectiveSection />
           <WorkAreasSection />
