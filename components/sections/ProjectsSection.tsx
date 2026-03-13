@@ -46,9 +46,11 @@ export default function ProjectsSection() {
   const [revealedCards, setRevealedCards] = useState<boolean[]>(() => projects.map(() => false));
   const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalMounted, setIsModalMounted] = useState(false);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
 
   const openVideoModal = (source: string, title: string) => {
+    setIsModalMounted(true);
     setActiveVideo({
       src: `${source}?autoplay=1&modestbranding=1&rel=0`,
       title,
@@ -57,6 +59,7 @@ export default function ProjectsSection() {
 
   const closeVideoModal = () => {
     setIsModalVisible(false);
+    setActiveVideo(null);
   };
 
   useEffect(() => {
@@ -74,18 +77,18 @@ export default function ProjectsSection() {
   }, [activeVideo]);
 
   useEffect(() => {
-    if (activeVideo || isModalVisible) {
+    if (activeVideo || isModalVisible || !isModalMounted) {
       return;
     }
 
     const timeout = window.setTimeout(() => {
-      setActiveVideo(null);
+      setIsModalMounted(false);
     }, 320);
 
     return () => {
       window.clearTimeout(timeout);
     };
-  }, [activeVideo, isModalVisible]);
+  }, [activeVideo, isModalVisible, isModalMounted]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -145,7 +148,7 @@ export default function ProjectsSection() {
   }, [activeVideo]);
 
   const videoModal =
-    (activeVideo || isModalVisible) && typeof document !== "undefined"
+    isModalMounted && typeof document !== "undefined"
       ? createPortal(
           <div
             className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-all duration-300 ease-out ${
