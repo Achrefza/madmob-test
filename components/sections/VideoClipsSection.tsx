@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 const videoClips = [
   {
@@ -26,23 +27,53 @@ const videoClips = [
 ];
 
 export default function VideoClipsSection() {
-  const [videoSrc, setVideoSrc] = useState<string | null>(null);
-  const [videoTitle, setVideoTitle] = useState<string>("Video clip");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalMounted, setIsModalMounted] = useState(false);
 
   const openVideoModal = (videoId: string, title: string) => {
-    setVideoSrc(`https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`);
-    setVideoTitle(title);
-    setIsModalOpen(true);
+    setIsModalMounted(true);
+    setActiveVideo({
+      src: `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`,
+      title,
+    });
   };
 
   const closeVideoModal = () => {
-    setIsModalOpen(false);
-    setVideoSrc(null);
+    setIsModalVisible(false);
+    setActiveVideo(null);
   };
 
   useEffect(() => {
-    if (!isModalOpen) {
+    if (!activeVideo) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      setIsModalVisible(true);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+    };
+  }, [activeVideo]);
+
+  useEffect(() => {
+    if (activeVideo || isModalVisible || !isModalMounted) {
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      setIsModalMounted(false);
+    }, 320);
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [activeVideo, isModalVisible, isModalMounted]);
+
+  useEffect(() => {
+    if (!activeVideo) {
       return;
     }
 
@@ -57,7 +88,48 @@ export default function VideoClipsSection() {
     return () => {
       window.removeEventListener("keydown", handleEscapeKey);
     };
-  }, [isModalOpen]);
+  }, [activeVideo]);
+
+  const videoModal =
+    isModalMounted && typeof document !== "undefined"
+      ? createPortal(
+          <div
+            className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-all duration-300 ease-out ${
+              isModalVisible ? "opacity-100" : "pointer-events-none opacity-0"
+            }`}
+            onClick={closeVideoModal}
+            aria-modal="true"
+            role="dialog"
+          >
+            <div
+              className={`relative aspect-video w-[92vw] max-w-4xl overflow-hidden rounded-2xl shadow-2xl shadow-black/50 transition-all duration-[320ms] ease-out ${
+                isModalVisible ? "scale-100 opacity-100" : "scale-[0.92] opacity-0"
+              }`}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={closeVideoModal}
+                className="absolute top-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900/90 text-xl text-white shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-zinc-700"
+                aria-label="Close video clip"
+              >
+                ×
+              </button>
+
+              {activeVideo ? (
+                <iframe
+                  className="h-full w-full"
+                  src={activeVideo.src}
+                  title={activeVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : null}
+            </div>
+          </div>,
+          document.body,
+        )
+      : null;
 
   return (
     <section id="video-clips" className="relative overflow-hidden border-t border-white/10 bg-black px-6 py-20 sm:py-28">
@@ -113,37 +185,7 @@ export default function VideoClipsSection() {
           ))}
         </div>
       </div>
-
-      {isModalOpen ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-          style={{ animation: "madfestModalFadeIn 220ms ease-out" }}
-          onClick={closeVideoModal}
-          aria-modal="true"
-          role="dialog"
-        >
-          <div className="relative w-full max-w-[1100px]" onClick={(event) => event.stopPropagation()}>
-            <button
-              type="button"
-              onClick={closeVideoModal}
-              className="absolute -top-14 right-0 flex h-11 w-11 items-center justify-center rounded-full bg-zinc-900/90 text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:bg-zinc-700"
-              aria-label="Close video clip"
-            >
-              <span className="text-xl leading-none">×</span>
-            </button>
-
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-2xl shadow-black/50">
-              <iframe
-                className="h-full w-full"
-                src={videoSrc ?? undefined}
-                title={videoTitle}
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </div>
-      ) : null}
+      {videoModal}
     </section>
   );
 }
