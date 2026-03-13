@@ -125,6 +125,14 @@ export default function ProjectsSection() {
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.85),rgba(0,0,0,0.95))]" />
 
       <div className="relative z-10 mx-auto max-w-6xl">
+        <div className="relative mb-12 flex justify-center pointer-events-none">
+          <img
+            src="/images/backgrounds/9064133.png"
+            alt=""
+            className="w-[95%] sm:w-[90%] max-w-[1400px] opacity-80 select-none"
+          />
+        </div>
+
         <div className="mb-10 sm:mb-14">
           <p className="font-madmob text-xs tracking-[0.25em] text-[var(--accent-red)] uppercase">T h e   J o u r n e y</p>
           <h2 className="font-madmob mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[0.25em] text-blue">Djing and fests </h2>
