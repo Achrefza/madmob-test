@@ -45,6 +45,7 @@ const projects = [
 export default function ProjectsSection() {
   const [revealedCards, setRevealedCards] = useState<boolean[]>(() => projects.map(() => false));
   const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
 
   const openVideoModal = (source: string, title: string) => {
@@ -55,8 +56,36 @@ export default function ProjectsSection() {
   };
 
   const closeVideoModal = () => {
-    setActiveVideo(null);
+    setIsModalVisible(false);
   };
+
+  useEffect(() => {
+    if (!activeVideo) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      setIsModalVisible(true);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+    };
+  }, [activeVideo]);
+
+  useEffect(() => {
+    if (activeVideo || isModalVisible) {
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      setActiveVideo(null);
+    }, 320);
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [activeVideo, isModalVisible]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -116,32 +145,40 @@ export default function ProjectsSection() {
   }, [activeVideo]);
 
   const videoModal =
-    activeVideo && typeof document !== "undefined"
+    (activeVideo || isModalVisible) && typeof document !== "undefined"
       ? createPortal(
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-            style={{ animation: "madfestModalFadeIn 220ms ease-out" }}
+            className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-all duration-300 ease-out ${
+              isModalVisible ? "opacity-100" : "pointer-events-none opacity-0"
+            }`}
             onClick={closeVideoModal}
             aria-modal="true"
             role="dialog"
           >
-            <div className="relative w-[90vw] max-w-4xl aspect-video" onClick={(event) => event.stopPropagation()}>
+            <div
+              className={`relative aspect-video w-[92vw] max-w-4xl overflow-hidden rounded-lg shadow-2xl shadow-[0_0_40px_rgba(255,0,0,0.15)] transition-all duration-[320ms] ease-out ${
+                isModalVisible ? "scale-100 opacity-100" : "scale-[0.92] opacity-0"
+              }`}
+              onClick={(event) => event.stopPropagation()}
+            >
               <button
                 type="button"
                 onClick={closeVideoModal}
-                className="absolute -top-12 right-0 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900/90 text-xl text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:bg-zinc-700"
+                className="absolute top-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900/90 text-xl text-white shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-zinc-700"
                 aria-label="Close project video"
               >
                 ×
               </button>
 
-              <iframe
-                className="h-full w-full rounded-lg"
-                src={activeVideo.src}
-                title={activeVideo.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              {activeVideo ? (
+                <iframe
+                  className="h-full w-full"
+                  src={activeVideo.src}
+                  title={activeVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : null}
             </div>
           </div>,
           document.body,
