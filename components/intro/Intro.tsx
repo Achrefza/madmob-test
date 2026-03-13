@@ -22,7 +22,6 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
 
   useEffect(() => {
     lockScroll();
-
     const video = videoRef.current;
 
     if (video) {
