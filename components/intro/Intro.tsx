@@ -6,6 +6,7 @@ import { lockScroll, unlockScroll } from "@/hooks/useScrollLock";
 export default function Intro({ onFinish }: { onFinish: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showLoader, setShowLoader] = useState(true);
+  const [isInactive, setIsInactive] = useState(false);
   const hasFinishedRef = useRef(false);
 
   const finishIntro = useCallback(() => {
@@ -14,6 +15,7 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
     }
 
     hasFinishedRef.current = true;
+    setIsInactive(true);
     unlockScroll();
     onFinish();
   }, [onFinish]);
@@ -54,7 +56,7 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
   }, [finishIntro]);
 
   return (
-    <div className="fixed inset-0 z-[999] bg-black overflow-hidden">
+    <div className={`fixed inset-0 z-[999] bg-black overflow-hidden ${isInactive ? "pointer-events-none" : ""}`}>
 
       {/* VIDEO */}
       <video
