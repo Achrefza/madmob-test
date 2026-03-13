@@ -45,6 +45,8 @@ const getBotReply = (message: string) => {
 export default function MadBotWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [isIntroBubbleVisible, setIsIntroBubbleVisible] = useState(false);
+  const [isIntroBubbleLeaving, setIsIntroBubbleLeaving] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
@@ -72,6 +74,36 @@ export default function MadBotWidget() {
 
     messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
   }, [messages, isMinimized, isOpen]);
+
+  useEffect(() => {
+    const showTimer = window.setTimeout(() => {
+      setIsIntroBubbleVisible(true);
+    }, 2000);
+
+    return () => {
+      window.clearTimeout(showTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isIntroBubbleVisible) {
+      return;
+    }
+
+    const hideTimer = window.setTimeout(() => {
+      setIsIntroBubbleLeaving(true);
+    }, 6500);
+
+    const removeTimer = window.setTimeout(() => {
+      setIsIntroBubbleVisible(false);
+      setIsIntroBubbleLeaving(false);
+    }, 7200);
+
+    return () => {
+      window.clearTimeout(hideTimer);
+      window.clearTimeout(removeTimer);
+    };
+  }, [isIntroBubbleVisible]);
 
   const handleSend = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -103,6 +135,8 @@ export default function MadBotWidget() {
   const openWidget = () => {
     setIsOpen(true);
     setIsMinimized(false);
+    setIsIntroBubbleVisible(false);
+    setIsIntroBubbleLeaving(false);
   };
 
   const closeWidget = () => {
@@ -189,6 +223,22 @@ export default function MadBotWidget() {
           </div>
         </div>
       </section>
+
+      {isIntroBubbleVisible ? (
+        <button
+          type="button"
+          onClick={openWidget}
+          className={`relative max-w-[240px] rounded-2xl border border-white/20 bg-black/85 px-4 py-3 text-center font-madmob text-sm text-white shadow-[0_0_20px_rgba(205,28,24,0.25)] backdrop-blur-sm transition hover:border-white/40 ${
+            isIntroBubbleLeaving
+              ? "animate-[madbotMistOut_0.7s_ease-out_forwards]"
+              : "animate-[madbotMistIn_0.7s_ease-out_forwards]"
+          }`}
+          aria-label="Open MadBot chat"
+        >
+          Hello, wanna chat with MadBot?
+          <span className="pointer-events-none absolute right-8 -bottom-2 h-4 w-4 rotate-45 border-r border-b border-white/20 bg-black/85" />
+        </button>
+      ) : null}
 
       <button
         type="button"
