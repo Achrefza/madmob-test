@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import MadBotWidget from "@/components/MadBotWidget";
+import DelayedMadBotWidget from "@/app/DelayedMadBotWidget";
 
 const madmobFont = localFont({
   src: "fonts/madmob.otf",
@@ -33,7 +33,7 @@ export default function RootLayout({
           className="fixed top-5 left-6 z-50 w-14 h-auto opacity-90 pointer-events-none select-none"
         />
         {children}
-        <MadBotWidget />
+        <DelayedMadBotWidget />
       </body>
     </html>
   );

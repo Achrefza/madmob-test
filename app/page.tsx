@@ -31,25 +31,31 @@ export default function Page() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!introFinished) {
+      return;
+    }
+
+    window.dispatchEvent(new Event("madmob:intro-finished"));
+  }, [introFinished]);
+
   return (
     <main className="min-h-screen bg-[#000000] text-white">
-      {!introFinished && <Intro onFinish={() => setIntroFinished(true)} />}
-
-      <div
-        className={`transition-opacity duration-1000 ${
-          introFinished ? "opacity-100" : "pointer-events-none opacity-0"
-        }`}
-      >
-        <HeroSection />
-        <CollectiveSection />
-        <WorkAreasSection />
-        <ProjectsSection />
-        <MusicCoversSection />
-        <VideoClipsSection />
-        <CollaborationsSection />
-        <BleedSection />
-        <ContactSection />
-      </div>
+      {!introFinished ? (
+        <Intro onFinish={() => setIntroFinished(true)} />
+      ) : (
+        <>
+          <HeroSection />
+          <CollectiveSection />
+          <WorkAreasSection />
+          <ProjectsSection />
+          <MusicCoversSection />
+          <VideoClipsSection />
+          <CollaborationsSection />
+          <BleedSection />
+          <ContactSection />
+        </>
+      )}
     </main>
   );
 }
