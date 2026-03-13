@@ -57,22 +57,20 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
 
   return (
     <div
-      className={`fixed inset-0 z-[999] bg-black overflow-hidden ${isInactive ? "pointer-events-none" : ""}`}
+      className={`fixed inset-0 z-[999] flex items-center justify-center bg-black overflow-hidden ${isInactive ? "pointer-events-none" : ""}`}
     >
       {/* VIDEO */}
-      <div className="absolute inset-0 flex items-center justify-center bg-black">
-        <video
-          ref={videoRef}
-          className="w-[88vw] sm:w-[72vw] lg:w-[60vw] max-w-[700px] h-auto object-contain shadow-[0_0_60px_rgba(255,0,0,0.15)]"
-          src="/intro/intro.mp4"
-          muted
-          playsInline
-          autoPlay
-          preload="auto"
-          onEnded={finishIntro}
-          onError={finishIntro}
-        />
-      </div>
+      <video
+        ref={videoRef}
+        className="w-[60vw] max-w-[700px] h-auto object-contain"
+        src="/intro/intro.mp4"
+        muted
+        playsInline
+        autoPlay
+        preload="auto"
+        onEnded={finishIntro}
+        onError={finishIntro}
+      />
 
       {/* LOADING TEXT */}
       {showLoader && (
