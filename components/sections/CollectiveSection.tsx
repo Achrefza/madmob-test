@@ -103,13 +103,14 @@ export default function CollectiveSection() {
 
       <div className="relative z-20 mx-auto max-w-4xl text-center">
         <p className="font-madmob mb-4 text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">MADMOB</p>
-        <h2 className="font-madmob text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
-          C u l t u r e
+        <h2 className="font-madmob mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[0.25em] text-blue">
+          Culture
         </h2>
-        <p className="font-madmob mx-auto mt-8 max-w-3xl text-base leading-relaxed text-zinc-300 sm:text-lg">
-          more than a collective—it’s a platform for artistic expression and cultural impact. We champion diversity,
-          authenticity, and connection, bridging underground talent with global audiences through live shows,
-          immersive experiences, and community-driven projects.
+        <p className="font-madmob mx-auto mt-8 max-w-3xl text-base leading-[1.8] tracking-[0.12em] text-zinc-300 sm:text-lg">
+          We champion diversity,authenticity, and connection, bridging underground talent
+          with global audiences through live shows,immersive experiences, and community-driven projects.
+          
+          
         </p>
 
         <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2 lg:grid-cols-3">

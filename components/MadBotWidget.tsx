@@ -136,7 +136,7 @@ export default function MadBotWidget() {
       hasIntroRunRef.current = true;
       setIsIntroBubbleVisible(true);
       setIsIntroBubbleLeaving(false);
-    }, 1500);
+    }, 5000);
 
     introDelayTimerRef.current = delayTimer;
 
