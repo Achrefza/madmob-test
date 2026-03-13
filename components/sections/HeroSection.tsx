@@ -26,7 +26,7 @@ export default function HeroSection() {
         </p>
       </div>
 
-      <div className="absolute bottom-16 left-1/2 z-20 -translate-x-1/2 sm:bottom-20">
+      <div className="absolute bottom-28 left-1/2 z-20 -translate-x-1/2 sm:bottom-20">
         <button
           type="button"
           onClick={handleExploreCollective}
