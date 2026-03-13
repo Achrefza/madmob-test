@@ -13,7 +13,7 @@ const projects = [
   {
     title: "MADFEST 2K21 SET",
     description: "Live MADFEST 2K21 set performance.",
-    image: "/images/backgrounds/madfest.webp",
+    image: "https://img.youtube.com/vi/J8Udp3QVqm0/maxresdefault.jpg",
     video: "https://www.youtube.com/embed/J8Udp3QVqm0",
   },
   {
