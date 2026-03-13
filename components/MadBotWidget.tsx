@@ -130,50 +130,20 @@ export default function MadBotWidget() {
   }, [messages, isMinimized, isOpen]);
 
   useEffect(() => {
-    const heroSection = document.querySelector("main section");
+    if (hasIntroRunRef.current) return;
 
-    if (!heroSection) {
-      return;
-    }
+    const delayTimer = window.setTimeout(() => {
+      hasIntroRunRef.current = true;
+      setIsIntroBubbleVisible(true);
+      setIsIntroBubbleLeaving(false);
+    }, 1500);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const heroEntry = entries[0];
-
-        if (!heroEntry) {
-          return;
-        }
-
-        if (heroEntry.isIntersecting && heroEntry.intersectionRatio > 0.5) {
-          if (!hasIntroRunRef.current && !introDelayTimerRef.current) {
-            introDelayTimerRef.current = window.setTimeout(() => {
-              hasIntroRunRef.current = true;
-              setIsIntroBubbleVisible(true);
-              setIsIntroBubbleLeaving(false);
-              introDelayTimerRef.current = null;
-            }, 1000);
-          }
-
-          return;
-        }
-
-        if (!hasIntroRunRef.current && introDelayTimerRef.current) {
-          window.clearTimeout(introDelayTimerRef.current);
-          introDelayTimerRef.current = null;
-        }
-      },
-      {
-        threshold: [0.5],
-      },
-    );
-
-    observer.observe(heroSection);
+    introDelayTimerRef.current = delayTimer;
 
     return () => {
-      observer.disconnect();
-      clearIntroTimers();
+      window.clearTimeout(delayTimer);
     };
-  }, [clearIntroTimers]);
+  }, []);
 
   useEffect(() => {
     if (!isIntroBubbleVisible) {
