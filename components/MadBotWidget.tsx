@@ -225,10 +225,10 @@ export default function MadBotWidget() {
   };
 
   return (
-    <div className="fixed right-4 bottom-6 z-50 flex max-w-[calc(100vw-2rem)] flex-col items-end gap-3 sm:right-6 sm:bottom-6"
+    <div className="pointer-events-none fixed right-4 bottom-6 z-50 flex max-w-[calc(100vw-2rem)] flex-col items-end gap-3 sm:right-6 sm:bottom-6"
       style={{ bottom: "calc(env(safe-area-inset-bottom) + 1.5rem)" }}>
       <section
-        className={`w-[min(340px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-white/15 bg-black/70 text-white shadow-[0_16px_40px_rgba(0,0,0,0.55)] backdrop-blur-md transition-all duration-300 ease-out ${panelVisibilityClasses}`}
+        className={`pointer-events-auto w-[min(340px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-white/15 bg-black/70 text-white shadow-[0_16px_40px_rgba(0,0,0,0.55)] backdrop-blur-md transition-all duration-300 ease-out ${panelVisibilityClasses}`}
       >
         <header className="flex items-center justify-between border-b border-white/10 px-4 py-3">
           <h2 className="font-madmob text-lg tracking-wide">MAD_BOT</h2>
@@ -316,7 +316,7 @@ export default function MadBotWidget() {
         <button
           type="button"
           onClick={openWidget}
-          className={`relative max-w-[240px] rounded-2xl border border-white/20 bg-black/85 px-4 py-3 text-center font-madmob text-sm text-white shadow-[0_0_20px_rgba(205,28,24,0.25)] backdrop-blur-sm transition hover:border-white/40 ${
+          className={`pointer-events-auto relative max-w-[240px] rounded-2xl border border-white/20 bg-black/85 px-4 py-3 text-center font-madmob text-sm text-white shadow-[0_0_20px_rgba(205,28,24,0.25)] backdrop-blur-sm transition hover:border-white/40 ${
             isIntroBubbleLeaving
               ? "animate-[madbotMistOut_0.6s_ease-out_forwards]"
               : "animate-[madbotMistIn_0.6s_ease-out_forwards]"
@@ -331,7 +331,7 @@ export default function MadBotWidget() {
       <button
         type="button"
         onClick={openWidget}
-        className={`font-madmob rounded-full border border-white/20 bg-black px-5 py-3 text-sm tracking-wide text-white shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-300 hover:shadow-[0_0_18px_rgba(205,28,24,0.55)] ${
+        className={`pointer-events-auto font-madmob rounded-full border border-white/20 bg-black px-5 py-3 text-sm tracking-wide text-white shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-300 hover:shadow-[0_0_18px_rgba(205,28,24,0.55)] ${
           isOpen ? "scale-90 opacity-0" : "scale-100 opacity-100"
         }`}
       >
