@@ -7,21 +7,25 @@ const areas = [
   },
   {
     title: "Music Videos & Visuals",
+    image: "/images/backgrounds/madmob.png",
     description:
       "Cinematic editing and visual rhythm built for music videos, campaign films, and cultural storytelling.",
   },
   {
     title: "Event organanization",
+    image: "/images/backgrounds/event.webp",
     description:
       "We design and deliver explosive music festivals,residencies, and unforgettable live performances, crafting immersive experiences that unite artists and audiences.",
   },
   {
     title: "Art Direction & Creative Direction",
+    image: "/images/backgrounds/madmob.png",
     description:
       "Our creative team shapes the visual narrative of our collective, from branding to event aesthetics.",
   },
   {
     title: "Music Production",
+    image: "/images/backgrounds/madmob.png",
     description:
       "We craft original tracks, blending diverse influences from hip-hop, electronic, and alternative music.",
   },
