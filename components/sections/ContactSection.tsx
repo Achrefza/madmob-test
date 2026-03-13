@@ -22,13 +22,23 @@ export default function ContactSection() {
           contact@madmob.tn
         </a>
 
-        <div className="flex justify-center items-center gap-8 mt-10">
+        <div className="flex justify-center items-center gap-10 mt-10">
           {socialLinks.map((social) => (
-            <a key={social.name} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.name}>
+            <a
+              key={social.name}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.name}
+              className="group relative"
+            >
               <img
                 src={social.icon}
                 alt={social.name}
-                className="w-10 h-10 opacity-80 hover:opacity-100 hover:scale-110 transition duration-200"
+                className="w-10 h-10 transition-all duration-300 ease-out opacity-80 group-hover:opacity-100 group-hover:scale-125 group-hover:rotate-3 drop-shadow-[0_0_0px_rgba(0,0,0,0)] group-hover:drop-shadow-[0_0_10px_rgba(255,0,0,0.9)] group-hover:drop-shadow-[0_0_25px_rgba(255,0,0,0.6)]"
+              />
+              <span
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 bg-[radial-gradient(circle,rgba(255,0,0,0.35)_0%,rgba(255,0,0,0)_70%)] blur-md"
               />
             </a>
           ))}
