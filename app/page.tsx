@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import Intro from "@/components/intro/Intro";
 import HeroSection from "@/components/sections/HeroSection";
 import CollectiveSection from "@/components/sections/CollectiveSection";
@@ -11,6 +11,10 @@ import ContactSection from "@/components/sections/ContactSection";
 import BleedSection from "@/components/sections/BleedSection";
 import MusicCoversSection from "@/components/sections/MusicCoversSection";
 import VideoClipsSection from "@/components/sections/VideoClipsSection";
+
+const heroEnterAnimationStyle: CSSProperties = {
+  animation: "heroEnter 700ms ease-out forwards",
+};
 
 export default function Page() {
   const [introFinished, setIntroFinished] = useState(false);
@@ -44,7 +48,10 @@ export default function Page() {
       {!introFinished ? (
         <Intro onFinish={() => setIntroFinished(true)} />
       ) : (
-        <>
+        <div
+          className="opacity-0 translate-y-[30px]"
+          style={heroEnterAnimationStyle}
+        >
           <HeroSection />
           <CollectiveSection />
           <WorkAreasSection />
@@ -54,8 +61,21 @@ export default function Page() {
           <CollaborationsSection />
           <BleedSection />
           <ContactSection />
-        </>
+        </div>
       )}
+      <style jsx>{`
+        @keyframes heroEnter {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </main>
   );
 }
