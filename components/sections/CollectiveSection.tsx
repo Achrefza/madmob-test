@@ -107,9 +107,10 @@ export default function CollectiveSection() {
           C u l t u r e
         </h2>
         <p className="font-madmob mx-auto mt-8 max-w-3xl text-base leading-relaxed text-zinc-300 sm:text-lg">
-          more than a collective—it’s a platform for artistic expression and cultural impact. We champion diversity,
-          authenticity, and connection, bridging underground talent with global audiences through live shows,
-          immersive experiences, and community-driven projects.
+          We champion diversity,authenticity, and connection, bridging underground talent
+          with global audiences through live shows,immersive experiences, and community-driven projects.
+          
+          
         </p>
 
         <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
