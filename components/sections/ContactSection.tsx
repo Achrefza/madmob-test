@@ -1,4 +1,9 @@
-const socials = ["Instagram", "YouTube", "Spotify", "TikTok"];
+const socialLinks = [
+  { name: "Facebook", href: "https://www.facebook.com/MADMOB4L", icon: "/images/backgrounds/facebook.png" },
+  { name: "Instagram", href: "https://www.instagram.com/_madmob", icon: "/images/backgrounds/instagram.png" },
+  { name: "SoundCloud", href: "https://soundcloud.com/madmob-44422605", icon: "/images/backgrounds/soundcloud.png" },
+  { name: "YouTube", href: "https://www.youtube.com/@madmob4l", icon: "/images/backgrounds/youtube.png" },
+];
 
 export default function ContactSection() {
   return (
@@ -17,10 +22,14 @@ export default function ContactSection() {
           contact@madmob.tn
         </a>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-5 text-sm text-zinc-400">
-          {socials.map((social) => (
-            <a key={social} href="#" className="transition hover:text-white">
-              {social}
+        <div className="flex justify-center items-center gap-8 mt-10">
+          {socialLinks.map((social) => (
+            <a key={social.name} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.name}>
+              <img
+                src={social.icon}
+                alt={social.name}
+                className="w-10 h-10 opacity-80 hover:opacity-100 hover:scale-110 transition duration-200"
+              />
             </a>
           ))}
         </div>
