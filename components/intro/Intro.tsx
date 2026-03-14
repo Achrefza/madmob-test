@@ -62,7 +62,7 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
       {/* VIDEO */}
       <video
         ref={videoRef}
-        className="w-[85vw] max-w-[900px] h-auto object-contain"
+        className="w-[50vw] max-w-[650px] h-auto object-contain"
         src="/intro/intro.mp4"
         muted
         playsInline
