@@ -1,16 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import Intro from "@/components/intro/Intro";
+import HeroSection from "@/components/sections/HeroSection";
+import CollectiveSection from "@/components/sections/CollectiveSection";
+import WorkAreasSection from "@/components/sections/WorkAreasSection";
+import CollaborationsSection from "@/components/sections/CollaborationsSection";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import ContactSection from "@/components/sections/ContactSection";
+import BleedSection from "@/components/sections/BleedSection";
+import MusicCoversSection from "@/components/sections/MusicCoversSection";
+import VideoClipsSection from "@/components/sections/VideoClipsSection";
+
+const heroEnterAnimationStyle: CSSProperties = {
+  animation: "heroEnter 700ms ease-out forwards",
+};
 
 export default function Page() {
   const [introFinished, setIntroFinished] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  // Detect normal first mount
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Detect refresh / back-forward cache restore
   useEffect(() => {
@@ -28,23 +35,44 @@ export default function Page() {
     };
   }, []);
 
-  if (!mounted) return null;
+  useEffect(() => {
+    if (!introFinished) {
+      return;
+    }
+
+    window.dispatchEvent(new Event("madmob:intro-finished"));
+  }, [introFinished]);
 
   return (
-    <main className="bg-black text-white min-h-screen">
-      {!introFinished && (
+    <main className="min-h-screen bg-[#000000] text-white">
+      {!introFinished ? (
         <Intro onFinish={() => setIntroFinished(true)} />
+      ) : (
+        <div className="opacity-0" style={heroEnterAnimationStyle}>
+          <HeroSection />
+          <CollectiveSection />
+          <WorkAreasSection />
+          <ProjectsSection />
+          <MusicCoversSection />
+          <VideoClipsSection />
+          <CollaborationsSection />
+          <BleedSection />
+          <ContactSection />
+        </div>
       )}
+      <style jsx>{`
+        @keyframes heroEnter {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
 
-      <div
-        className={`transition-opacity duration-1000 ${
-          introFinished ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <section className="h-screen flex items-center justify-center">
-          <h1 className="text-6xl">Homepage</h1>
-        </section>
-      </div>
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </main>
   );
 }

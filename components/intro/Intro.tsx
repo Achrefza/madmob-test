@@ -1,11 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { lockScroll, unlockScroll } from "@/hooks/useScrollLock";
 
 export default function Intro({ onFinish }: { onFinish: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showLoader, setShowLoader] = useState(true);
+  const [isInactive, setIsInactive] = useState(false);
+  const hasFinishedRef = useRef(false);
+
+  const finishIntro = useCallback(() => {
+    if (hasFinishedRef.current) {
+      return;
+    }
+
+    hasFinishedRef.current = true;
+    setIsInactive(true);
+    unlockScroll();
+    onFinish();
+  }, [onFinish]);
 
   useEffect(() => {
     lockScroll();
@@ -19,7 +32,9 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
       // attempt autoplay (works on most devices)
       const playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise.catch(() => {});
+        playPromise.catch(() => {
+          finishIntro();
+        });
       }
     }
 
@@ -28,27 +43,33 @@ export default function Intro({ onFinish }: { onFinish: () => void }) {
       setShowLoader(false);
     }, 1000);
 
-    return () => clearTimeout(loaderTimer);
-  }, []);
+    // safety net in case the browser never fires onEnded
+    const fallbackTimer = setTimeout(() => {
+      finishIntro();
+    }, 7000);
 
-  const handleEnd = () => {
-    unlockScroll();
-    onFinish();
-  };
+    return () => {
+      clearTimeout(loaderTimer);
+      clearTimeout(fallbackTimer);
+      unlockScroll();
+    };
+  }, [finishIntro]);
 
   return (
-    <div className="fixed inset-0 z-[999] bg-black overflow-hidden">
-
+    <div
+      className={`fixed inset-0 z-[999] flex items-center justify-center bg-black overflow-hidden ${isInactive ? "pointer-events-none" : ""}`}
+    >
       {/* VIDEO */}
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="w-[50vw] max-w-[650px] h-auto object-contain"
         src="/intro/intro.mp4"
         muted
         playsInline
         autoPlay
         preload="auto"
-        onEnded={handleEnd}
+        onEnded={finishIntro}
+        onError={finishIntro}
       />
 
       {/* LOADING TEXT */}
