@@ -172,11 +172,8 @@ textarea,
 }
 
 .ig-embed-stage {
-  transform: translate3d(0, 0, 0);
-  transform-style: preserve-3d;
-  will-change: transform;
+  transform: translateZ(0);
   backface-visibility: hidden;
-  contain: layout paint;
   isolation: isolate;
 }
 
