@@ -133,15 +133,49 @@ export default function MusicCoversSection() {
                             : "scale-95"
                       }`}
                     >
-                      <iframe
-                        src={slide.embedUrl}
-                        title={`Instagram music cover ${index + 1}`}
-                        className={`h-[480px] w-full rounded-xl shadow-[0_0_40px_rgba(255,0,0,0.15)] transition-all duration-700 ease-in-out sm:h-[520px] ${
-                          isActive ? "shadow-[0_0_60px_rgba(255,0,0,0.2)]" : ""
-                        }`}
-                        scrolling="no"
-                        loading={isActive || shouldPreload ? "eager" : "lazy"}
-                      />
+                      <div className="relative mx-auto w-full max-w-[420px] overflow-hidden rounded-xl">
+                        <iframe
+                          src={slide.embedUrl}
+                          title={`Instagram music cover ${index + 1}`}
+                          className={`h-[520px] w-full rounded-xl shadow-[0_0_40px_rgba(255,0,0,0.15)] transition-all duration-700 ease-in-out ${
+                            isActive ? "shadow-[0_0_60px_rgba(255,0,0,0.2)]" : ""
+                          }`}
+                          scrolling="no"
+                          loading={isActive || shouldPreload ? "eager" : "lazy"}
+                        />
+
+                        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[90px] bg-gradient-to-t from-black via-black/80 to-transparent" />
+
+                        <div className="pointer-events-none absolute bottom-0 left-0 z-10 flex w-full items-center justify-between bg-black/70 px-4 py-3 backdrop-blur-md">
+                          <span className="text-xs tracking-wide text-white/60">
+                            View on Instagram
+                          </span>
+
+                          <a
+                            href={`https://www.instagram.com/p/${slide.postId}/`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(event) => event.stopPropagation()}
+                            className="pointer-events-auto group inline-flex min-h-10 items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-white backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-white/20 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,0,0,0.25)] focus-visible:scale-[1.03] focus-visible:border-white/20 focus-visible:bg-white/10 focus-visible:shadow-[0_0_20px_rgba(255,0,0,0.25)] motion-reduce:hover:scale-100 motion-reduce:transition-none"
+                            aria-label="View this music cover on Instagram"
+                          >
+                            <svg
+                              className="h-4 w-4 opacity-70 transition group-hover:opacity-100 group-focus-visible:opacity-100"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm5 5a5 5 0 110 10 5 5 0 010-10zm6.5-.75a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5z" />
+                            </svg>
+
+                            <span className="text-xs uppercase tracking-[0.3em] text-white/70 transition group-hover:text-white group-focus-visible:text-white">
+                              View
+                            </span>
+
+                            <span className="absolute bottom-[6px] left-1/2 h-px w-0 -translate-x-1/2 bg-red-500 transition-all duration-300 group-hover:w-3/4 group-focus-visible:w-3/4" />
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
