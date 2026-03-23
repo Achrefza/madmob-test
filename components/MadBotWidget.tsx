@@ -342,7 +342,7 @@ export default function MadBotWidget() {
       <button
         type="button"
         onClick={openWidget}
-        className={`pointer-events-auto rounded-full border border-white/20 bg-black px-5 py-3 text-sm tracking-wide text-white shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-[500ms] ease-out hover:shadow-[0_0_18px_rgba(205,28,24,0.55)] ${
+        className={`font-buttons pointer-events-auto rounded-full border border-white/20 bg-black px-5 py-3 text-sm tracking-wide text-white shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-[500ms] ease-out hover:shadow-[0_0_18px_rgba(205,28,24,0.55)] ${
           isOpen
             ? "scale-90 opacity-0"
             : hasMadBotButtonEntered

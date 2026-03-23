@@ -30,7 +30,7 @@ export default function HeroSection() {
         <button
           type="button"
           onClick={handleExploreCollective}
-          className="font-madmob group inline-flex min-w-[13rem] flex-col items-center justify-center rounded-md border border-white/70 bg-transparent px-6 py-3 text-white transition-all duration-300 ease-out hover:scale-105 hover:border-white hover:bg-white/5 hover:text-white hover:shadow-[0_0_24px_rgba(255,255,255,0.28)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/70"
+          className="font-buttons group inline-flex min-w-[13rem] flex-col items-center justify-center rounded-md border border-white/70 bg-transparent px-6 py-3 text-white transition-all duration-300 ease-out hover:scale-105 hover:border-white hover:bg-white/5 hover:text-white hover:shadow-[0_0_24px_rgba(255,255,255,0.28)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/70"
           style={{ animation: "heroExploreFloatGlow 2.5s ease-in-out infinite" }}
           aria-label="Explore collective"
         >

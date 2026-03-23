@@ -15,6 +15,18 @@ const textFont = localFont({
   display: "swap",
 });
 
+const buttonsFont = localFont({
+  src: "fonts/Buttons.otf",
+  variable: "--font-buttons",
+  display: "swap",
+});
+
+const titlesFont = localFont({
+  src: "fonts/titles.otf",
+  variable: "--font-titles",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Madmob",
   description: "Artistic Collective Website",
@@ -31,7 +43,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${madmobFont.variable} ${textFont.variable}`}>
+    <html
+      lang="en"
+      className={`${madmobFont.variable} ${textFont.variable} ${buttonsFont.variable} ${titlesFont.variable}`}
+    >
       <body>
         <img
           src="/images/backgrounds/madmob.png"

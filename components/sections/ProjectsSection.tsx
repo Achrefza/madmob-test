@@ -228,7 +228,7 @@ export default function ProjectsSection() {
                     <p className="text-xs font-semibold tracking-[0.3em] text-[var(--accent-red)] uppercase">
                       Choose a set
                     </p>
-                    <h3 className="mt-3 text-2xl text-white sm:text-3xl">{selectedProject.title}</h3>
+                    <h3 className="title-content mt-3 text-2xl text-white sm:text-3xl">{selectedProject.title}</h3>
                     <p className="mt-3 max-w-2xl text-sm text-zinc-400 sm:text-base">{selectedProject.description}</p>
                   </div>
 
@@ -259,7 +259,7 @@ export default function ProjectsSection() {
                           </div>
                         </div>
                         <div className="p-4">
-                          <p className="text-sm text-white sm:text-base">{video.title}</p>
+                          <p className="title-content text-sm text-white sm:text-base">{video.title}</p>
                         </div>
                       </button>
                     ))}
@@ -337,7 +337,7 @@ export default function ProjectsSection() {
               ) : null}
               <div className="absolute inset-0 flex items-end p-4">
                 <div className="translate-y-2 transition-all duration-500 ease-out group-hover:translate-y-0">
-                  <h3 className="text-lg text-white">{project.title}</h3>
+                  <h3 className="title-content text-lg text-white">{project.title}</h3>
                   <p
                     className={`mt-2 text-sm text-zinc-400 transition-all duration-500 ease-out ${
                       revealedCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"

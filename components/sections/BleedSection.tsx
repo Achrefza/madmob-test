@@ -116,7 +116,7 @@ export default function BleedSection() {
 
           <a
             href="#contact"
-            className="font-madmob mt-10 inline-flex items-center justify-center border border-[#0078ff]/70 px-8 py-3 text-sm uppercase tracking-[0.2em] text-white transition duration-300 hover:border-[#0078ff] hover:bg-[#0078ff]/10 hover:shadow-[0_0_28px_rgba(0,120,255,0.35)]"
+            className="font-buttons mt-10 inline-flex items-center justify-center border border-[#0078ff]/70 px-8 py-3 text-sm text-white transition duration-300 hover:border-[#0078ff] hover:bg-[#0078ff]/10 hover:shadow-[0_0_28px_rgba(0,120,255,0.35)]"
           >
             Bleed website
           </a>
@@ -186,7 +186,7 @@ export default function BleedSection() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(event) => event.stopPropagation()}
-                            className="font-madmob group relative inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-white backdrop-blur-md transition-all duration-300 pointer-events-auto hover:scale-[1.03] hover:border-white/20 hover:bg-white/10 hover:shadow-[0_0_25px_rgba(0,120,255,0.35)] focus-visible:scale-[1.03] focus-visible:border-white/20 focus-visible:bg-white/10 focus-visible:shadow-[0_0_25px_rgba(0,120,255,0.35)] motion-reduce:hover:scale-100 motion-reduce:transition-none"
+                            className="font-buttons group relative inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-white backdrop-blur-md transition-all duration-300 pointer-events-auto hover:scale-[1.03] hover:border-white/20 hover:bg-white/10 hover:shadow-[0_0_25px_rgba(0,120,255,0.35)] focus-visible:scale-[1.03] focus-visible:border-white/20 focus-visible:bg-white/10 focus-visible:shadow-[0_0_25px_rgba(0,120,255,0.35)] motion-reduce:hover:scale-100 motion-reduce:transition-none"
                             aria-label="View this bleed post on Instagram"
                           >
                             <svg
