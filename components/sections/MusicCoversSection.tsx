@@ -8,7 +8,7 @@ type CoverSlide = {
   embedUrl: string;
 };
 
-const INSTAGRAM_POSTS = ["DBjcyKOOdZw", "C8dJN1BKzfS", "C9u-lM1u5CV", "C9r-dS9qgoL"];
+const INSTAGRAM_POSTS = ["CYNaTMWqpR-","DBjcyKOOdZw","DPrhKi_DPfv","DRm4XXzjLTw","DTsLUGTjOV2","DMDsF8esyuX","C8dJN1BKzfS", "C9u-lM1u5CV", "C9r-dS9qgoL"];
 
 const coverSlides: CoverSlide[] = INSTAGRAM_POSTS.map((postId) => ({
   id: postId.toLowerCase(),
