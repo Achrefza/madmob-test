@@ -38,7 +38,10 @@ const projects: Project[] = [
     title: "Royal Rumble",
     description: "Held on 15 Feb 2020, this high-energy battle-style music event spotlighted underground talent.",
     image: "/images/backgrounds/royalrumble.webp",
-    videos: [{ id: "vFel4jMDOrw", title: "Royal Rumble" }],
+    videos: [
+      { id: "vFel4jMDOrw", title: "Royal Rumble" },
+      { id: "DqoxDa6Hgnw", title: "Royal Rumble — Video 2" },
+    ],
   },
   {
     title: "ALTERNATIVE (DJ Set)",
