@@ -94,7 +94,7 @@ export default function MusicCoversSection() {
 
         <div>
           <div
-            className="relative h-[520px] overflow-hidden rounded-lg border border-white/10 bg-black shadow-[0_0_60px_rgba(255,0,0,0.15)] [touch-action:pan-y] sm:h-[540px]"
+            className="ig-embed-stage relative h-[520px] overflow-hidden rounded-lg border border-white/10 bg-black shadow-[0_0_60px_rgba(255,0,0,0.15)] [touch-action:pan-y] sm:h-[540px]"
             onMouseEnter={() => handleInteraction(3000)}
             onTouchStart={() => handleInteraction()}
             onMouseDown={() => handleInteraction()}
@@ -103,6 +103,7 @@ export default function MusicCoversSection() {
             <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.16),transparent_60%)]" />
             <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(205,28,24,0.2),transparent_65%)]" />
             <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(120deg,rgba(205,28,24,0.08),transparent_35%,rgba(205,28,24,0.12)_70%,transparent)] animate-[madmobGradientShift_12s_ease-in-out_infinite]" />
+            <div className="ig-embed-noise pointer-events-none absolute inset-0 z-0 opacity-60" />
 
             {coverSlides.map((slide, index) => {
               const isActive = index === currentSlide;
@@ -111,43 +112,43 @@ export default function MusicCoversSection() {
               return (
                 <div
                   key={slide.id}
-                  className={`absolute inset-0 flex items-center justify-center px-4 py-4 transition-all duration-700 ease-out sm:px-6 ${
+                  className={`ig-embed-transition absolute inset-0 flex translate-z-0 items-center justify-center px-4 py-4 sm:px-6 ${
                     isActive
-                      ? "opacity-100 blur-0 scale-100 pointer-events-auto z-10"
+                      ? "pointer-events-auto z-10 translate-y-0 scale-100 opacity-100 blur-0"
                       : shouldPreload
-                        ? "opacity-0 blur-sm scale-[0.97] pointer-events-none z-0"
-                        : "opacity-0 blur-sm scale-[0.97] pointer-events-none z-0"
+                        ? "pointer-events-none z-0 translate-y-2 scale-[0.985] opacity-0 blur-sm"
+                        : "pointer-events-none z-0 -translate-y-2 scale-[0.985] opacity-0 blur-sm"
                   }`}
                   aria-hidden={!isActive}
                 >
-                  <div className="w-full h-full flex items-center justify-center relative">
+                  <div className="ig-embed-stage relative flex h-full w-full items-center justify-center">
                     <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-40 pointer-events-none" />
 
                     <div
-                      className={`flex w-full max-w-[350px] justify-center transition-all duration-700 ease-out sm:max-w-[420px] ${
+                      className={`ig-embed-stage ig-embed-transition flex w-full max-w-[350px] justify-center sm:max-w-[420px] ${
                         isActive
-                          ? "animate-[madmobFloat_6s_ease-in-out_infinite] scale-100"
+                          ? "animate-[madmobFloat_6s_cubic-bezier(0.22,1,0.36,1)_infinite] scale-100"
                           : shouldPreload
-                            ? "scale-[0.97]"
-                            : "scale-[0.97]"
+                            ? "scale-[0.985]"
+                            : "scale-[0.985]"
                       }`}
                     >
                       <div
-                        className="relative mx-auto w-full max-w-[420px] overflow-hidden rounded-xl"
+                        className="ig-embed-stage relative mx-auto w-full max-w-[420px] overflow-hidden rounded-xl"
                         onTouchStart={() => handleInteraction()}
                         onMouseDown={() => handleInteraction()}
                       >
                         <iframe
                           src={slide.embedUrl}
                           title={`Instagram music cover ${index + 1}`}
-                          className={`h-[520px] w-full rounded-xl shadow-[0_0_40px_rgba(255,0,0,0.15)] transition-all duration-700 ease-out ${
+                          className={`ig-embed-transition h-[520px] w-full translate-z-0 rounded-xl shadow-[0_0_40px_rgba(255,0,0,0.15)] ${
                             isActive ? "shadow-[0_0_60px_rgba(255,0,0,0.2)]" : ""
                           }`}
                           scrolling="no"
                           loading={isActive || shouldPreload ? "eager" : "lazy"}
                         />
 
-                        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[90px] bg-gradient-to-t from-black via-black/80 to-transparent" />
+                        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[90px] bg-[linear-gradient(to_top,rgba(0,0,0,0.82),rgba(0,0,0,0.38),transparent)]" />
 
                         <div className="pointer-events-none absolute bottom-0 left-0 z-10 flex w-full items-center justify-between bg-black/70 px-4 py-3 backdrop-blur-md">
                           <span className="pointer-events-none text-xs tracking-wide text-white/60">
