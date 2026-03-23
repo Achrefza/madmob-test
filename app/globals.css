@@ -83,6 +83,16 @@ textarea,
   font-family: var(--font-madmob), sans-serif;
 }
 
+.madbot-font {
+  font-family: var(--font-madmob), sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.madbot-font *,
+.madbot-font *::placeholder {
+  font-family: var(--font-madmob), sans-serif !important;
+}
+
 .font-buttons {
   font-family: var(--font-buttons), sans-serif;
   letter-spacing: 0.08em;
