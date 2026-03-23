@@ -7,31 +7,31 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 const navigationItems = [
   {
     title: "Work Areas",
-    label: "W O R K   A R E A S",
+    label: "Work Areas",
     href: "#work-areas",
     sectionId: "work-areas",
   },
   {
     title: "Projects",
-    label: "P R O J E C T S",
+    label: "Projects",
     href: "#projects",
     sectionId: "projects",
   },
   {
     title: "Collaborations",
-    label: "C O L L A B O R A T I O N S",
+    label: "Collaborations",
     href: "#collaborations",
     sectionId: "collaborations",
   },
   {
     title: "Bleed",
-    label: "B L E E D",
+    label: "Bleed",
     href: "#bleed",
     sectionId: "bleed",
   },
   {
     title: "Contact",
-    label: "C O N T A C T",
+    label: "Contact",
     href: "#contact",
     sectionId: "contact",
   },
@@ -123,7 +123,7 @@ export default function CollectiveSection() {
                 href={item.href}
                 onClick={(event) => handleNavigationClick(event, item.sectionId)}
                 aria-current={isActive ? "true" : undefined}
-                className={`font-buttons group flex items-center justify-center gap-3 rounded-lg border border-white/10 bg-zinc-950/60 px-5 py-4 text-left shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-400 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:border-[var(--accent-red)]/70 hover:shadow-[0_0_20px_rgba(205,28,24,0.15)] active:scale-95 active:duration-150 ${
+                className={`font-buttons group flex min-w-fit items-center justify-center gap-3 rounded-lg border border-white/10 bg-zinc-950/60 px-6 py-4 text-left shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-400 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:border-[var(--accent-red)]/70 hover:shadow-[0_0_20px_rgba(205,28,24,0.15)] active:scale-95 active:duration-150 ${
                   activeNavigation === item.sectionId ? "scale-95 duration-150" : ""
                 } ${
                   isActive
@@ -132,7 +132,7 @@ export default function CollectiveSection() {
                 }`}
               >
                 <span
-                  className={`text-sm tracking-[0.08em] uppercase ${isActive ? "text-[var(--accent-red)]" : "text-zinc-100"}`}
+                  className={`whitespace-nowrap text-sm tracking-[0.05em] uppercase ${isActive ? "text-[var(--accent-red)]" : "text-zinc-100"}`}
                 >
                   {item.label}
                 </span>

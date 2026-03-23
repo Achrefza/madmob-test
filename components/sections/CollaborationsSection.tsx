@@ -64,8 +64,8 @@ export default function CollaborationsSection() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 sm:mb-14">
           <p className="font-madmob text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">Collaborations</p>
-          <h2 className="font-madmob mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            A r t i s t s
+          <h2 className="font-madmob mt-3 text-3xl font-semibold tracking-[0.02em] text-white sm:text-4xl">
+            Artists
           </h2>
         </div>
 
