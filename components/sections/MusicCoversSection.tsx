@@ -20,26 +20,26 @@ const AUTOPLAY_DELAY = 5000;
 
 export default function MusicCoversSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const resumeTimeoutRef = useRef<number | null>(null);
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
+  const interactionTimeoutRef = useRef<number | null>(null);
 
   const nextSlideIndex = useMemo(() => (currentSlide + 1) % coverSlides.length, [currentSlide]);
 
-  const scheduleAutoplayResume = useCallback((duration = AUTOPLAY_DELAY) => {
-    setIsPaused(true);
+  const handleInteraction = useCallback((duration = AUTOPLAY_DELAY) => {
+    setIsUserInteracting(true);
 
-    if (resumeTimeoutRef.current) {
-      window.clearTimeout(resumeTimeoutRef.current);
+    if (interactionTimeoutRef.current) {
+      window.clearTimeout(interactionTimeoutRef.current);
     }
 
-    resumeTimeoutRef.current = window.setTimeout(() => {
-      setIsPaused(false);
+    interactionTimeoutRef.current = window.setTimeout(() => {
+      setIsUserInteracting(false);
     }, duration);
   }, []);
 
   useEffect(() => {
     const interval = window.setInterval(() => {
-      if (isPaused) {
+      if (isUserInteracting) {
         return;
       }
 
@@ -47,33 +47,33 @@ export default function MusicCoversSection() {
     }, AUTOPLAY_DELAY);
 
     return () => window.clearInterval(interval);
-  }, [isPaused]);
+  }, [isUserInteracting]);
 
   useEffect(() => {
     return () => {
-      if (resumeTimeoutRef.current) {
-        window.clearTimeout(resumeTimeoutRef.current);
+      if (interactionTimeoutRef.current) {
+        window.clearTimeout(interactionTimeoutRef.current);
       }
     };
   }, []);
 
   const goToSlide = useCallback(
     (index: number) => {
-      scheduleAutoplayResume();
+      handleInteraction();
       setCurrentSlide(index);
     },
-    [scheduleAutoplayResume],
+    [handleInteraction],
   );
 
   const handlePrevious = useCallback(() => {
-    scheduleAutoplayResume();
+    handleInteraction();
     setCurrentSlide((prev) => (prev - 1 + coverSlides.length) % coverSlides.length);
-  }, [scheduleAutoplayResume]);
+  }, [handleInteraction]);
 
   const handleNext = useCallback(() => {
-    scheduleAutoplayResume();
+    handleInteraction();
     setCurrentSlide((prev) => (prev + 1) % coverSlides.length);
-  }, [scheduleAutoplayResume]);
+  }, [handleInteraction]);
 
   return (
     <section id="music-covers" className="relative overflow-hidden border-t border-white/10 bg-black px-6 py-20 sm:py-28 min-h-[80vh]">
@@ -94,12 +94,11 @@ export default function MusicCoversSection() {
 
         <div>
           <div
-            className="relative overflow-hidden rounded-lg border border-white/10 bg-black h-[520px] sm:h-[540px]"
-            onMouseEnter={() => scheduleAutoplayResume()}
-            onMouseLeave={() => scheduleAutoplayResume()}
-            onTouchStart={() => scheduleAutoplayResume()}
-            onWheel={() => scheduleAutoplayResume()}
-            onClick={() => scheduleAutoplayResume()}
+            className="relative h-[520px] overflow-hidden rounded-lg border border-white/10 bg-black shadow-[0_0_60px_rgba(255,0,0,0.15)] [touch-action:pan-y] sm:h-[540px]"
+            onMouseEnter={() => handleInteraction(3000)}
+            onTouchStart={() => handleInteraction()}
+            onMouseDown={() => handleInteraction()}
+            onWheel={() => handleInteraction(2500)}
           >
             <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.16),transparent_60%)]" />
             <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(205,28,24,0.2),transparent_65%)]" />
@@ -112,12 +111,12 @@ export default function MusicCoversSection() {
               return (
                 <div
                   key={slide.id}
-                  className={`absolute inset-0 flex items-center justify-center px-4 py-4 transition-all duration-700 ease-in-out sm:px-6 ${
+                  className={`absolute inset-0 flex items-center justify-center px-4 py-4 transition-all duration-700 ease-out sm:px-6 ${
                     isActive
                       ? "opacity-100 blur-0 scale-100 pointer-events-auto z-10"
                       : shouldPreload
-                        ? "opacity-0 blur-sm scale-[0.98] pointer-events-none z-0"
-                        : "opacity-0 blur-sm scale-95 pointer-events-none z-0"
+                        ? "opacity-0 blur-sm scale-[0.97] pointer-events-none z-0"
+                        : "opacity-0 blur-sm scale-[0.97] pointer-events-none z-0"
                   }`}
                   aria-hidden={!isActive}
                 >
@@ -125,19 +124,23 @@ export default function MusicCoversSection() {
                     <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-40 pointer-events-none" />
 
                     <div
-                      className={`w-full max-w-[350px] sm:max-w-[420px] flex justify-center transition-all duration-700 ease-in-out ${
+                      className={`flex w-full max-w-[350px] justify-center transition-all duration-700 ease-out sm:max-w-[420px] ${
                         isActive
                           ? "animate-[madmobFloat_6s_ease-in-out_infinite] scale-100"
                           : shouldPreload
-                            ? "scale-[0.98]"
-                            : "scale-95"
+                            ? "scale-[0.97]"
+                            : "scale-[0.97]"
                       }`}
                     >
-                      <div className="relative mx-auto w-full max-w-[420px] overflow-hidden rounded-xl">
+                      <div
+                        className="relative mx-auto w-full max-w-[420px] overflow-hidden rounded-xl"
+                        onTouchStart={() => handleInteraction()}
+                        onMouseDown={() => handleInteraction()}
+                      >
                         <iframe
                           src={slide.embedUrl}
                           title={`Instagram music cover ${index + 1}`}
-                          className={`h-[520px] w-full rounded-xl shadow-[0_0_40px_rgba(255,0,0,0.15)] transition-all duration-700 ease-in-out ${
+                          className={`h-[520px] w-full rounded-xl shadow-[0_0_40px_rgba(255,0,0,0.15)] transition-all duration-700 ease-out ${
                             isActive ? "shadow-[0_0_60px_rgba(255,0,0,0.2)]" : ""
                           }`}
                           scrolling="no"
@@ -147,7 +150,7 @@ export default function MusicCoversSection() {
                         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[90px] bg-gradient-to-t from-black via-black/80 to-transparent" />
 
                         <div className="pointer-events-none absolute bottom-0 left-0 z-10 flex w-full items-center justify-between bg-black/70 px-4 py-3 backdrop-blur-md">
-                          <span className="text-xs tracking-wide text-white/60">
+                          <span className="pointer-events-none text-xs tracking-wide text-white/60">
                             View on Instagram
                           </span>
 
@@ -156,7 +159,7 @@ export default function MusicCoversSection() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(event) => event.stopPropagation()}
-                            className="pointer-events-auto group inline-flex min-h-10 items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-white backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:border-white/20 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,0,0,0.25)] focus-visible:scale-[1.03] focus-visible:border-white/20 focus-visible:bg-white/10 focus-visible:shadow-[0_0_20px_rgba(255,0,0,0.25)] motion-reduce:hover:scale-100 motion-reduce:transition-none"
+                            className="group relative inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-white backdrop-blur-md transition-all duration-300 pointer-events-auto hover:scale-[1.03] hover:border-white/20 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,0,0,0.25)] focus-visible:scale-[1.03] focus-visible:border-white/20 focus-visible:bg-white/10 focus-visible:shadow-[0_0_20px_rgba(255,0,0,0.25)] motion-reduce:hover:scale-100 motion-reduce:transition-none"
                             aria-label="View this music cover on Instagram"
                           >
                             <svg
