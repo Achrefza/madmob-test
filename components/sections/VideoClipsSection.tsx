@@ -120,7 +120,7 @@ function VideoClipCard({ onOpen, video }: VideoClipCardProps) {
         </div>
 
         <div className="absolute inset-x-0 bottom-0 p-4">
-          <h3 className="text-base text-white sm:text-lg">{video.title}</h3>
+          <h3 className="title-content text-base text-white sm:text-lg">{video.title}</h3>
         </div>
       </div>
     </article>

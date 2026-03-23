@@ -40,9 +40,13 @@ h3 {
 }
 
 button {
-  font-family: var(--font-madmob), sans-serif;
+  font-family: var(--font-buttons), sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+[role="button"] {
+  font-family: var(--font-buttons), sans-serif;
 }
 
 .small-text {
@@ -77,6 +81,17 @@ textarea,
 
 .font-madmob {
   font-family: var(--font-madmob), sans-serif;
+}
+
+.font-buttons {
+  font-family: var(--font-buttons), sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.title-content {
+  font-family: var(--font-titles), sans-serif;
+  letter-spacing: 0.04em;
 }
 
 @keyframes madfestModalFadeIn {
