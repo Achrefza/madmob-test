@@ -1,16 +1,9 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "madmob-text";
-  src: url("/fonts/text.ttf") format("truetype");
-  font-display: swap;
-}
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
   --accent-red: #CD1C18;
-  --font-text: "madmob-text";
 }
 
 @theme inline {
@@ -31,6 +24,30 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-text), sans-serif;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+p {
+  line-height: 1.7;
+  letter-spacing: 0.015em;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: 0.03em;
+}
+
+button {
+  font-family: var(--font-madmob), sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.small-text {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 html,
@@ -53,11 +70,11 @@ textarea,
   cursor: text;
 }
 
-
 ::selection {
   background: var(--accent-red);
   color: white;
 }
+
 .font-madmob {
   font-family: var(--font-madmob), sans-serif;
 }
@@ -100,7 +117,6 @@ textarea,
   }
 }
 
-
 @keyframes madmobFloat {
   0%,
   100% {
@@ -124,7 +140,6 @@ textarea,
     transform: translateX(3%);
   }
 }
-
 
 .translate-z-0 {
   transform: translateZ(0);
