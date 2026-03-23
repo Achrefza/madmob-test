@@ -27,6 +27,7 @@ body {
 
 html,
 body {
+  -webkit-overflow-scrolling: touch;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -114,4 +115,10 @@ textarea,
     opacity: 0.6;
     transform: translateX(3%);
   }
+}
+
+
+.translate-z-0 {
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
