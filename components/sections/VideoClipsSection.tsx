@@ -11,9 +11,9 @@ type VideoClip = {
 
 const videoClips: VideoClip[] = [
   {
-    id: "NC7Gx6R0Reo",
+    id: "JFIjDaqBLbo",
     title: "A.L.A - Ya Ghali (Official Music Video)",
-    fallbackTitle: "A.L.A - Ya Ghali (Official Music Video)",
+    fallbackTitle: "XIIVI & $MXTI - 4LIFE X ALL MY N**** 2 (Official Music Video)",
   },
   {
     id: "Rug85eDybfs",
@@ -24,6 +24,11 @@ const videoClips: VideoClip[] = [
     id: "fRqk3TDk_c0",
     title: "KTYB X Madmob - ANANAYA (Official Music Video)",
     fallbackTitle: "KTYB X Madmob - ANANAYA (Official Music Video)",
+  },
+  {
+    id: "NC7Gx6R0Reo",
+    title: "A.L.A - Ya Ghali (Official Music Video)",
+    fallbackTitle: "A.L.A - Ya Ghali (Official Music Video)",
   },
   {
     id: "IXPu3Z_u98U",
