@@ -34,10 +34,10 @@ export default function HeroSection() {
           style={{ animation: "heroExploreFloatGlow 2.5s ease-in-out infinite" }}
           aria-label="Explore collective"
         >
-          <span className="text-center font-madmob text-xs tracking-[0.18em] sm:tracking-[0.25em]">
+          <span className="text-center text-xs tracking-[0.18em] sm:tracking-[0.25em]">
             PRESS / SCROLL
           </span>
-          <span className="text-center font-madmob text-xs tracking-[0.18em] sm:tracking-[0.25em]">
+          <span className="text-center text-xs tracking-[0.18em] sm:tracking-[0.25em]">
             TO EXPLORE
           </span>
         </button>
