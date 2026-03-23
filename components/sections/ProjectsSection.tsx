@@ -40,7 +40,7 @@ const projects: Project[] = [
     image: "/images/backgrounds/royalrumble.webp",
     videos: [
       { id: "vFel4jMDOrw", title: "Royal Rumble" },
-      { id: "DqoxDa6Hgnw", title: "Royal Rumble — Video 2" },
+      { id: "RE6p2iRL4zg", title: "Royal Rumble — Video 2" },
     ],
   },
   {
