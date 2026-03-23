@@ -1,24 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type CoverSlide = {
   id: string;
+  postId: string;
   embedUrl: string;
 };
 
-const coverSlides: CoverSlide[] = [
-  "C9r-dS9qgoL",
-  "C95GEcoKtVp",
-  "CpAHUcdqCzl",
-  "ClMeIxJuvRf",
-  "CkQ7D_ZqqA7",
-  "Cn2idCWKvH9",
-  "DH_w6nhOGwY",
-  "DPrhKi_DPfv",
-  "CpBVHU_q7pu",
-].map((postId) => ({
+const INSTAGRAM_POSTS = ["CYNaTMWqpR-","DBjcyKOOdZw","DPrhKi_DPfv","DRm4XXzjLTw","DTsLUGTjOV2","DMDsF8esyuX","C8dJN1BKzfS", "C9u-lM1u5CV", "C9r-dS9qgoL"];
+
+const coverSlides: CoverSlide[] = INSTAGRAM_POSTS.map((postId) => ({
   id: postId.toLowerCase(),
+  postId,
   embedUrl: `https://www.instagram.com/p/${postId}/embed`,
 }));
 
@@ -26,15 +20,26 @@ const AUTOPLAY_DELAY = 5000;
 
 export default function MusicCoversSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const autoplayResumeAtRef = useRef(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const resumeTimeoutRef = useRef<number | null>(null);
 
-  const pauseAutoplay = useCallback((duration = AUTOPLAY_DELAY) => {
-    autoplayResumeAtRef.current = Date.now() + duration;
+  const nextSlideIndex = useMemo(() => (currentSlide + 1) % coverSlides.length, [currentSlide]);
+
+  const scheduleAutoplayResume = useCallback((duration = AUTOPLAY_DELAY) => {
+    setIsPaused(true);
+
+    if (resumeTimeoutRef.current) {
+      window.clearTimeout(resumeTimeoutRef.current);
+    }
+
+    resumeTimeoutRef.current = window.setTimeout(() => {
+      setIsPaused(false);
+    }, duration);
   }, []);
 
   useEffect(() => {
     const interval = window.setInterval(() => {
-      if (Date.now() < autoplayResumeAtRef.current) {
+      if (isPaused) {
         return;
       }
 
@@ -42,25 +47,33 @@ export default function MusicCoversSection() {
     }, AUTOPLAY_DELAY);
 
     return () => window.clearInterval(interval);
+  }, [isPaused]);
+
+  useEffect(() => {
+    return () => {
+      if (resumeTimeoutRef.current) {
+        window.clearTimeout(resumeTimeoutRef.current);
+      }
+    };
   }, []);
 
   const goToSlide = useCallback(
     (index: number) => {
-      pauseAutoplay();
+      scheduleAutoplayResume();
       setCurrentSlide(index);
     },
-    [pauseAutoplay],
+    [scheduleAutoplayResume],
   );
 
   const handlePrevious = useCallback(() => {
-    pauseAutoplay();
+    scheduleAutoplayResume();
     setCurrentSlide((prev) => (prev - 1 + coverSlides.length) % coverSlides.length);
-  }, [pauseAutoplay]);
+  }, [scheduleAutoplayResume]);
 
   const handleNext = useCallback(() => {
-    pauseAutoplay();
+    scheduleAutoplayResume();
     setCurrentSlide((prev) => (prev + 1) % coverSlides.length);
-  }, [pauseAutoplay]);
+  }, [scheduleAutoplayResume]);
 
   return (
     <section id="music-covers" className="relative overflow-hidden border-t border-white/10 bg-black px-6 py-20 sm:py-28 min-h-[80vh]">
@@ -82,34 +95,54 @@ export default function MusicCoversSection() {
         <div>
           <div
             className="relative overflow-hidden rounded-lg border border-white/10 bg-black h-[520px] sm:h-[540px]"
-            onMouseEnter={() => pauseAutoplay()}
-            onMouseLeave={() => pauseAutoplay()}
-            onTouchStart={() => pauseAutoplay()}
-            onWheel={() => pauseAutoplay()}
+            onMouseEnter={() => scheduleAutoplayResume()}
+            onMouseLeave={() => scheduleAutoplayResume()}
+            onTouchStart={() => scheduleAutoplayResume()}
+            onWheel={() => scheduleAutoplayResume()}
+            onClick={() => scheduleAutoplayResume()}
           >
             <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.16),transparent_60%)]" />
+            <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(205,28,24,0.2),transparent_65%)]" />
+            <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(120deg,rgba(205,28,24,0.08),transparent_35%,rgba(205,28,24,0.12)_70%,transparent)] animate-[madmobGradientShift_12s_ease-in-out_infinite]" />
 
             {coverSlides.map((slide, index) => {
               const isActive = index === currentSlide;
+              const shouldPreload = index === nextSlideIndex;
 
               return (
                 <div
                   key={slide.id}
-                  className={`absolute inset-0 flex items-center justify-center px-4 py-4 transition-all duration-700 ease-out sm:px-6 ${
+                  className={`absolute inset-0 flex items-center justify-center px-4 py-4 transition-all duration-700 ease-in-out sm:px-6 ${
                     isActive
-                      ? "translate-x-0 opacity-100 pointer-events-auto"
-                      : "translate-x-6 opacity-0 pointer-events-none"
+                      ? "opacity-100 blur-0 scale-100 pointer-events-auto z-10"
+                      : shouldPreload
+                        ? "opacity-0 blur-sm scale-[0.98] pointer-events-none z-0"
+                        : "opacity-0 blur-sm scale-95 pointer-events-none z-0"
                   }`}
                   aria-hidden={!isActive}
                 >
-                  <div className="w-full h-full flex items-center justify-center">
-                    <iframe
-                      src={slide.embedUrl}
-                      title={`Instagram music cover ${index + 1}`}
-                      className="h-full w-full max-w-[350px] rounded-xl sm:max-w-[400px]"
-                      allowTransparency={true}
-                      scrolling="no"
-                    />
+                  <div className="w-full h-full flex items-center justify-center relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-40 pointer-events-none" />
+
+                    <div
+                      className={`w-full max-w-[350px] sm:max-w-[420px] flex justify-center transition-all duration-700 ease-in-out ${
+                        isActive
+                          ? "animate-[madmobFloat_6s_ease-in-out_infinite] scale-100"
+                          : shouldPreload
+                            ? "scale-[0.98]"
+                            : "scale-95"
+                      }`}
+                    >
+                      <iframe
+                        src={slide.embedUrl}
+                        title={`Instagram music cover ${index + 1}`}
+                        className={`h-[480px] w-full rounded-xl shadow-[0_0_40px_rgba(255,0,0,0.15)] transition-all duration-700 ease-in-out sm:h-[520px] ${
+                          isActive ? "shadow-[0_0_60px_rgba(255,0,0,0.2)]" : ""
+                        }`}
+                        scrolling="no"
+                        loading={isActive || shouldPreload ? "eager" : "lazy"}
+                      />
+                    </div>
                   </div>
                 </div>
               );
