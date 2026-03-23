@@ -3,31 +3,48 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-const projects = [
+type ProjectVideo = {
+  id: string;
+  title: string;
+};
+
+type Project = {
+  title: string;
+  description: string;
+  image?: string;
+  videos?: ProjectVideo[];
+};
+
+const getYouTubeEmbedUrl = (videoId: string) =>
+  `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`;
+
+const getYouTubeThumbnailUrl = (videoId: string) => `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+
+const projects: Project[] = [
   {
     title: "Annual Festival: MADFEST",
     description:
       "From 2020 to 2022, MADFEST ran as a two-day festival with 1,000–1,200 attendees and lineups of up to 12 rappers per edition.",
     image: "/images/backgrounds/madfest.webp",
-    video: "https://www.youtube.com/embed/UFpmdPuqVOA",
+    videos: [{ id: "UFpmdPuqVOA", title: "Annual Festival: MADFEST" }],
   },
   {
     title: "MADFEST 2K21 SET",
     description: "Live MADFEST 2K21 set performance.",
     image: "https://img.youtube.com/vi/J8Udp3QVqm0/maxresdefault.jpg",
-    video: "https://www.youtube.com/embed/J8Udp3QVqm0",
+    videos: [{ id: "J8Udp3QVqm0", title: "MADFEST 2K21 SET" }],
   },
   {
     title: "Royal Rumble",
     description: "Held on 15 Feb 2020, this high-energy battle-style music event spotlighted underground talent.",
     image: "/images/backgrounds/royalrumble.webp",
-    video: "https://www.youtube.com/embed/vFel4jMDOrw",
+    videos: [{ id: "vFel4jMDOrw", title: "Royal Rumble" }],
   },
   {
     title: "ALTERNATIVE (DJ Set)",
     description: "In 2024, MADMOB hosted an intimate DJ set session at TBRL Studio.",
     image: "https://img.youtube.com/vi/OHimhB1eKGI/maxresdefault.jpg",
-    video: "https://www.youtube.com/embed/OHimhB1eKGI",
+    videos: [{ id: "OHimhB1eKGI", title: "ALTERNATIVE (DJ Set)" }],
   },
   {
     title: "Club Residency — Zebra Club",
@@ -38,32 +55,53 @@ const projects = [
     title: "Gimic Radio Residency",
     description: "From 2022 to 2023, MADMOB held a radio residency in Brussels, Belgium.",
     image: "https://img.youtube.com/vi/ki4ezofcR00/maxresdefault.jpg",
-    video: "https://www.youtube.com/embed/ki4ezofcR00",
+    videos: [
+      { id: "ki4ezofcR00", title: "Gimic Radio Residency — Session 1" },
+      { id: "qeCMrm2OtZ8", title: "Gimic Radio Residency — Session 2" },
+    ],
   },
 ];
 
 export default function ProjectsSection() {
   const [revealedCards, setRevealedCards] = useState<boolean[]>(() => projects.map(() => false));
   const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalMounted, setIsModalMounted] = useState(false);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
 
-  const openVideoModal = (source: string, title: string) => {
+  const openVideoPlayer = (video: ProjectVideo) => {
+    setSelectedProject(null);
     setIsModalMounted(true);
     setActiveVideo({
-      src: `${source}?autoplay=1&modestbranding=1&rel=0`,
-      title,
+      src: getYouTubeEmbedUrl(video.id),
+      title: video.title,
     });
+  };
+
+  const handleProjectOpen = (project: Project) => {
+    if (!project.videos?.length) {
+      return;
+    }
+
+    if (project.videos.length === 1) {
+      openVideoPlayer(project.videos[0]);
+      return;
+    }
+
+    setActiveVideo(null);
+    setSelectedProject(project);
+    setIsModalMounted(true);
   };
 
   const closeVideoModal = () => {
     setIsModalVisible(false);
     setActiveVideo(null);
+    setSelectedProject(null);
   };
 
   useEffect(() => {
-    if (!activeVideo) {
+    if (!activeVideo && !selectedProject) {
       return;
     }
 
@@ -74,10 +112,10 @@ export default function ProjectsSection() {
     return () => {
       window.cancelAnimationFrame(frame);
     };
-  }, [activeVideo]);
+  }, [activeVideo, selectedProject]);
 
   useEffect(() => {
-    if (activeVideo || isModalVisible || !isModalMounted) {
+    if (activeVideo || selectedProject || isModalVisible || !isModalMounted) {
       return;
     }
 
@@ -88,7 +126,7 @@ export default function ProjectsSection() {
     return () => {
       window.clearTimeout(timeout);
     };
-  }, [activeVideo, isModalVisible, isModalMounted]);
+  }, [activeVideo, selectedProject, isModalVisible, isModalMounted]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -130,7 +168,7 @@ export default function ProjectsSection() {
   }, []);
 
   useEffect(() => {
-    if (!activeVideo) {
+    if (!activeVideo && !selectedProject) {
       return;
     }
 
@@ -145,7 +183,7 @@ export default function ProjectsSection() {
     return () => {
       window.removeEventListener("keydown", handleEscapeKey);
     };
-  }, [activeVideo]);
+  }, [activeVideo, selectedProject]);
 
   const videoModal =
     isModalMounted && typeof document !== "undefined"
@@ -159,16 +197,16 @@ export default function ProjectsSection() {
             role="dialog"
           >
             <div
-              className={`relative aspect-video w-[92vw] max-w-4xl overflow-hidden rounded-lg shadow-2xl shadow-[0_0_40px_rgba(255,0,0,0.15)] transition-all duration-[320ms] ease-out ${
+              className={`relative w-full max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/95 shadow-2xl shadow-[0_0_40px_rgba(255,0,0,0.15)] transition-all duration-[320ms] ease-out ${
                 isModalVisible ? "scale-100 opacity-100" : "scale-[0.92] opacity-0"
-              }`}
+              } ${activeVideo ? "aspect-video" : "max-h-[85vh]"}`}
               onClick={(event) => event.stopPropagation()}
             >
               <button
                 type="button"
                 onClick={closeVideoModal}
-                className="absolute top-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900/90 text-xl text-white shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-zinc-700"
-                aria-label="Close project video"
+                className="absolute top-3 right-3 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900/90 text-xl text-white shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-zinc-700"
+                aria-label={activeVideo ? "Close project video" : "Close video selection"}
               >
                 ×
               </button>
@@ -181,6 +219,49 @@ export default function ProjectsSection() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
+              ) : selectedProject ? (
+                <div className="p-5 sm:p-6">
+                  <div className="pr-12">
+                    <p className="text-xs font-semibold tracking-[0.3em] text-[var(--accent-red)] uppercase">
+                      Choose a set
+                    </p>
+                    <h3 className="mt-3 text-2xl text-white sm:text-3xl">{selectedProject.title}</h3>
+                    <p className="mt-3 max-w-2xl text-sm text-zinc-400 sm:text-base">{selectedProject.description}</p>
+                  </div>
+
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                    {selectedProject.videos?.map((video, index) => (
+                      <button
+                        key={video.id}
+                        type="button"
+                        onClick={() => openVideoPlayer(video)}
+                        className="group overflow-hidden rounded-xl border border-white/10 bg-zinc-900/90 text-left transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:shadow-[0_12px_40px_rgba(0,0,0,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                      >
+                        <div className="relative aspect-video overflow-hidden">
+                          <img
+                            src={getYouTubeThumbnailUrl(video.id)}
+                            alt={video.title}
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                          <div className="absolute left-3 top-3 rounded-full border border-white/15 bg-black/60 px-2.5 py-1 text-[11px] tracking-[0.2em] text-white/80 uppercase">
+                            Video {index + 1}
+                          </div>
+                          <div className="absolute inset-0 flex items-center justify-center opacity-80 transition-opacity duration-300 group-hover:opacity-100">
+                            <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/25 bg-black/55 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                              <svg aria-hidden="true" className="ml-1 h-5 w-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.85l8.49-5.18a1 1 0 0 0 0-1.7L9.54 5.97A1 1 0 0 0 8 6.82Z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="p-4">
+                          <p className="text-sm text-white sm:text-base">{video.title}</p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
               ) : null}
             </div>
           </div>,
@@ -204,7 +285,11 @@ export default function ProjectsSection() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
+          {projects.map((project, index) => {
+            const hasVideos = Boolean(project.videos?.length);
+            const videoCount = project.videos?.length ?? 0;
+
+            return (
             <article
               key={project.title}
               ref={(element) => {
@@ -212,25 +297,25 @@ export default function ProjectsSection() {
               }}
               data-project-index={index}
               className={`group relative h-52 overflow-hidden border border-white/10 bg-zinc-900 ${
-                project.video ? "cursor-pointer" : ""
+                hasVideos ? "cursor-pointer" : ""
               }`}
               onClick={() => {
-                if (project.video) {
-                  openVideoModal(project.video, project.title);
+                if (hasVideos) {
+                  handleProjectOpen(project);
                 }
               }}
               onKeyDown={(event) => {
-                if (!project.video) {
+                if (!hasVideos) {
                   return;
                 }
 
                 if (event.key === "Enter" || event.key === " ") {
                   event.preventDefault();
-                  openVideoModal(project.video, project.title);
+                  handleProjectOpen(project);
                 }
               }}
-              role={project.video ? "button" : undefined}
-              tabIndex={project.video ? 0 : undefined}
+              role={hasVideos ? "button" : undefined}
+              tabIndex={hasVideos ? 0 : undefined}
             >
               {project.image ? (
                 <div
@@ -242,6 +327,11 @@ export default function ProjectsSection() {
               )}
               <div className="absolute inset-0 bg-[linear-gradient(145deg,#191919,#050505)] opacity-70" />
               <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,var(--accent-red),transparent_45%)] transition-all duration-500 ease-out group-hover:opacity-60" />
+              {videoCount > 1 ? (
+                <div className="absolute top-3 right-3 z-10 rounded-full border border-white/15 bg-black/60 px-3 py-1 text-[11px] font-medium tracking-[0.2em] text-white/85 uppercase backdrop-blur-sm">
+                  {videoCount} videos
+                </div>
+              ) : null}
               <div className="absolute inset-0 flex items-end p-4">
                 <div className="translate-y-2 transition-all duration-500 ease-out group-hover:translate-y-0">
                   <h3 className="text-lg text-white">{project.title}</h3>
@@ -255,11 +345,12 @@ export default function ProjectsSection() {
                 </div>
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
       </div>
-      </section>
       {videoModal}
+      </section>
     </>
   );
 }
