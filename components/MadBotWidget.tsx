@@ -236,7 +236,7 @@ export default function MadBotWidget() {
   };
 
   return (
-    <div className="pointer-events-none fixed right-4 bottom-6 z-50 flex max-w-[calc(100vw-2rem)] flex-col items-end gap-3 sm:right-6 sm:bottom-6"
+    <div className="font-madmob pointer-events-none fixed right-4 bottom-6 z-50 flex max-w-[calc(100vw-2rem)] flex-col items-end gap-3 sm:right-6 sm:bottom-6"
       style={{ bottom: "calc(env(safe-area-inset-bottom) + 1.5rem)" }}>
       <section
         className={`pointer-events-auto w-[min(340px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-white/15 bg-black/70 text-white shadow-[0_16px_40px_rgba(0,0,0,0.55)] backdrop-blur-md transition-all duration-300 ease-out ${panelVisibilityClasses}`}
@@ -310,7 +310,7 @@ export default function MadBotWidget() {
                 value={inputValue}
                 onChange={(event) => setInputValue(event.target.value)}
                 placeholder="Ask MadBot..."
-                className="h-10 flex-1 rounded-xl border border-white/15 bg-black/45 px-3 text-sm text-white outline-none transition placeholder:text-white/45 focus:border-[var(--accent-red)]"
+                className="h-10 flex-1 rounded-xl border border-white/15 bg-black/45 px-3 text-sm normal-case text-white outline-none transition placeholder:text-white/45 focus:border-[var(--accent-red)]"
               />
               <button
                 type="submit"

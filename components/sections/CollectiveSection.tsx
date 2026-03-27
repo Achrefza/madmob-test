@@ -123,7 +123,7 @@ export default function CollectiveSection() {
                 href={item.href}
                 onClick={(event) => handleNavigationClick(event, item.sectionId)}
                 aria-current={isActive ? "true" : undefined}
-                className={`group flex items-center justify-center gap-3 rounded-lg border border-white/10 bg-zinc-950/60 px-5 py-4 text-left shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-400 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:border-[var(--accent-red)]/70 hover:shadow-[0_0_20px_rgba(205,28,24,0.15)] active:scale-95 active:duration-150 ${
+                className={`font-madmob group flex items-center justify-center gap-3 rounded-lg border border-white/10 bg-zinc-950/60 px-5 py-4 text-left shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-400 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:border-[var(--accent-red)]/70 hover:shadow-[0_0_20px_rgba(205,28,24,0.15)] active:scale-95 active:duration-150 ${
                   activeNavigation === item.sectionId ? "scale-95 duration-150" : ""
                 } ${
                   isActive

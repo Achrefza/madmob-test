@@ -57,7 +57,7 @@ export default function BleedSection() {
 
           <a
             href="#contact"
-            className="mt-10 inline-flex items-center justify-center border border-[var(--bleed-accent)]/70 px-8 py-3 text-sm uppercase tracking-[0.2em] text-white transition duration-300 hover:border-[var(--bleed-accent)] hover:bg-[var(--bleed-accent)]/10 hover:shadow-[0_0_28px_rgba(var(--bleed-accent-rgb),0.35)]"
+            className="font-madmob mt-10 inline-flex items-center justify-center border border-[var(--bleed-accent)]/70 px-8 py-3 text-sm uppercase tracking-[0.2em] text-white transition duration-300 hover:border-[var(--bleed-accent)] hover:bg-[var(--bleed-accent)]/10 hover:shadow-[0_0_28px_rgba(var(--bleed-accent-rgb),0.35)]"
           >
             Bleed website
           </a>
