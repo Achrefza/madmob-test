@@ -106,7 +106,7 @@ export default function CollectiveSection() {
         <h2 className="font-madmob mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[0.25em] text-blue">
           Culture
         </h2>
-        <p className="font-madmob mx-auto mt-8 max-w-3xl text-base leading-[1.8] tracking-[0.12em] text-zinc-300 sm:text-lg">
+        <p className="mx-auto mt-8 max-w-3xl text-base leading-[1.8] tracking-[0.12em] text-zinc-300 sm:text-lg">
           We champion diversity,authenticity, and connection, bridging underground talent
           with global audiences through live shows,immersive experiences, and community-driven projects.
           
@@ -132,7 +132,7 @@ export default function CollectiveSection() {
                 }`}
               >
                 <span
-                  className={`font-madmob text-sm tracking-[0.08em] uppercase ${isActive ? "text-[var(--accent-red)]" : "text-zinc-100"}`}
+                  className={`text-sm tracking-[0.08em] uppercase ${isActive ? "text-[var(--accent-red)]" : "text-zinc-100"}`}
                 >
                   {item.label}
                 </span>

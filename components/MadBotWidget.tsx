@@ -327,7 +327,7 @@ export default function MadBotWidget() {
         <button
           type="button"
           onClick={openWidget}
-          className={`pointer-events-auto relative max-w-[240px] rounded-2xl border border-white/20 bg-black/85 px-4 py-3 text-center font-madmob text-sm text-white shadow-[0_0_20px_rgba(205,28,24,0.25)] backdrop-blur-sm transition hover:border-white/40 ${
+          className={`pointer-events-auto relative max-w-[240px] rounded-2xl border border-white/20 bg-black/85 px-4 py-3 text-center text-sm text-white shadow-[0_0_20px_rgba(205,28,24,0.25)] backdrop-blur-sm transition hover:border-white/40 ${
             isIntroBubbleLeaving
               ? "animate-[madbotMistOut_0.6s_ease-out_forwards]"
               : "animate-[madbotMistIn_0.6s_ease-out_forwards]"
@@ -342,7 +342,7 @@ export default function MadBotWidget() {
       <button
         type="button"
         onClick={openWidget}
-        className={`pointer-events-auto font-madmob rounded-full border border-white/20 bg-black px-5 py-3 text-sm tracking-wide text-white shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-[500ms] ease-out hover:shadow-[0_0_18px_rgba(205,28,24,0.55)] ${
+        className={`pointer-events-auto rounded-full border border-white/20 bg-black px-5 py-3 text-sm tracking-wide text-white shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-[500ms] ease-out hover:shadow-[0_0_18px_rgba(205,28,24,0.55)] ${
           isOpen
             ? "scale-90 opacity-0"
             : hasMadBotButtonEntered

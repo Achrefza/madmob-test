@@ -1,15 +1,22 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "madmob-text";
+  src: url("/fonts/text.ttf") format("truetype");
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
   --accent-red: #CD1C18;
+  --font-text: "madmob-text";
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-text);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -23,6 +30,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-text), sans-serif;
 }
 
 html,
