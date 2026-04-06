@@ -110,7 +110,7 @@ export default function CollectiveSection() {
           We champion diversity,authenticity, and connection, bridging underground talent
           with global audiences through live shows,immersive experiences, and community-driven projects.
           
-          
+        
         </p>
 
         <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
