@@ -5,32 +5,32 @@ import { useEffect, useRef, useState } from "react";
 const artists = [
   {
     name: "ALA",
-    description: "Longtime MADMOB collaborator known for high-impact live sets and sharp lyricism.",
+    description: "",
     image: "/images/backgrounds/ala.webp",
   },
   {
     name: "KTYB",
-    description: "A bold underground voice collaborating with the collective on forward-thinking sessions.",
+    description: "",
     image: "/images/backgrounds/ktyb.webp",
   },
    {
     name: "XIIVI",
-    description: "An energetic collaborator bringing sharp flows and an unmistakable stage presence to MADMOB sessions.",
+    description: "",
     image: "/images/backgrounds/xiivi.webp",
   },
   {
     name: "DABL DE",
-    description: "A distinctive voice blending grit and melody across collaborative records and performances.",
+    description: "",
     image: "/images/backgrounds/dabl_de.webp",
   },
   {
-    name: "MIZO",
-    description: "A genre-pushing artist contributing fresh perspectives and high-impact collaborations.",
+    name: "MIZO-H",
+    description: "",
     image: "/images/backgrounds/mizo.webp",
   },
   {
     name: "STOU",
-    description: "A versatile creative partner known for strong live delivery and crossover-ready collaborations.",
+    description: "",
     image: "/images/backgrounds/stou.webp",
   },
   
