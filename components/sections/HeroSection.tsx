@@ -35,7 +35,7 @@ export default function HeroSection() {
           aria-label="Explore collective"
         >
           <span className="text-center text-xs tracking-[0.18em] sm:tracking-[0.25em]">
-            PRESS / SCROLL
+            PRESS
           </span>
           <span className="text-center text-xs tracking-[0.18em] sm:tracking-[0.25em]">
             TO EXPLORE
