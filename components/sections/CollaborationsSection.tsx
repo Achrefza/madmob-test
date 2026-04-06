@@ -13,6 +13,26 @@ const artists = [
     description: "A bold underground voice collaborating with the collective on forward-thinking sessions.",
     image: "/images/backgrounds/ktyb.webp",
   },
+   {
+    name: "XIIVI",
+    description: "An energetic collaborator bringing sharp flows and an unmistakable stage presence to MADMOB sessions.",
+    image: "/images/backgrounds/xiivi.webp",
+  },
+  {
+    name: "DABL DE",
+    description: "A distinctive voice blending grit and melody across collaborative records and performances.",
+    image: "/images/backgrounds/dabl_de.webp",
+  },
+  {
+    name: "MIZO",
+    description: "A genre-pushing artist contributing fresh perspectives and high-impact collaborations.",
+    image: "/images/backgrounds/mizo.webp",
+  },
+  {
+    name: "STOU",
+    description: "A versatile creative partner known for strong live delivery and crossover-ready collaborations.",
+    image: "/images/backgrounds/stou.webp",
+  },
   
 ];
 
