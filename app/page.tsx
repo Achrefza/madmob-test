@@ -48,7 +48,7 @@ export default function Page() {
       {!introFinished ? (
         <Intro onFinish={() => setIntroFinished(true)} />
       ) : (
-        <div className="opacity-0" style={heroEnterAnimationStyle}>
+        <div className="opacity-0" style={heroEnterAnimationStyle} data-app-shell>
           <HeroSection />
           <CollectiveSection />
           <WorkAreasSection />

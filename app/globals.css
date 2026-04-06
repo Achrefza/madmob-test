@@ -145,3 +145,11 @@ textarea,
   transform: translateZ(0);
   backface-visibility: hidden;
 }
+
+body.video-modal-open [data-app-shell] {
+  animation-play-state: paused !important;
+}
+
+body.video-modal-open [data-app-shell] * {
+  animation-play-state: paused !important;
+}

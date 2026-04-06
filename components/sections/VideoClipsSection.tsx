@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 type VideoClip = {
@@ -69,6 +69,8 @@ const videoClips: VideoClip[] = [
 
 const getMaxResThumbnail = (videoId: string) => `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 const getFallbackThumbnail = (videoId: string) => `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+const getEmbedUrl = (videoId: string) =>
+  `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`;
 
 type VideoClipCardProps = {
   onOpen: (videoId: string, title: string) => void;
@@ -77,7 +79,6 @@ type VideoClipCardProps = {
 
 function VideoClipCard({ onOpen, video }: VideoClipCardProps) {
   const [thumbnailSrc, setThumbnailSrc] = useState(() => getMaxResThumbnail(video.id));
-
 
   return (
     <article
@@ -97,6 +98,7 @@ function VideoClipCard({ onOpen, video }: VideoClipCardProps) {
           className="absolute inset-0 h-full w-full translate-z-0 object-cover will-change-transform transition-transform duration-500 ease-out group-hover:scale-105"
           src={thumbnailSrc}
           alt={video.title}
+          loading="lazy"
           onError={() => {
             if (thumbnailSrc !== getFallbackThumbnail(video.id)) {
               setThumbnailSrc(getFallbackThumbnail(video.id));
@@ -127,12 +129,73 @@ function VideoClipCard({ onOpen, video }: VideoClipCardProps) {
   );
 }
 
+type VideoModalProps = {
+  isVisible: boolean;
+  isMounted: boolean;
+  title: string;
+  videoUrl: string | null;
+  onClose: () => void;
+};
+
+const VideoModal = memo(function VideoModal({
+  isVisible,
+  isMounted,
+  title,
+  videoUrl,
+  onClose,
+}: VideoModalProps) {
+  if (!isMounted || typeof document === "undefined") {
+    return null;
+  }
+
+  return createPortal(
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 transition-all duration-500 ease-out ${
+        isVisible ? "opacity-100" : "pointer-events-none opacity-0"
+      }`}
+      onClick={onClose}
+      aria-modal="true"
+      role="dialog"
+    >
+      <div
+        className={`relative aspect-video w-[92vw] max-w-4xl translate-z-0 overflow-hidden rounded-2xl shadow-2xl shadow-black/50 will-change-transform transition-all duration-500 ease-out ${
+          isVisible ? "scale-100 opacity-100" : "scale-[0.92] opacity-0"
+        }`}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute top-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900/90 text-xl text-white shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-zinc-700"
+          aria-label="Close video clip"
+        >
+          ×
+        </button>
+
+        {videoUrl ? (
+          <iframe
+            key={videoUrl}
+            className="h-full w-full"
+            src={videoUrl}
+            title={title}
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        ) : null}
+      </div>
+    </div>,
+    document.body,
+  );
+});
+
 export default function VideoClipsSection() {
   const [videos, setVideos] = useState(videoClips);
-  const [activeVideo, setActiveVideo] = useState<{ src: string; title: string } | null>(null);
+  const [activeVideo, setActiveVideo] = useState<{ id: string; title: string } | null>(null);
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalMounted, setIsModalMounted] = useState(false);
-
 
   useEffect(() => {
     let isMounted = true;
@@ -176,18 +239,18 @@ export default function VideoClipsSection() {
     };
   }, []);
 
-  const openVideoModal = (videoId: string, title: string) => {
-    setIsModalMounted(true);
-    setActiveVideo({
-      src: `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`,
-      title,
-    });
-  };
-
-  const closeVideoModal = () => {
+  const openVideoModal = useCallback((videoId: string, title: string) => {
     setIsModalVisible(false);
+    setVideoUrl(null);
+    setActiveVideo({ id: videoId, title });
+    setIsModalMounted(true);
+  }, []);
+
+  const closeVideoModal = useCallback(() => {
+    setIsModalVisible(false);
+    setVideoUrl(null);
     setActiveVideo(null);
-  };
+  }, []);
 
   useEffect(() => {
     if (!activeVideo) {
@@ -195,6 +258,7 @@ export default function VideoClipsSection() {
     }
 
     const frame = window.requestAnimationFrame(() => {
+      setVideoUrl(getEmbedUrl(activeVideo.id));
       setIsModalVisible(true);
     });
 
@@ -218,7 +282,7 @@ export default function VideoClipsSection() {
   }, [activeVideo, isModalVisible, isModalMounted]);
 
   useEffect(() => {
-    if (!activeVideo) {
+    if (!isModalMounted) {
       return;
     }
 
@@ -233,57 +297,32 @@ export default function VideoClipsSection() {
     return () => {
       window.removeEventListener("keydown", handleEscapeKey);
     };
-  }, [activeVideo]);
+  }, [closeVideoModal, isModalMounted]);
 
-  const videoModal =
-    isModalMounted && typeof document !== "undefined"
-      ? createPortal(
-          <div
-            className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 transition-all duration-500 ease-out ${
-              isModalVisible ? "opacity-100" : "pointer-events-none opacity-0"
-            }`}
-            onClick={closeVideoModal}
-            aria-modal="true"
-            role="dialog"
-          >
-            <div
-              className={`relative aspect-video w-[92vw] max-w-4xl translate-z-0 overflow-hidden rounded-2xl shadow-2xl shadow-black/50 will-change-transform transition-all duration-500 ease-out ${
-                isModalVisible ? "scale-100 opacity-100" : "scale-[0.92] opacity-0"
-              }`}
-              onClick={(event) => event.stopPropagation()}
-            >
-              <button
-                type="button"
-                onClick={closeVideoModal}
-                className="absolute top-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900/90 text-xl text-white shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-zinc-700"
-                aria-label="Close video clip"
-              >
-                ×
-              </button>
+  useEffect(() => {
+    if (!isModalMounted) {
+      document.body.classList.remove("video-modal-open");
+      return;
+    }
 
-              {activeVideo ? (
-                <iframe
-                  className="h-full w-full"
-                  src={activeVideo.src}
-                  title={activeVideo.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              ) : null}
-            </div>
-          </div>,
-          document.body,
-        )
-      : null;
+    document.body.classList.add("video-modal-open");
+
+    return () => {
+      document.body.classList.remove("video-modal-open");
+    };
+  }, [isModalMounted]);
 
   return (
-    <section id="video-clips" className="relative overflow-hidden border-t border-white/10 bg-black px-6 py-20 sm:py-28 translate-z-0 will-change-transform">
+    <section
+      id="video-clips"
+      className="relative overflow-hidden border-t border-white/10 bg-black px-6 py-20 sm:py-28 translate-z-0 will-change-transform"
+    >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),transparent_65%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.88))]" />
 
       <div className="relative z-10 mx-auto max-w-6xl translate-z-0 will-change-transform">
         <h2 className="font-madmob mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[0.25em] text-blue">
-          Video      Clips
+          Video Clips
         </h2>
 
         <div className="mt-10 grid grid-cols-1 gap-6 sm:gap-7 md:grid-cols-2 lg:grid-cols-3">
@@ -292,7 +331,14 @@ export default function VideoClipsSection() {
           ))}
         </div>
       </div>
-      {videoModal}
+
+      <VideoModal
+        isVisible={isModalVisible}
+        isMounted={isModalMounted}
+        title={activeVideo?.title ?? "Video clip"}
+        videoUrl={videoUrl}
+        onClose={closeVideoModal}
+      />
     </section>
   );
 }
