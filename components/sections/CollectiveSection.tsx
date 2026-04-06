@@ -107,8 +107,7 @@ export default function CollectiveSection() {
           Culture
         </h2>
         <p className="mx-auto mt-8 max-w-3xl text-base leading-[1.8] tracking-[0.12em] text-zinc-300 sm:text-lg">
-          We champion diversity,authenticity, and connection, bridging underground talent
-          with global audiences through live shows,immersive experiences, and community-driven projects.
+          We champion diversity,authenticity, and connection.
           
           
         </p>
