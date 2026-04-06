@@ -80,7 +80,7 @@ export default function ContactSection() {
         >
           <div className="mx-auto h-px w-3/5 bg-white/10" />
           <p className="mt-5 text-center text-[12px] leading-[1.6] tracking-[0.06em] text-white/50">
-            © 2026 MADMOB — Tous droits réservés
+            © 2026 MADMOB — All rights reserved
           </p>
         </div>
       </div>
