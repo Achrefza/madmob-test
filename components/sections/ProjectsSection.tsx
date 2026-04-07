@@ -60,7 +60,7 @@ const projects: Project[] = [
     image: "https://img.youtube.com/vi/ki4ezofcR00/maxresdefault.jpg",
     videos: [
       { id: "ki4ezofcR00", title: "Gimic Radio Residency — Session 1" },
-      { id: "qeCMrm2OtZ8", title: "Gimic Radio Residency — Session 2" },
+      { id: "RE6p2iRL4zg", title: "Gimic Radio Residency — Session 2" },
     ],
   },
 ];
