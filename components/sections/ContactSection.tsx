@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 const socialLinks = [
   { name: "Facebook", href: "https://www.facebook.com/MADMOB4L", icon: "/images/backgrounds/facebook.png" },
   { name: "Instagram", href: "https://www.instagram.com/_madmob", icon: "/images/backgrounds/instagram.png" },
@@ -6,11 +10,35 @@ const socialLinks = [
 ];
 
 export default function ContactSection() {
+  const signatureRef = useRef<HTMLDivElement | null>(null);
+  const [isSignatureVisible, setIsSignatureVisible] = useState(false);
+
+  useEffect(() => {
+    if (!signatureRef.current) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsSignatureVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.25 },
+    );
+
+    observer.observe(signatureRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="contact" className="border-t border-white/10 px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-4xl text-center">
         <p className="font-madmob text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">Contact</p>
-        <h2 className="font-madmob mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl"> M a d m o b</h2>
+        <h2 className="font-madmob mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl"> Madmob</h2>
         <p className="mx-auto mt-5 max-w-2xl text-zinc-300">
           For bookings, collaborations, and creative direction inquiries, reach out and we’ll respond with availability and next steps.
         </p>
@@ -42,6 +70,18 @@ export default function ContactSection() {
               />
             </a>
           ))}
+        </div>
+
+        <div
+          ref={signatureRef}
+          className={`mt-14 pt-8 transition-all duration-900 ease-out ${
+            isSignatureVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+          }`}
+        >
+          <div className="mx-auto h-px w-3/5 bg-white/10" />
+          <p className="mt-5 text-center text-[12px] leading-[1.6] tracking-[0.06em] text-white/50">
+            © 2026 MADMOB — All rights reserved
+          </p>
         </div>
       </div>
     </section>

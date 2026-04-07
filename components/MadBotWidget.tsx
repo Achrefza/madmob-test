@@ -211,7 +211,7 @@ export default function MadBotWidget() {
     const botMessageId = nextId.current;
     const botMessage: ChatMessage = {
       id: botMessageId,
-      sender: "bot",
+     sender: "bot",
       text: "",
       isTyping: true,
     };
@@ -242,7 +242,7 @@ export default function MadBotWidget() {
         className={`pointer-events-auto w-[min(340px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-white/15 bg-black/70 text-white shadow-[0_16px_40px_rgba(0,0,0,0.55)] backdrop-blur-md transition-all duration-300 ease-out ${panelVisibilityClasses}`}
       >
         <header className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-          <h2 className="font-madmob text-lg tracking-wide">MAD_BOT</h2>
+          <h2 className="font-madmob text-lg tracking-[0.08em]">MADBOT</h2>
           <div className="flex items-center gap-2">
             <button
               type="button"
@@ -282,10 +282,10 @@ export default function MadBotWidget() {
                     className={`flex ${isUserMessage ? "justify-end" : "justify-start"}`}
                   >
                     <p
-                      className={`max-w-[85%] whitespace-pre-line rounded-2xl px-3 py-2 text-sm leading-relaxed ${
+                      className={`max-w-[85%] whitespace-pre-line rounded-[14px] px-[14px] py-3 text-[14.5px] leading-[1.6] tracking-normal backdrop-blur-[10px] ${
                         isUserMessage
-                          ? "rounded-br-sm bg-[var(--accent-red)] text-white"
-                          : "rounded-bl-sm border border-white/15 bg-white/10 text-white/95"
+                          ? "bg-[var(--accent-red)]/95 text-white"
+                          : "border border-white/15 bg-white/10 text-white/95"
                       }`}
                     >
                       {message.text}
@@ -310,13 +310,13 @@ export default function MadBotWidget() {
                 value={inputValue}
                 onChange={(event) => setInputValue(event.target.value)}
                 placeholder="Ask MadBot..."
-                className="h-10 flex-1 rounded-xl border border-white/15 bg-black/45 px-3 text-sm text-white outline-none transition placeholder:text-white/45 focus:border-[var(--accent-red)]"
+                className="h-10 flex-1 rounded-xl border border-white/15 bg-black/45 px-3.5 text-[14px] leading-[1.6] tracking-normal normal-case text-white outline-none transition placeholder:text-[14px] placeholder:tracking-normal placeholder:text-white/45 focus:border-[var(--accent-red)]"
               />
               <button
                 type="submit"
-                className="h-10 rounded-xl bg-[var(--accent-red)] px-4 text-sm font-semibold text-white transition hover:brightness-110"
+                className="font-madmob h-10 rounded-xl bg-[var(--accent-red)] px-4 text-sm tracking-[0.05em] text-white transition hover:brightness-110"
               >
-                Send
+                SEND
               </button>
             </form>
           </div>
@@ -327,14 +327,15 @@ export default function MadBotWidget() {
         <button
           type="button"
           onClick={openWidget}
-          className={`pointer-events-auto relative max-w-[240px] rounded-2xl border border-white/20 bg-black/85 px-4 py-3 text-center text-sm text-white shadow-[0_0_20px_rgba(205,28,24,0.25)] backdrop-blur-sm transition hover:border-white/40 ${
+          className={`pointer-events-auto relative max-w-[240px] rounded-2xl border border-white/20 bg-black/85 px-4 py-3 text-center text-sm leading-[1.55] tracking-normal text-white shadow-[0_0_12px_rgba(205,28,24,0.15)] backdrop-blur-sm transition hover:border-white/40 ${
             isIntroBubbleLeaving
               ? "animate-[madbotMistOut_0.6s_ease-out_forwards]"
               : "animate-[madbotMistIn_0.6s_ease-out_forwards]"
           }`}
           aria-label="Open MadBot chat"
         >
-          Hello, wanna chat with MadBot?
+          <span className="font-madmob mr-1">HELLO</span>
+          wanna chat with MadBot?
           <span className="pointer-events-none absolute right-8 -bottom-2 h-4 w-4 rotate-45 border-r border-b border-white/20 bg-black/85" />
         </button>
       ) : null}
@@ -342,7 +343,7 @@ export default function MadBotWidget() {
       <button
         type="button"
         onClick={openWidget}
-        className={`pointer-events-auto rounded-full border border-white/20 bg-black px-5 py-3 text-sm tracking-wide text-white shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-[500ms] ease-out hover:shadow-[0_0_18px_rgba(205,28,24,0.55)] ${
+        className={`font-madmob pointer-events-auto rounded-full border border-white/20 bg-black px-5 py-3 text-sm tracking-[0.08em] text-white shadow-[0_0_0_rgba(205,28,24,0)] transition-all duration-[500ms] ease-out hover:shadow-[0_0_14px_rgba(205,28,24,0.35)] ${
           isOpen
             ? "scale-90 opacity-0"
             : hasMadBotButtonEntered
@@ -350,8 +351,9 @@ export default function MadBotWidget() {
               : "translate-y-5 scale-95 opacity-0"
         }`}
       >
-        MAD_BOT
+        MADBOT
       </button>
     </div>
   );
 }
+

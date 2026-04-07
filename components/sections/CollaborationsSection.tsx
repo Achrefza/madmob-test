@@ -5,13 +5,33 @@ import { useEffect, useRef, useState } from "react";
 const artists = [
   {
     name: "ALA",
-    description: "Longtime MADMOB collaborator known for high-impact live sets and sharp lyricism.",
+    description: "",
     image: "/images/backgrounds/ala.webp",
   },
   {
     name: "KTYB",
-    description: "A bold underground voice collaborating with the collective on forward-thinking sessions.",
+    description: "",
     image: "/images/backgrounds/ktyb.webp",
+  },
+   {
+    name: "XIIVI",
+    description: "",
+    image: "/images/backgrounds/xiivi.webp",
+  },
+  {
+    name: "DABL DE",
+    description: "",
+    image: "/images/backgrounds/dabl_de.webp",
+  },
+  {
+    name: "MIZO-H",
+    description: "",
+    image: "/images/backgrounds/mizo.webp",
+  },
+  {
+    name: "STOU",
+    description: "",
+    image: "/images/backgrounds/stou.webp",
   },
   
 ];
@@ -65,7 +85,7 @@ export default function CollaborationsSection() {
         <div className="mb-10 sm:mb-14">
           <p className="font-madmob text-xs tracking-[0.35em] text-[var(--accent-red)] uppercase">Collaborations</p>
           <h2 className="font-madmob mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            A r t i s t s
+            Artists
           </h2>
         </div>
 

@@ -40,7 +40,7 @@ const projects: Project[] = [
     image: "/images/backgrounds/royalrumble.webp",
     videos: [
       { id: "vFel4jMDOrw", title: "Royal Rumble" },
-      { id: "RE6p2iRL4zg", title: "Royal Rumble — Video 2" },
+      { id: "DqoxDa6Hgnw", title: "Royal Rumble — Ala & Friends" },
     ],
   },
   {
@@ -60,7 +60,7 @@ const projects: Project[] = [
     image: "https://img.youtube.com/vi/ki4ezofcR00/maxresdefault.jpg",
     videos: [
       { id: "ki4ezofcR00", title: "Gimic Radio Residency — Session 1" },
-      { id: "qeCMrm2OtZ8", title: "Gimic Radio Residency — Session 2" },
+      { id: "RE6p2iRL4zg", title: "Gimic Radio Residency — Session 2" },
     ],
   },
 ];
